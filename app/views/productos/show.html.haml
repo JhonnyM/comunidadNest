@@ -1,0 +1,27 @@
+%p
+  %b Titulo:
+  = @producto.titulo
+%p
+  %b Materiales:
+  = @producto.materiales
+%p
+  %b Diseñador:
+  = @producto.diseñador
+%p
+  %b Codigo:
+  = @producto.codigo
+%p
+  %b Pais:
+  = @producto.pais
+%p
+  %b Descripcion:
+  = @producto.descripcion
+
+.col-xs-12
+  =@producto.producto_imagenes.each do |pic|
+    .col-xs-4
+      =image_tag pic.imagen.url(:thumb)
+
+= link_to 'Editar', edit_producto_path(@producto)
+\|
+= link_to 'Atrás', productos_path

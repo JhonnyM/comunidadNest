@@ -1,0 +1,10 @@
+.gray-bg.big-padding.searchbar
+  .container.text-center
+    .col-xs-12.col-md-8.col-md-offset-2
+      = form_tag pages_buscar_path, method: :get, :class => 'form' do
+        .form-group.newsletter.clearfix
+          = text_field_tag :queue, params[:queue], class: 'newsletter-field', :placeholder => "Buscar empresa o profesional..."
+          = hidden_field_tag "type_orden[orden_key]", 'asc'
+          = hidden_field_tag "type_orden[creación_key]", 'asc'
+          = hidden_field_tag "ubicación[pais_name]", 'Todos'
+          = submit_tag "Buscar", class: 'newsletter-submit'

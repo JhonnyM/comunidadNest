@@ -1,0 +1,40 @@
+%header
+  %nav#mainnav.navbar.navbar-default.navbar-fixed-top
+    .container-fluid
+      .col-xs-2.logo
+        = link_to root_path, :class => "logo-link" do
+          = image_tag "logo-menu.png", :class => "logo-image"
+      .col-xs-6
+        .navbar-header
+          %button.navbar-toggle{:type => 'button', :data => {:toggle => 'collapse', :target => '.t3-navbar-collapse'}}
+            %i.fa.fa-bars
+        .navbar-collapse.collapse
+          %ul.nav.navbar-nav.level0
+            %li{:class => current_class?('/')}= link_to 'Home', root_path
+            %li{:class => current_class?('empresas')}= link_to 'Empresas', empresas_path
+            %li{:class => current_class?('profesionales')}= link_to 'Profesionales', profesionales_path
+            %li{:class => current_class?('proyectos')}= link_to 'Proyectos', proyectos_path
+            -#%li{:class => current_class?('productos')}= link_to 'Productos', productos_path
+            %li{:class => current_class?('blog')}= link_to 'Blog', '/blog'
+            %li{:class => current_class?('/contacto')}= link_to 'Contacto', '/contacto'
+      .col-xs-4
+        %ul.nav.navbar-nav.user-menu.navbar-right
+          - if user_signed_in?
+            %li.saludo= "Hola, #{current_user.nombre}"
+            - if has_unread_notifications?
+              %li.mailbox.new-messages
+                = link_to mailbox_notifications_path do
+                  %i.fa.fa-envelope
+                  = 'Nuevos mensajes'
+            - elsif has_unread_inbox_messages?
+              %li.mailbox.new-messages
+                = link_to mailbox_inbox_path do
+                  %i.fa.fa-envelope 
+                  = 'Nuevos mensajes'
+            - else
+              %li.mailbox
+                = link_to mailbox_inbox_path do
+                  %i.fa.fa-envelope 
+            %li= link_to "Cerrar Sesión", destroy_user_session_path, method: :delete    
+          - else
+            %li= link_to('Login / Crear Cuenta', new_user_registration_path)

@@ -1,0 +1,49 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  status: 1
+  user_id: 1
+  nombre: MyString
+  especialidades: MyText
+  descripcion: MyText
+  email: MyString
+  telefono: MyString
+  movil: MyString
+  website: 
+  facebook: MyString
+  twitter: MyString
+  instagram: MyString
+  pinterest: MyString
+  linkedin: MyString
+  pais: 1
+  ciudad: MyString
+  otros: MyText
+  genero: 1
+  nacimiento: 2016-02-03
+  estado_civil: 1
+  intereses: MyText
+  cfia: MyString
+
+two:
+  status: 1
+  user_id: 1
+  nombre: MyString
+  especialidades: MyText
+  descripcion: MyText
+  email: MyString
+  telefono: MyString
+  movil: MyString
+  website: 
+  facebook: MyString
+  twitter: MyString
+  instagram: MyString
+  pinterest: MyString
+  linkedin: MyString
+  pais: 1
+  ciudad: MyString
+  otros: MyText
+  genero: 1
+  nacimiento: 2016-02-03
+  estado_civil: 1
+  intereses: MyText
+  cfia: MyString

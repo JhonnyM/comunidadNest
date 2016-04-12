@@ -1,0 +1,16 @@
+.nest-object-img
+  =link_to proyecto do
+    - if proyecto.proyecto_imagenes.exists?
+      .profile-pic{:style => "background-image: url(#{proyecto.cover_img.url(:thumb)});"}
+    - else
+      .profile-pic{:style => "background-image: url('#{image_path('missing_avatar_empresa.jpg')}');"}
+.nest-object-info
+  = link_to proyecto do
+    %h3=proyecto.titulo
+  %p.subtitle
+    -proyecto.proyectos_categorias.each do |categoria|
+      - if categoria == proyecto.proyectos_categorias.last
+        =categoria.nombre
+      -else
+        =categoria.nombre+', '
+  %p.pais= proyecto.pais

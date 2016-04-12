@@ -1,0 +1,20 @@
+.row
+  .spacer
+  .col-md-12
+    -#= link_to "Escribir nuevo mensaje", new_conversation_path, class: "btn btn-primary"
+    .spacer
+  .col-md-4
+    .panel.panel-default
+      .panel-body
+        = render 'mailbox/folders'
+  .col-md-8
+    .panel.panel-default
+      .panel-body
+        = render partial: 'messages'
+      .panel-footer
+      / Reply Form
+      = form_for :message, url: reply_conversation_path(conversation) do |f|
+        .form-group
+          = f.text_area :body, placeholder: "Responder Mensaje", rows: 4, class: "form-control"
+        = f.submit "Responder", class: 'btn btn-primary pull-right'
+      .clearfix

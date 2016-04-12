@@ -1,0 +1,31 @@
+%p
+  %b Titulo:
+  = @vacantes_trabajo.titulo
+%p
+  %b Empresa:
+  = @vacantes_trabajo.empresa_id
+%p
+  %b Pais:
+  = @vacantes_trabajo.pais
+%p
+  %b Desripcion:
+  = @vacantes_trabajo.descripcion
+%p
+  %b Puesto:
+  = @vacantes_trabajo.puesto
+%p
+  %b Descripcion puesto:
+  = @vacantes_trabajo.descripcion_puesto
+%p
+  %b Requisitos:
+  = @vacantes_trabajo.requisitos
+%p
+  %b Tiempo:
+  = @vacantes_trabajo.tiempo
+%p
+  %b Salario:
+  = @vacantes_trabajo.salario
+
+= link_to 'Editar', edit_vacantes_trabajo_path(@vacantes_trabajo), {:class => 'btn btn-primary'}
+%br
+= link_to 'Volver al perfil de empresa', empresa_path(:id => @vacantes_trabajo.empresa_id)

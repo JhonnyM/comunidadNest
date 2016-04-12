@@ -1,0 +1,15 @@
+= form_for(@experiencia, remote: true) do |f|
+	= f.hidden_field :profesional_id, :value => @profesional.id
+	.control-group
+		= f.label :empresa
+		= f.text_field :empresa, {:class => 'form-control'}
+	.control-group
+		= f.label :puesto
+		= f.text_field :puesto, {:class => 'form-control'}
+	.control-group
+		= f.label :inicio
+		= f.text_field :inicio, {:class => 'form-control'}
+	.control-group
+		= f.label :salida
+		= f.text_field :salida, {:class => 'form-control'}
+	= f.submit 'Agregar Experiencia', {:class => 'btn btn-primary'}

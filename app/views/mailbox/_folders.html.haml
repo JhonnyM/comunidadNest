@@ -1,0 +1,19 @@
+%ul.nav.nav-pills.nav-stacked
+  %li{:class => active_page(:notifications)}
+    = link_to mailbox_notifications_path do
+      %span.label.label-danger.pull-right= unread_notifications_count
+      %em.fa.fa-inbox.fa-lg
+      %span Notificaciones
+  %li{:class => active_page(:inbox)}
+    = link_to mailbox_inbox_path do
+      %span.label.label-danger.pull-right= unread_messages_count
+      %em.fa.fa-inbox.fa-lg
+      %span Mensajes Recibidos
+  %li{:class => active_page(:sent)}
+    = link_to mailbox_sent_path do
+      %em.fa.fa-paper-plane-o.fa-lg
+      %span Mensajes Enviados
+  %li{:class => active_page(:trash)}
+    = link_to mailbox_trash_path do
+      %em.fa.fa-trash-o.fa-lg
+      %span Basurero

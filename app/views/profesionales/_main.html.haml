@@ -1,0 +1,67 @@
+.page_img{style: "background-image: url(#{@profesional.page_img.url(:default)};"}
+  =# image_tag @profesional.page_img.url(:default), {:class => 'img-responsive'}
+%ul.nav.nav-tabs#profile-detail-tabs
+  %li.active
+    %a{:href => '#descripcion', :data => { :toggle => 'tab' }} Descipción
+  %li
+    %a{:href => '#experiencia', :data => { :toggle => 'tab' }} Experiencia
+  %li
+    %a{:href => '#estudios', :data => { :toggle => 'tab' }} Estudios
+  %li
+    %a{:href => '#otros', :data => { :toggle => 'tab' }} Otros
+  %li
+    %a{:href => '#opiniones', :data => { :toggle => 'tab' }} Opiniones
+.tab-content#myTabContent
+  #descripcion.tab-pane.active
+    %h3 Descripción
+    =simple_format(@profesional.descripcion)
+  #experiencia.tab-pane
+    %h3 Experiencia
+    #experiencias_container
+      %ul.list-unstyled
+        = render @profesional.experiencias
+      = link_to "Agregar Experiencia", new_experiencia_path(:profesional => @profesional.id), remote: true, :class => 'btn btn-primary new-experiencia-button'
+  #estudios.tab-pane
+    %h3 Estudios
+    #estudios_container
+      %ul.list-unstyled
+        = render @profesional.estudios
+      = link_to "Agregar Estudios", new_estudio_path(:profesional => @profesional.id), remote: true, :class => 'btn btn-primary new-estudio-button'
+  #otros.tab-pane
+    %h3 Otros
+    %ul.list-unstyled
+      %li
+        %strong Fecha de nacimiento:
+        -#=@profesional.nacimiento.strftime('%d de %b, %Y')
+      %li
+        %strong Estado Civil:
+        =@profesional.estado_civil_formateado
+      %li
+        %strong Idiomas:
+        =@profesional.idiomas_string
+      %li
+        %strong Otros:
+        =@profesional.otros
+    -unless @profesional.intereses.empty?
+      %h3 Intereses
+      =simple_format(@profesional.intereses)
+  #opiniones.tab-pane
+    %h3 Opiniones
+    - if @profesional.reviews.blank?
+      %p= "Este profesional todavía no ha sido calificado.<br/><strong>¡Sé el primero en calificar a #{@profesional.nombre}!</strong>".html_safe
+      = link_to "Calificar", new_profesional_review_path(@profesional), class: "btn btn-primary"
+    - else
+      %ul.list-unstyled.calificaciones
+        = render @profesional.reviews
+
+:javascript
+  $(function() {
+      $('.star-rating').barrating({
+        theme: 'fontawesome-stars',
+        readonly: true
+      });
+   });
+
+%hr
+
+= render partial: "shared/social_buttons", locals: {text: @profesional.nombre, title: @profesional.nombre, summary: @profesional.descripcion, img: @profesional.page_img.url(:default)}

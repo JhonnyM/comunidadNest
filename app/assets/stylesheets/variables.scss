@@ -1,0 +1,110 @@
+// Grays
+// -------------------------
+
+$gray-darker:            #061c21;
+$gray-dark:              #333;
+$gray:                   #555;
+$gray-light:             #999;
+$gray-lighter:           #eee;
+$gray-lightest:          #f4f5f5; // T3 Note: Add gray lightest
+
+
+// Brand colors
+// -------------------------
+
+$brand-primary:         #05dbcb;
+$brand-secondary:       #0cb7fa; // T3 Note: Add secondary color
+$brand-secondary-light: #0e414c;
+$brand-purple:          #695AA7;
+$brand-success:         #5cb85c;
+$brand-warning:         #f7ec00; //AMARILLO
+$brand-danger:          #d9534f;
+$brand-info:            #5bc0de;
+
+
+// Navbar
+// --------------------------
+
+$navbar-height:                    66px;
+
+$navbar-default-color:             $gray-lightest;
+$navbar-default-bg:                $gray-darker;
+
+// Navbar links
+$navbar-default-link-color:                $gray-lightest;
+$navbar-default-link-hover-color:          $brand-warning;
+$navbar-default-link-hover-bg:             transparent;
+$navbar-default-link-active-color:         $gray-lightest;
+$navbar-default-link-active-bg:            $brand-primary;
+$navbar-default-link-disabled-color:       #ccc;
+$navbar-default-link-disabled-bg:          transparent;
+
+// Navbar brand label
+$navbar-default-brand-color:               $navbar-default-link-color;
+$navbar-default-brand-hover-color:         darken($navbar-default-brand-color, 10%);
+$navbar-default-brand-hover-bg:            transparent;
+
+// Footer Styles
+// -------------------------
+$footer-background:              $navbar-default-bg;
+$footer-text-color:              $gray-lightest;
+
+
+// Other styles
+//---------------------------
+.yellow-bg {
+    background: $brand-warning;
+}
+.gray-bg {
+    background: $gray-lighter;
+}
+.big-padding{
+	padding: 40px 0 60px 0;
+}
+
+$border-radius-base: 0;
+$border-radius-large:       0px;
+$border-radius-small:       0px;
+
+.bg-test{background:$brand-purple;min-height:10px;}
+
+
+// Botones
+// -------------------------
+.btn{
+	border: none;
+}
+.btn-primary{
+	border: none !important;
+	border-radius: 0;
+}
+.btn-sm, btn{
+	border-radius: 0;
+	border: none;
+}
+
+.btn-secondary, a.btn-secondary, a.btn-secondary:visited {
+	background-color: $brand-secondary;
+	border-radius: 0;
+	color: #fff;
+	&:hover{
+		color: #fff;
+		background-color: darken( $brand-secondary, 8% );
+	}
+}
+
+// Mixins
+//---------------------------
+@mixin full-background {
+	background-position: center center;
+	background-repeat: no-repeat; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+@mixin bebas{
+	font-family: 'bebasregular';
+	letter-spacing: 1px;
+}

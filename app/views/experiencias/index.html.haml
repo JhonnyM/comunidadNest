@@ -1,0 +1,19 @@
+%h1 Listing experiencias
+
+%table
+  %thead
+    %tr
+      %th
+      %th
+      %th
+
+  %tbody
+    - @experiencias.each do |experiencia|
+      %tr
+        %td= link_to 'Show', experiencia
+        %td= link_to 'Edit', edit_experiencia_path(experiencia)
+        %td= link_to 'Destroy', experiencia, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Experiencia', new_experiencia_path

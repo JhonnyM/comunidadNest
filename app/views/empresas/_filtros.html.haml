@@ -1,0 +1,27 @@
+.sidebar.sidebar-left.filtros
+  = form_tag empresas_buscar_path, method: :get do
+    .form-group
+      = text_field_tag :queue, params[:queue], class: 'form-control', placeholder: 'Buscar empresa'
+
+      = label_tag "Industria"
+
+      %ul.radio-filters.list-unstyled
+        = collection_radio_buttons('industria', 'nombre_id', Industria.all, :id, :nombre, class: 'form-control') do |b|
+          = content_tag(:li, class: ('checked' if params[:industria] && b.value.to_s == params[:industria][:nombre_id])) do
+            = b.label do
+              = b.radio_button
+              = b.text
+
+      = label_tag "Empresa orden alfabético:"
+      = select("empresias", "orden_key", {'de la A'=>'asc', 'de la Z'=>'desc'}.each {|name,value| [ name, value ] },
+        { include_blank: false }, {class: "form-control"})
+      = label_tag "Pais"
+      = select("empresa", "pais_name", empresas_pais_filter_values,
+        { include_blank: 'Todos' }, class: "form-control")
+      = label_tag "Empresas fecha de creación:"
+      = select("empresa", "creación_key", {'nuevo'=>'asc', 'viejo'=>'desc'}.each {|name,value| [ name, value ] },
+        { include_blank: false }, {class: "form-control"})
+    = submit_tag "Buscar", class: 'btn btn-primary', name: nil
+
+  %br
+  = link_to 'Crear perfil de profesional', new_profesional_path, {:class => 'btn btn-primary'}

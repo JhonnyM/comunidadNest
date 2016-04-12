@@ -1,0 +1,27 @@
+.sidebar.sidebar-left.filtros
+  = form_tag profesionales_buscar_path, method: :get do
+    .form-group
+      = text_field_tag :queue, params[:queue], class: 'form-control', placeholder: '¿Qué se busca?'
+
+      = label_tag "Profesion"
+
+      %ul.radio-filters.list-unstyled
+        = collection_radio_buttons('profesion', 'generico_id', Profesion.all, :id, :generico, class: 'form-control') do |b|
+          = content_tag(:li, class: ('checked' if params[:profesion] && b.value.to_s == params[:profesion][:generico_id])) do
+            = b.label do
+              = b.radio_button
+              = b.text
+
+
+      = label_tag "Profesionales orden alfabético:"
+      = select("profies", "orden_key", {'de la A'=>'asc', 'de la Z'=>'desc'}.each {|name,value| [ name, value ] },
+        { include_blank: false }, {class: "form-control"})
+      = label_tag "Pais"
+      = select("profesional", "pais_name", professionales_pais_filter_values,
+        { include_blank: 'Todos' }, class: "form-control")
+      = label_tag "Profesionales fecha de creación:"
+      = select("profies", "creación_key", {'nuevo'=>'asc', 'viejo'=>'desc'}.each {|name,value| [ name, value ] },
+        { include_blank: false }, {class: "form-control"})
+    = submit_tag "Buscar", class: 'btn btn-primary', name: nil
+  %br/
+  = link_to 'Crear perfil de profesional', new_profesional_path, {:class => 'btn btn-primary'}

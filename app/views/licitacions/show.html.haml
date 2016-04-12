@@ -1,0 +1,40 @@
+%p
+  %b Titulo:
+  = @licitacion.titulo
+%p
+  %b Pais:
+  = @licitacion.pais
+%p
+  %b Cantidad:
+  = @licitacion.cantidad
+%p
+  %b Unidad medida:
+  = @licitacion.unidad_medida
+%p
+  %b Producto categoria:
+  = @licitacion.productos_categoria_id
+%p
+  %b Especificaciones:
+  = @licitacion.especificaciones
+%p
+  %b Precio minimo:
+  = @licitacion.precio_minimo
+%p
+  %b Precio maximo:
+  = @licitacion.precio_maximo
+%p
+  %b Tipo de cambio:
+  = @licitacion.tipo_de_cambio
+%p
+  %b Entrega:
+  = @licitacion.entrega
+%p
+  %b Plazo:
+  = @licitacion.plazo
+%p
+  %b Observaciones:
+  = @licitacion.observaciones
+
+= link_to 'Editar', edit_licitacion_path(@licitacion), {:class => 'btn btn-primary'}
+%br
+= link_to 'Volver al perfil de empresa', empresa_path(:id => @licitacion.empresa_id)

@@ -1,0 +1,22 @@
+#socialicons
+  %ul.list-inline
+    %li
+      %span.facebook
+        = link_to "https://www.facebook.com/sharer.php?u=#{url ||= request.original_url}", popup: true, target: "_blank" do
+          %i.fa.fa-facebook
+    %li
+      %span.twitter
+        = link_to "https://twitter.com/intent/tweet?url=#{url}&text=#{text ||= ""}", popup: true, target: "_blank" do
+          %i.fa.fa-twitter
+    %li
+      %span.googleplus
+        = link_to "https://plus.google.com/share?url=#{url}", popup: true, target: "_blank"do
+          %i.fa.fa-google-plus
+    %li
+      %span.linkedin
+        = link_to "https://www.linkedin.com/shareArticle?mini=true&url=#{url || ""}&title#{title ||= ""}=&summary=#{summary ||= ""}", target: "_blank", popup: true do
+          %i.fa.fa-linkedin
+    %li
+      %span.pinterest
+        = link_to "https://www.pinterest.com/pin/create/button/?url=#{url}&media=#{img ||= ""}&description=#{text}", popup: true, target: "_blank" do
+          %i.fa.fa-pinterest

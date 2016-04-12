@@ -1,0 +1,28 @@
+#right-sidebar
+	.opciones-perfil
+		%h3 OPCIONES DE PERFIL
+		%p
+			=link_to "Profesional", new_profesional_path, class: "btn btn-purple btn-profesional"
+		%p
+			=link_to "Empresa", new_empresa_path, class: "btn btn-blue btn-empresa"
+	.module
+		%h3 Estamos en
+		#socialicons
+			%span.facebook
+				%a{:href => "https://www.facebook.com/comunidadnest", :rel => "nofollow", :target => "_blank", :title => "Facebook", :class => 'facebook'}
+					%i.fa.fa-facebook
+			%span.twitter
+				%a{:href => "https://twitter.com/Comunidad_nest", :rel => "nofollow", :target => "_blank", :title => "Twitter", :class => 'twitter'}
+					%i.fa.fa-twitter
+			%span.instagram
+				%a{:href => "https://instagram.com/comunidadnest/", :rel => "nofollow", :target => "_blank", :title => "Instagram", :class => 'instagram'}
+					%i.fa.fa-instagram
+			%span.pinterest
+				%a{:href => "https://www.pinterest.com/nest0398/", :rel => "nofollow", :target => "_blank", :title => "Pinterest", :class => 'pinterest'}
+					%i.fa.fa-pinterest
+
+	.module
+		%h3 Espacio de coworking
+		.banneritem
+			%a{:href => "/component/banners/click/3", :target => "_blank", :title => "Espacio de Coworking"}
+				= image_tag "Impacticologo.png", :alt => "Espacio de Coworking"

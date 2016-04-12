@@ -1,0 +1,7 @@
+.nest-object-img
+  =link_to empresa do
+    .profile-pic{:style => "background-image: url(#{empresa.avatar.url(:medium)});"}
+.nest-object-info
+  = link_to empresa do
+    %h3=empresa.nombre
+  %p.subtitle=empresa.industria.nombre

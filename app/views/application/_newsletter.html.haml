@@ -1,0 +1,9 @@
+.yellow-bg.big-padding
+	.container.text-center
+		.col-xs-12.col-md-8.col-md-offset-2.col-lg-6.col-md-offset-3
+			%h3 SUSCRIBITE AL NEWSLETTER
+			%p ¡Conocé las últimas noticias en el mundo del diseño, ingeniería y construcción!
+			%form#mc-embedded-subscribe-form.validate{:action => "//comunidadnest.us13.list-manage.com/subscribe/post?u=b1b41f1026023e640fa447c1d&amp;id=c0af30eee3", :method => "post", :name => "mc-embedded-subscribe-form", :novalidate => "", :target => "_blank", :class => 'form'}
+				.form-group.newsletter.clearfix
+					%input#mce-EMAIL.required.email{:name => "EMAIL", :type => "email", :value => "", :class => 'newsletter-field'}
+					%input#mc-embedded-subscribe.button{:name => "subscribe", :type => "submit", :value => "Suscribirse", :class => 'newsletter-submit'}

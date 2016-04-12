@@ -1,0 +1,21 @@
+.row
+  .col-xs-12.col-md-6.col-lg-3#sidebar-left
+    .caja
+      =render partial: "filtros"
+  .col-xs-12.col-md-6.col-lg-6.list-main-container
+    .row
+      -if @profesionales.present?
+        %h2= 'Comunidad de profesionales: ' + @queue
+        .row
+          =render partial: "profesionales/profesional", collection: @profesionales, layout: "layouts/nest_object"
+      -else
+        %h2 No se encontraron profesionales
+
+      -if @empresas.present?
+        %h2= 'Comunidad de empresas: ' + @queue
+        .row
+          =render partial: "empresas/empresa", collection: @empresas, layout: "layouts/nest_object"
+      -else
+        %h2 No se encontraron empresas
+  .col-xs-12.col-md-6.col-lg-3
+    Listado de mis perfiles

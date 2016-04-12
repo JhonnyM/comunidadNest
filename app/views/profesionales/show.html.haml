@@ -1,0 +1,21 @@
+-content_for :title do
+	= @profesional.nombre
+
+-content_for :meta_tags do
+	= render partial: "shared/meta_tags", locals: { title: @profesional.nombre, descripcion: @profesional.descripcion, image: @profesional.page_img.url(:default), author_handle: @profesional.twitter}
+
+.row
+	#sidebar-left.col-xs-4.profile-info
+		=render "info_bar"
+	#profile-main.col-xs-8
+		=render "main"
+		-unless @proyectos.empty?
+			%hr
+			%h2 Proyectos
+			.row
+				= render partial: "proyectos/proyecto", collection: @proyectos, layout: "layouts/nest_object"
+		-unless @productos.empty?
+			%hr
+			%h2 Productos
+			.row
+				= render partial: "productos/producto", collection: @productos, layout: "layouts/nest_object"

@@ -1,0 +1,43 @@
+-content_for :title do
+	= @post.title
+
+-content_for :meta_tags do
+	= render partial: "shared/meta_tags", locals: { title: @post.title, descripcion: @post.introtext, image: @post.image_intro.url(:default)}
+
+%article
+	%h1=@post.title
+	= render partial: "shared/social_buttons", locals: {text: @post.title, title: @post.title, summary: @post.introtext, img: @post.image_intro.url(:default) }
+	%p
+		%i.fa.fa-calendar
+		=I18n.l @post.created_at, :format => "%e de %B de %Y"
+	-if @post.fulltext.blank?
+		-# Do this in the database instead of the view:
+		= simple_format(@post.introtext.encode(universal_newline: true).html_safe)
+	- else
+		= simple_format(@post.fulltext)
+= link_to "Anterior", @post.next, :class => 'btn btn-border' unless @post.prev.nil?
+= link_to "Siguiente", @post.next, :class => 'btn btn-border' unless @post.next.nil?
+
+#disqus_thread
+:javascript
+	/**
+	* RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+	* LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+	*/
+	/*
+	var disqus_config = function () {
+	this.page.url = PAGE_URL; // Replace PAGE_URL with your page's canonical URL variable
+	this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+	};
+	*/
+	(function() { // DON'T EDIT BELOW THIS LINE
+	var d = document, s = d.createElement('script');
+
+	s.src = '//comunidadnest.disqus.com/embed.js';
+
+	s.setAttribute('data-timestamp', +new Date());
+	(d.head || d.body).appendChild(s);
+	})();
+%noscript
+	Please enable JavaScript to view the
+	%a{:href => "https://disqus.com/?ref_noscript", :rel => "nofollow"} comments powered by Disqus.

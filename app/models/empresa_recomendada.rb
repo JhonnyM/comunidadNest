@@ -1,0 +1,2 @@
+class EmpresaRecomendada < Recomendado
+end

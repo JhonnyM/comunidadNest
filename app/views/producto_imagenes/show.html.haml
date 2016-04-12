@@ -1,0 +1,18 @@
+%p#notice= notice
+
+%p
+  %b Descripcion:
+  = @producto_imagen.descripcion
+%p
+  %b Imagen:
+  = @producto_imagen.imagen
+%p
+  %b Producto:
+  = @producto_imagen.producto_id
+%p
+  %b Producto token:
+  = @producto_imagen.producto_token
+
+= link_to 'Edit', edit_producto_imagen_path(@producto_imagen)
+\|
+= link_to 'Back', producto_imagenes_path

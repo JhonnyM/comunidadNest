@@ -1,0 +1,49 @@
+= form_for (@vacantes_trabajo), :html => {class: 'form form-profile form-horizontal'} do |f|
+  - if @vacantes_trabajo.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@vacantes_trabajo.errors.count, "error")} prohibited this vacantes_trabajo from being saved:"
+      %ul
+        - @vacantes_trabajo.errors.full_messages.each do |msg|
+          %li= msg
+
+  .form-group
+    = f.label :titulo,class: 'col-xs-2'
+    .col-xs-8
+      = f.text_field :titulo, {class: "form-control"}
+  .form-group
+    = f.label :pais,class: 'col-xs-2'
+    .col-xs-8
+      = country_select("profesional", "pais", {priority_countries: ["CR"]}, {class: "form-control"})
+  .form-group
+    = f.label :descripcion,class: 'col-xs-2'
+    .col-xs-8
+      = f.text_area :descripcion, {class: "form-control"}
+  .form-group
+    = f.label :puesto,class: 'col-xs-2'
+    .col-xs-8
+      = f.text_field :puesto, {class: "form-control"}
+  .form-group
+    = f.label :descripcion_puesto,class: 'col-xs-2'
+    .col-xs-8
+      = f.text_area :descripcion_puesto, {class: "form-control"}
+  .form-group
+    = f.label :requisitos,class: 'col-xs-2'
+    .col-xs-8
+      = f.text_area :requisitos, {class: "form-control"}
+  .form-group
+    = f.label :tiempo,class: 'col-xs-2'
+    .col-xs-8
+      = f.text_field :tiempo, {class: "form-control"}
+  .form-group
+    = f.label :salario,class: 'col-xs-2'
+    .col-xs-8
+      = f.text_field :salario, {class: "form-control"}
+  -if params[:action] == 'edit'
+    .form-group
+      = f.hidden_field :empresa_id
+  -else
+    .form-group
+      = f.hidden_field :empresa_id, :value => @empresa_id
+
+  .actions
+    = f.submit 'Guardar', {:class => 'btn btn-primary'}

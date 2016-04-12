@@ -1,0 +1,36 @@
+-content_for :title do
+	= @empresa.nombre
+
+-content_for :meta_tags do
+	= render partial: "shared/meta_tags", locals: { title: @empresa.nombre, descripcion: @empresa.descripcion, image: @empresa.page_img.url(:default), author_handle: @empresa.twitter}
+
+.row
+	#sidebar-left.col-xs-4.profile-info
+		=render "info_bar"
+	#profile-main.col-xs-8
+		=render "main"
+
+		%hr
+		- unless @empresa.proyectos.empty?
+			%h3 Proyectos
+			.row
+				= render partial: "proyectos/proyecto", collection: @empresa.proyectos, layout: "layouts/nest_object"
+			-unless @empresa.vacantes_trabajos.empty?
+				%hr
+				%h3 Trabajá con nosotros
+				.row
+					= render partial: 'vacantes_trabajos/vacantes_trabajo', collection: @empresa.vacantes_trabajos
+			= form_tag new_vacantes_trabajo_path do
+				= hidden_field_tag :propietario_id, @empresa.id
+				= hidden_field_tag :propietario_tipo, 'empresa'
+				-#= submit_tag 'Crear Oferta de Empleo' , {:class => 'btn btn-primary'}
+
+		-unless @empresa.licitacions.empty?
+			%hr
+			%h3 Licitaciones
+			.row
+				= render partial: 'licitacions/licitacion', collection: @empresa.licitacions
+			= form_tag new_licitacion_path do
+				= hidden_field_tag :propietario_id, @empresa.id
+				= hidden_field_tag :propietario_tipo, 'empresa'
+				-#= submit_tag 'Crear Oferta de Empleo' , {:class => 'btn btn-primary'}

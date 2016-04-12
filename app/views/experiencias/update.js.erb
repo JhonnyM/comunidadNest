@@ -1,0 +1,3 @@
+$('form').hide();
+$('form#edit_experiencia_<%= @experiencia.id %>').replaceWith('<%= j render partial: "experiencia", locals: {experiencia: @experiencia} %>');
+$('.new-experiencia-button').show();

@@ -1,0 +1,1 @@
+IDIOMAS = YAML.load_file("#{Rails.root}/config/data/idiomas.yml")

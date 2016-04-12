@@ -1,0 +1,7 @@
+.nest-object-img
+	=link_to producto do
+		.profile-pic{:style => "background-image: url(#{producto.producto_imagenes.first.imagen.url(:thumb)});"}
+.nest-object-info
+	=link_to producto do
+		%h3=producto.titulo
+	%p.subtitle= producto.productos_categoria.nombre

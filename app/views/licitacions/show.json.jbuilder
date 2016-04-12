@@ -1,0 +1,1 @@
+json.extract! @licitacion, :id, :titulo, :pais, :cantidad, :unidad_medida, :producto_categoria_id, :especificaciones, :precio_minimo, :precio_maximo, :tipo_de_cambio, :entrega, :plazo, :observaciones, :created_at, :updated_at

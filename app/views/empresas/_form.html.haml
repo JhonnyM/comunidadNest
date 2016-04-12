@@ -1,0 +1,70 @@
+= form_for @empresa, html: { multipart: true, class: 'form form-profile form-horizontal' } do |f|
+  - if @empresa.errors.any?
+    #error_explanation
+      %h1= "#{pluralize(@empresa.errors.count, "error")} prohibited this empresa from being saved:"
+      %ul
+        - @empresa.errors.full_messages.each do |msg|
+          %li= msg
+
+  %fieldset.clearfix
+    %h2 Información General
+    .form-group
+      = f.label :nombre, 'Nombre', class: 'col-xs-2'
+      .col-xs-8
+        = f.text_field :nombre, class: "form-control"
+    .form-group
+      = f.label :avatar, 'Imagen de perfil', class: 'col-xs-2'
+      .col-xs-8
+        = f.file_field :avatar, class: "form-control"
+    .form-group
+      = f.label :page_img, 'Imagen para su página', class: 'col-xs-2'
+      .col-xs-8
+        = f.file_field :page_img, class: "form-control"
+    .form-group
+      = f.label :industria, class: 'col-xs-2'
+      .col-xs-8
+        = f.collection_select :industria_id, Industria.all, :id, :nombre, {prompt: "Seleccioná una Industria"}, {class: "form-control"}
+    .form-group
+      = f.label :pais, class: 'col-xs-2'
+      .col-xs-8
+        = country_select("empresa", "pais", {priority_countries: ["CR"]}, {class: "form-control"})
+    .form-group
+      = f.label :telefono, class: 'col-xs-2'
+      .col-xs-8
+        = f.text_field :telefono, class: "form-control"
+    .form-group
+      = f.label :telefono2, class: 'col-xs-2'
+      .col-xs-8
+        = f.text_field :telefono2, class: "form-control"
+    .form-group
+      = f.label :email, class: 'col-xs-2'
+      .col-xs-8
+        = f.text_field :email, class: "form-control"
+    .form-group
+      = f.label :servicios, class: 'col-xs-2'
+      .col-xs-8
+        = f.text_area :servicios, class: "form-control"
+    .form-group
+      = f.label :horario, class: 'col-xs-2'
+      .col-xs-8
+        = f.text_area :horario, class: "form-control"
+    .form-group
+      = f.label :empleados, class: 'col-xs-2'
+      .col-xs-8
+        = f.number_field :empleados, class: "form-control"
+    .form-group
+      = f.label :fundacion, class: 'col-xs-2'
+      .col-xs-8
+        = f.number_field :fundacion, class: "form-control"
+    .form-group
+      = f.label :portafolio, class: 'col-xs-2'
+      .col-xs-8
+        = f.file_field :portafolio, class: "form-control"
+    .form-group
+      = f.label :tag_list, 'Tags', class: 'col-xs-2'
+      .col-xs-8
+        = f.text_field :tag_list, :value => @empresa.tag_list.join(', '), class: "form-control"
+
+  .actions
+    = f.submit 'Guardar', {:class => 'btn btn-primary'}
+    = link_to 'Cancelar', empresas_path, :class =>  "btn"

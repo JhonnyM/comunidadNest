@@ -1,0 +1,37 @@
+.page_img{style: "background-image: url(#{@empresa.page_img.url(:default)};"}
+  = image_tag @empresa.page_img.url(:default)
+%ul.nav.nav-tabs#profile-detail-tabs
+  %li.active
+    %a{:href => '#descripcion', :data => { :toggle => 'tab' }} Sobre Nosotros
+  %li
+    %a{:href => '#servicios', :data => { :toggle => 'tab' }} Servicios
+  %li
+    %a{:href => '#opiniones', :data => { :toggle => 'tab' }} Opiniones
+.tab-content#myTabContent
+  #descripcion.tab-pane.active
+    %h3 Descripción
+    =simple_format(@empresa.descripcion)
+  #servicios.tab-pane
+    %h3 Servicios
+    =simple_format(@empresa.servicios.gsub!("\r\n", " - "))
+  #opiniones.tab-pane
+    %h3 Opiniones
+    - if @empresa.reviews.blank?
+      %p= "Este empresa todavía no ha sido calificado.<br/><strong>¡Sé el primero en calificar a #{@empresa.nombre}!</strong>".html_safe
+      - if @empresa.reviewable_by?(current_user)
+        = link_to "Calificar", new_empresa_review_path(@empresa), class: "btn btn-primary"
+    - else
+      %ul.list-unstyled.calificaciones
+        = render @empresa.reviews
+
+:javascript
+  $(function() {
+      $('.star-rating').barrating({
+        theme: 'fontawesome-stars',
+        readonly: true
+      });
+   });
+
+%hr
+
+= render partial: "shared/social_buttons", locals: {text: @empresa.nombre, title: @empresa.nombre, summary: @empresa.descripcion, img: @empresa.page_img.url(:default)}

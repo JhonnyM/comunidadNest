@@ -1,0 +1,11 @@
+-content_for :content do
+	.row
+		.col-xs-3
+			.sidebar.sidebar-left
+				= yield :sidebar_left
+		.col-xs-6
+			= content_for?(:main_content) ? yield(:main_content) : yield
+		.col-xs-3
+			.sidebar.sidebar-right
+				= yield :sidebar_right
+= render template: "layouts/application"

@@ -1,0 +1,26 @@
+.sidebar.sidebar-left.filtros
+  = form_tag proyectos_buscar_path, method: :get do
+    .form-group
+      = text_field_tag :queue, params[:queue], class: 'form-control', placeholder: '¿Qué se busca?'
+      = label_tag "Proyectos propietario tipo"
+      = select("proyecto", "propietario_tipo", Proyecto.pluck(:propietario_tipo).uniq {|propietario| [ propietario, propietario ] },
+        { include_blank: true }, class: "form-control")
+      = label_tag "Proyectos categoria"
+      = select("proyecto", "nombre", ProyectosCategoria.pluck(:nombre) {|nombre| [ nombre, nombre ] },
+        { include_blank: 'Todos' }, class: "form-control")
+      = label_tag "Proyecto orden alfabético:"
+      = select("proyectios", "orden_key", {'de la A'=>'asc', 'de la Z'=>'desc'}.each {|name,value| [ name, value ] },
+        { include_blank: false }, {class: "form-control"})
+      = label_tag "Pais"
+      = select("proyecto", "pais_name", Proyecto.pluck(:pais).uniq {|pais| [ pais, pais ] },
+        { include_blank: 'Todos' }, class: "form-control")
+      = label_tag "Proyectos fecha de creación:"
+      = select("proyecto", "creación_key", {'nuevo'=>'asc', 'viejo'=>'desc'}.each {|name,value| [ name, value ] },
+        { include_blank: false }, {class: "form-control"})
+    = submit_tag "Buscar", class: 'btn btn-primary', name: nil
+  %br/
+  %h3 Filtrar por Categoría
+  %ul.list-unstyled
+    - @categorias.each do |categoria|
+      %li= link_to "#{categoria.nombre}", "/proyectos?categoria=#{categoria.id}"
+  = link_to 'Crear proyecto', new_proyecto_path, {:class => 'btn btn-primary'}

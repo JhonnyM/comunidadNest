@@ -1,0 +1,4 @@
+%li#eliminar[participante_proyecto]
+  = participante_proyecto.nombre
+  = participante_proyecto.rol
+  = button_to "Eliminar", participante_proyecto_path(participante_proyecto), form: {style: 'display:inline-block;'}, method: :delete, remote: true, class: 'btn btn-danger eliminar'

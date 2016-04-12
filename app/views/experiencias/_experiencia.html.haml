@@ -1,0 +1,5 @@
+%li{:id => "experiencia-#{experiencia.id}"}
+	%strong= "#{experiencia.puesto}."
+	= "#{experiencia.empresa}. #{experiencia.inicio} - #{experiencia.salida}"
+	= link_to 'Editar', edit_experiencia_path(experiencia), :remote => true, :class => "editar_experiencia" 
+	= link_to 'Eliminar', experiencia, method: :delete, data: { confirm: 'Está seguro?' }, :remote => true, :class => 'eliminar_experiencia'

@@ -1,0 +1,43 @@
+= form_for @producto, :html => { :class => 'form-horizontal', multipart: true }  do |f|
+  - if @producto.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@producto.errors.count, "error")} prohibited this producto from being saved:"
+      %ul
+        - @producto.errors.full_messages.each do |msg|
+          %li= msg
+
+  .field
+    = f.label :titulo
+    = f.text_field :titulo
+  .field
+    = f.label :productos_categoria_id
+    = f.collection_select(:productos_categoria_id, ProductosCategoria.all, :id, :nombre)
+  .field
+    = f.label :materiales
+    = f.text_field :materiales
+  .field
+    = f.label :diseñador
+    = f.text_field :diseñador
+  .field
+    = f.label :codigo
+    = f.text_field :codigo
+  .field
+    = f.label :pais
+    = country_select("producto", "pais", priority_countries: ["CR"])
+  .field
+    = f.label :descripcion
+    = f.text_area :descripcion
+  .field
+    = f.label :producto_imagenes, :class => 'control-label'
+    = file_field_tag "imagenes[]", type: :file, multiple: true
+
+  -if params[:action] == 'edit'
+    .field
+      = f.hidden_field :propietario_id
+      = f.hidden_field :propietario_tipo
+  -else
+    .field
+      = f.hidden_field :propietario_id, :value => @propietario_id
+      = f.hidden_field :propietario_tipo, :value => @propietario_tipo
+  .actions
+    = f.submit 'Guardar', {:class => 'btn btn-primary'}

@@ -1,0 +1,109 @@
+.main-profile
+  %h1.profile-title
+    =@profesional.nombre
+  %p.profile-subtitle
+    =@profesional.nombre_profesion
+  .avatar.profile-pic
+    = image_tag @profesional.avatar.url(:medium), class: 'img-responsive'
+  - if @profesional.es_recomendado?
+    .recomendado
+      = image_tag '/assets/sello-recomendado.png'
+.social-bar
+  %ul.list-inline
+    -if @profesional.website.present?
+      %li
+        = link_to @profesional.website, {:target => '_blank'} do
+          %i.fa.fa-globe
+    -if defined? (@profesional.facebook)
+      %li
+        = link_to @profesional.facebook, {:target => '_blank'} do
+          %i.fa.fa-facebook
+    -if defined? (@profesional.twitter)
+      %li
+        = link_to @profesional.twitter, {:target => '_blank'} do
+          %i.fa.fa-twitter
+    -if defined? (@profesional.instagram)
+      %li
+        = link_to @profesional.instagram, {:target => '_blank'} do
+          %i.fa.fa-instagram
+    -if defined? (@profesional.linkedin)
+      %li
+        = link_to @profesional.linkedin, {:target => '_blank'} do
+          %i.fa.fa-linkedin
+    -if defined? (@profesional.pinterest)
+      %li
+        = link_to @profesional.pinterest, {:target => '_blank'} do
+          %i.fa.fa-pinterest
+%h3 Calificación
+.caja.clearfix
+  .info-rating
+    = @avg_rating
+    %i.fa.fa-star
+  .info-rating-text
+    = "#{@avg_rating} de 5 estrellas"
+    %br
+    %small= "#{@profesional.reviews.length} Opiniones"
+  - if @profesional.reviewable_by?(current_user)
+    = link_to "Mi opinión", new_profesional_review_path(@profesional), class: "btn btn-primary pull-right"
+-#//- if @avg_rating > 4.5
+    -#//Profesional recomendado y 5 ratings
+%h3 ID PROFESIONAL
+.pull-right
+  -if @profesional.portafolio.exists?
+    =link_to 'P' , @profesional.portafolio.url, {:class => 'btn-circle btn-portafolio', :target => '_blank'}
+  -if @profesional.curriculum.exists?
+    =link_to 'CV' , @profesional.curriculum.url, {:class => 'btn-circle btn-cv', :target => '_blank'}
+.caja
+  %dl
+    %dt Residencia:
+    %dd= "#{@profesional.ciudad}, #{@profesional.country_name}"
+
+    %dt Especialidades:
+    %dd= @profesional.especialidades
+
+%h3 Contacto
+.caja.clearfix
+  %dl
+    %dt Sitio Web
+    %dd
+      =link_to @profesional.nombre, @profesional.website
+
+    %dt Número Móvil
+    %dd
+      = link_to @profesional.movil, "tel:#{@profesional.movil}"
+
+    %dt Teléfono secundario
+    %dd
+      = link_to @profesional.telefono, "tel:#{@profesional.telefono}"
+
+  = link_to new_conversation_path(:recipient_id => @profesional.user.id), class: 'btn btn-primary pull-right' do
+    %i.fa.fa-envelope
+    Enviar mensaje directo
+
+%h3 Tags
+.caja
+  =render @profesional.tags
+
+- unless @profesional.empleados_empresas.empty?
+  //%h3 Empresas
+  -#= render partial: 'empleados_empresas/empleador', collection: @profesional.empleados_empresas
+
+- if @is_owner
+  %h3 Crear
+  .caja.text-center.botones
+    = form_tag new_proyecto_path do
+      = hidden_field_tag :propietario_id, @profesional.id
+      = hidden_field_tag :propietario_tipo, 'profesional'
+      = submit_tag 'Crear Proyecto' , {:class => 'btn btn-primary'}
+    - if @profesional.empleados == "zz"
+      = form_tag new_producto_path do
+        = hidden_field_tag :propietario_id, @profesional.id
+        = hidden_field_tag :propietario_tipo, 'profesional'
+        = submit_tag 'Crear Producto' , {:class => 'btn btn-primary'}
+
+- if @is_owner
+  %h3 Opciones de Administrador
+  .caja
+    = link_to 'Editar', edit_profesional_path(@profesional), { :class => 'btn btn-primary'}
+
+= link_to 'Ver todos los profesionales', profesionales_path

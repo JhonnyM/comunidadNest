@@ -1,0 +1,11 @@
+%p#notice= notice
+
+%p
+  %b Imagen:
+  = @proyecto_imagen.inspect
+
+= link_to 'Edit', edit_proyecto_imagen_path(@proyecto_imagen)
+\|
+= link_to 'Back', proyecto_imagenes_path
+
+= link_to 'Make Default', make_default_proyecto_imagen_path(@proyecto_imagen)

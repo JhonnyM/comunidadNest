@@ -1,0 +1,7 @@
+%li
+	.row
+		.col-xs-2
+			= select_tag "star-rating", options_for_select(["1", "2", "3", "4", "5"], review.rating), class: 'star-rating'
+		.col-xs-10
+			%p.calificador= review.reviewable.nombre
+			%p.comentario= h(review.comentario).gsub(/\n/, '<br/>').html_safe

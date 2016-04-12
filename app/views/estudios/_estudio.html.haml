@@ -1,0 +1,4 @@
+%li{:id => "estudio-#{estudio.id}"}
+	= "#{estudio.fecha}, #{content_tag(:strong, estudio.institucion)}. #{estudio.titulo}. #{estudio.country_name}".html_safe
+	= link_to 'Editar', edit_estudio_path(estudio), :remote => true, :class => "editar_estudio" 
+	= link_to 'Eliminar', estudio, method: :delete, data: { confirm: 'Está seguro?' }, :remote => true, :class => 'eliminar_estudio'

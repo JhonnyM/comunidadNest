@@ -1,0 +1,2 @@
+class ProfesionalRecomendado < Recomendado
+end

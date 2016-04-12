@@ -1,0 +1,19 @@
+%h1 Listing empleados_empresas
+
+%table
+  %thead
+    %tr
+      %th
+      %th
+      %th
+
+  %tbody
+    - @empleados_empresas.each do |empleados_empresa|
+      %tr
+        %td= link_to 'Show', empleados_empresa
+        %td= link_to 'Edit', edit_empleados_empresa_path(empleados_empresa)
+        %td= link_to 'Destroy', empleados_empresa, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Empleados empresa', new_empleados_empresa_path

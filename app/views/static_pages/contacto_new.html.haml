@@ -1,0 +1,30 @@
+= form_for @contacto_mensaje, url: contacto_path, html: {class: "form form-profile form-horizontal"} do |f|
+
+  - if @contacto_mensaje.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@contacto_mensaje.errors.count, "error")} prohibited this message from being sent:"
+      %ul
+        - @contacto_mensaje.errors.full_messages.each do |msg|
+          %li= msg
+
+  %fieldset.clearfix
+    %h2 Contacto
+    .form-group
+      = f.label :nombre, class: 'col-xs-2'
+      .col-xs-8
+        = f.text_field :nombre, class: "form-control"
+    .form-group
+      = f.label :email, class: 'col-xs-2'
+      .col-xs-8
+        = f.email_field :email, class: "form-control"
+    .form-group
+      = f.label :asunto, class: 'col-xs-2'
+      .col-xs-8
+        = f.text_field :asunto, class: "form-control"
+    .form-group
+      = f.label :mensaje, class: 'col-xs-2'
+      .col-xs-8
+        = f.text_area :mensaje, class: "form-control"
+
+  .actions
+  = f.submit "Send", class: "btn btn-primary"

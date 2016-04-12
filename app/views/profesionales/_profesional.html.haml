@@ -1,0 +1,11 @@
+.nest-object-img
+  =link_to profesional do
+    .profile-pic{:style => "background-image: url(#{profesional.avatar.url(:medium)});"}
+  - if profesional.es_recomendado?
+    .recomendado
+      = image_tag '/assets/sello-recomendado.png'
+.nest-object-info
+  =link_to profesional do
+    %h3= profesional.nombre
+  %p.subtitle= profesional.nombre_profesion
+  %p.foot= profesional.pais

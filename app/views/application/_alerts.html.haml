@@ -1,0 +1,10 @@
+- if notice
+  .alert.alert-success.fade.in{:style => "margin-top:18px;"}
+    %a.close{"aria-label" => "close", "data-dismiss" => "alert", :href => "#", :title => "close"} ×
+    %strong ¡Listo!
+    = notice
+- if alert
+  .alert.alert-danger.fade.in
+    %a.close{"aria-label" => "close", "data-dismiss" => "alert", :href => "#", :title => "close"} ×
+    %strong ¡Error!
+    = alert

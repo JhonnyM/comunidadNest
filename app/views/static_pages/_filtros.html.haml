@@ -1,0 +1,13 @@
+.sidebar.sidebar-left.filtros
+  = form_tag pages_buscar_path, method: :get do
+    .form-group
+      = text_field_tag :queue, params[:queue], class: 'form-control', :placeholder => "Buscar empresa o profesional..."
+      = label_tag "Orden alfabético"
+      = select("type_orden", "orden_key", {'de la A'=>'asc', 'de la Z'=>'desc'}.each {|name,value| [ name, value ] },
+        { include_blank: false }, {class: "form-control"})
+      = label_tag "Fecha de creación:"
+      = select("type_orden", "creación_key", {'nuevo'=>'asc', 'viejo'=>'desc'}.each {|name,value| [ name, value ] },
+        { include_blank: false }, {class: "form-control"})
+      %br/
+      = submit_tag "Buscar", class: 'btn btn-primary'
+  %br/

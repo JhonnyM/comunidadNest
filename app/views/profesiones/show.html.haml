@@ -1,0 +1,15 @@
+%p#notice= notice
+
+%p
+  %b Generico:
+  = @profesion.generico
+%p
+  %b Masculino:
+  = @profesion.masculino
+%p
+  %b Femenino:
+  = @profesion.femenino
+
+= link_to 'Edit', edit_profesion_path(@profesion)
+\|
+= link_to 'Back', profesiones_path

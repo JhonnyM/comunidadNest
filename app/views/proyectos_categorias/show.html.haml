@@ -1,0 +1,9 @@
+%p#notice= notice
+
+%p
+  %b Nombre:
+  = @proyectos_categoria.nombre
+
+= link_to 'Edit', edit_proyectos_categoria_path(@proyectos_categoria)
+\|
+= link_to 'Back', proyectos_categorias_path

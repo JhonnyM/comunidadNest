@@ -1,0 +1,21 @@
+// Place all the styles related to the Blog controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.grid-sizer,
+.grid-item {
+	width: 30%;
+}
+
+.grid-item {
+	float: left;
+	padding: 20px;
+}
+article{
+	img{
+		max-width: 100%;
+	}
+}
+.article-justified{
+	text-align: justify;
+}

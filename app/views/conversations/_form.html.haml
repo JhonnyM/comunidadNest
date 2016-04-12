@@ -1,0 +1,13 @@
+= form_for :conversation, url: :conversations, html: { class: "" } do |f|
+  .form-group
+    = f.label :recipients, "Escribir a #{@user.nombre}"
+    -#= f.select(:recipients, User.all.collect {|p| [ p.nombre, p.id ] }, {}, { multiple: true , class: "chosen-select form-control" })
+    = hidden_field_tag(:recipient_id, "#{@user.id}")
+  .form-group
+    = f.label :subject, "Asunto"
+    = f.text_field :subject, placeholder: "Asunto", class: "form-control"
+  .form-group
+    = f.label :message, "Mensaje"
+    = f.text_area :body, class: 'form-control',placeholder: "Escribí tu mensaje aquí", rows: 4
+  .form-group
+    = f.submit "Enviar Mensaje", class: "btn btn-primary"

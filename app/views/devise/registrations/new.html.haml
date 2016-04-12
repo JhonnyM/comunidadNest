@@ -1,0 +1,44 @@
+.col-xs-12.col-md-6
+  %h2 ¿No tenés cuenta?
+  = form_for(resource, as: resource_name, url: registration_path(resource_name), :html => {class: 'form'}) do |f|
+    = devise_error_messages!
+    .form-group
+      = f.label :nombre, "Nombre completo"
+      = f.text_field :nombre, class: 'form-control'
+    .form-group
+      = f.label :email
+      = f.email_field :email, autofocus: true, :class => 'form-control'
+    .form-group
+      = f.label :password
+      - if @minimum_password_length
+        %em
+          (Mínimo #{@minimum_password_length} caracteres)
+      = f.password_field :password, autocomplete: "off", :class => 'form-control'
+    .form-group
+      = f.label :password_confirmation, "Confirmar Password"
+      = f.password_field :password_confirmation, autocomplete: "off", :class => 'form-control'
+    .checkbox
+      = f.label :terms, :class => "checkbox" do
+        = f.check_box :terms, :class => "checkbox"
+        Acepto los 
+        = link_to "términos y condiciones de uso", '/static_pages/terminos'
+        
+    .actions
+      = f.submit "Crear cuenta", class: 'btn btn-primary'
+
+.col-xs-12.col-md-6
+  %h2 ¿Ya tenés cuenta?
+  = form_tag session_path(:user), class: 'form' do
+    .form-group
+      = label_tag "Email o username"
+      = text_field_tag 'user[login]', nil, class: 'form-control'
+    .form-group
+      = label_tag "Password"
+      = password_field_tag 'user[password]', nil, class: 'form-control'
+    .form-group
+      = check_box_tag 'user[remember_me]'
+      = label_tag 'user[remember_me]', 'Recordarme'
+    .form-group
+      %button.btn.btn-primary Identificarse
+    .form-group
+      = link_to "¿Olvidó su contraseña?", new_password_path(:user)

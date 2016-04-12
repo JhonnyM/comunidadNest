@@ -1,0 +1,1 @@
+json.extract! @profesional, :id, :status, :user_id, :nombre, :especialidades, :descripcion, :email, :telefono, :movil, :website, :facebook, :twitter, :instagram, :pinterest, :linkedin, :pais, :ciudad, :otros, :genero, :nacimiento, :estado_civil, :intereses, :cfia, :created_at, :updated_at

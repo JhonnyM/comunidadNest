@@ -1,0 +1,27 @@
+%h1 Listing producto_imagenes
+
+%table
+  %thead
+    %tr
+      %th Descripcion
+      %th Imagen
+      %th Producto
+      %th Producto token
+      %th
+      %th
+      %th
+
+  %tbody
+    - @producto_imagenes.each do |producto_imagen|
+      %tr
+        %td= producto_imagen.descripcion
+        %td= producto_imagen.imagen
+        %td= producto_imagen.producto_id
+        %td= producto_imagen.producto_token
+        %td= link_to 'Show', producto_imagen
+        %td= link_to 'Edit', edit_producto_imagen_path(producto_imagen)
+        %td= link_to 'Destroy', producto_imagen, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Producto imagen', new_producto_imagen_path

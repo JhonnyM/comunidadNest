@@ -1,0 +1,7 @@
+%h1= "Calificar a #{@reviewable.nombre}"
+%hr
+.row
+	.col-xs-12
+		= render 'form'
+	.col-xs-10.col-xs-offset-2
+		= link_to 'Cancelar', @reviewable

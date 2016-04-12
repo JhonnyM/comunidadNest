@@ -1,0 +1,11 @@
+.caja.clearfix{:id => "empleador-#{empleador.id}"}
+	.avatar-container
+		= link_to empresa_path(:id => empleador.empresa.id ) do
+			= image_tag empleador.empresa.avatar.url(:thumb)
+	.pull-left
+		%h5= link_to empleador.empresa.nombre, empresa_path(:id => empleador.empresa.id )
+		%p= empleador.puesto
+	-if empleador.status == 0
+		= link_to "Autorizar", {controller: "empleados_empresas", action: "aceptar_solicitud_empleado"}, remote: true, class: 'autorizar-btn btn btn-primary btn-sm pull-right'
+	-else
+		%p= "Estado: #{empleador.estado_actual}"

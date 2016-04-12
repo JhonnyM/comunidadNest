@@ -1,0 +1,19 @@
+%h1 Listing participante_proyectos
+
+%table
+  %thead
+    %tr
+      %th
+      %th
+      %th
+
+  %tbody
+    - @participante_proyectos.each do |participante_proyecto|
+      %tr
+        %td= link_to 'Show', participante_proyecto
+        %td= link_to 'Edit', edit_participante_proyecto_path(participante_proyecto)
+        %td= link_to 'Destroy', participante_proyecto, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Participante proyecto', new_participante_proyecto_path

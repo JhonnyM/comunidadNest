@@ -1,0 +1,9 @@
+.row
+  .col-xs-2
+    =render partial: "filtros"
+  .col-xs-8
+    %h1 Productos
+    .row
+      =render partial: "producto", collection: @productos
+  .col-xs-2
+    Listado de mis perfiles

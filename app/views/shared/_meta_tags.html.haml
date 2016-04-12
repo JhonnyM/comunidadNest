@@ -1,0 +1,18 @@
+-if (title ||= nil)
+  %meta{name: "twitter:title", content: title}
+  %meta{name: "og:title", content: title}
+-if (description ||= nil)
+  %meta{name: "description", content: (descripcion||="")}
+  %meta{name: "twitter:description", content: descripcion}
+  %meta{name: "og:description", content: descripcion}
+-if (author_handle ||= nil)
+  %meta{name: "twitter:creator", content: author_handle}
+-if (image ||= nil)
+  %meta{name: "twitter:image", content: image}
+  %meta{name: "og:image", content: image}
+-if (fb_numeric_id ||= nil)
+  %meta{name: "fb:admins", content: fb_numeric_id}
+
+%meta{name: "twitter:card", content: "summary"}
+%meta{name: "og:type", content: "article"}
+%meta{name: "og:url", content: (url||=request.original_url)}

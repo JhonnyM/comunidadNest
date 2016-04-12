@@ -1,0 +1,10 @@
+.row
+	.col-xs-12.col-md-6.col-lg-3#sidebar-left
+		.caja
+			=render partial: "filtros"
+	.col-xs-12.col-md-6.col-lg-6.list-main-container
+		%h1 Proyectos
+		.row
+			=render partial: "proyecto", collection: @proyectos, layout: "layouts/nest_object"
+	.col-xs-12.col-md-6.col-lg-3
+		= render "application/right_sidebar"

@@ -1,0 +1,3 @@
+$('.new_estudio').hide();
+$('li#estudio-<%= @estudio.id %>').replaceWith('<%= j render("estudios/form") %>');
+$('.new-estudio-button').hide();

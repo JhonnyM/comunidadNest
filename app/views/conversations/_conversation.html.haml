@@ -1,0 +1,28 @@
+.media
+  .media-left
+    %a{:href => "#"}
+      %img.media-object{:alt => "...", :src => "http://placehold.it/64x64"}
+  .media-body
+    - if Mailboxer::Notification == conversation.class
+      %h4.media-heading
+        %small
+          %b Subject:
+          = conversation.subject
+        %br
+          %small
+            %b Date:
+            = conversation.created_at.strftime("%A, %b %d, %Y at %I:%M%p")
+      = conversation.body
+    - else
+      %h4.media-heading
+        = conversation.originator.nombre
+        %br
+          %small
+            %b Subject:
+            = conversation.subject
+          %br
+            %small
+              %b Date:
+              = conversation.messages.last.created_at.strftime("%A, %b %d, %Y at %I:%M%p")
+      = truncate conversation.messages.last.body, length: 145
+      = link_to "Ver", conversation_path(conversation)

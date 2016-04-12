@@ -1,0 +1,16 @@
+.grid-item
+  .nest-object
+    .nest-object-img
+      =link_to post do
+        .profile-pic{:style => "background-image: url(#{post.image_intro.url});"}
+    .nest-object-info
+      =link_to post do
+        %h3=post.title
+      %p.subtitle
+        %br
+        - if post.publish_up.present?
+          %i.fa.fa-calendar
+          = I18n.l post.publish_up, :format => "%e de %B de %Y"
+        %br
+        %i.fa.fa-user 
+        autor

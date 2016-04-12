@@ -1,0 +1,18 @@
+= form_for [@proyecto, @proyecto_imagen], :html => { :class => 'form-horizontal' } do |f|
+  .control-group
+  = image_tag @proyecto_imagen.imagen.url(:thumb), :id => 'cropbox'
+  .form-actions
+    = f.submit nil, :class => 'btn btn-primary btn-sm'
+    = link_to 'Cancelar', proyecto_path(@proyecto_imagen.proyecto), :class => 'btn btn-sm btn-danger'
+    = link_to 'Default', '', :class => 'btn btn-sm btn-success' , :id => 'make_default'
+%script{:charset => "utf-8", :type => "text/javascript"}
+  $(function () {
+  $('#make_default').click(function(event) {
+  event.preventDefault();
+  $.ajax({
+  url: '#{make_default_proyecto_imagen_path(@proyecto_imagen)}',
+  type: 'POST',
+  data: {id : #{@proyecto_imagen.id}, proyecto_id : #{@proyecto_imagen.proyecto.id}}
+  });
+  });
+  });

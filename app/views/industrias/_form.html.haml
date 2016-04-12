@@ -1,0 +1,10 @@
+= form_for @industria do |f|
+  - if @industria.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@industria.errors.count, "error")} prohibited this industria from being saved:"
+      %ul
+        - @industria.errors.full_messages.each do |msg|
+          %li= msg
+
+  .actions
+    = f.submit 'Save'

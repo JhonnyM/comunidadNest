@@ -1,0 +1,7 @@
+.empleado.col-xs-12
+  .image.pull-left
+    = image_tag empleado.profesional.avatar.url(:thumb)
+  = link_to empleado.profesional.nombre, empleado, { :class => 'nombre-empleado'} 
+  %p= empleado.profesional.nombre_profesion
+  %p.puesto= empleado.puesto
+  %p= empleado.estado_actual

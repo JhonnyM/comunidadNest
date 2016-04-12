@@ -1,0 +1,29 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  titulo: MyString
+  pais: MyString
+  cantidad: 1
+  unidad_medida: MyString
+  producto_categoria_id: 1
+  especificaciones: MyText
+  precio_minimo: 1
+  precio_maximo: 1
+  tipo_de_cambio: MyString
+  entrega: 2016-02-05
+  plazo: 2016-02-05
+  observaciones: MyText
+
+two:
+  titulo: MyString
+  pais: MyString
+  cantidad: 1
+  unidad_medida: MyString
+  producto_categoria_id: 1
+  especificaciones: MyText
+  precio_minimo: 1
+  precio_maximo: 1
+  tipo_de_cambio: MyString
+  entrega: 2016-02-05
+  plazo: 2016-02-05
+  observaciones: MyText

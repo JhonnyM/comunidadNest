@@ -1,0 +1,43 @@
+%h1 Listing licitacions
+
+%table
+  %thead
+    %tr
+      %th Titulo
+      %th Pais
+      %th Cantidad
+      %th Unidad medida
+      %th Producto categoria
+      %th Especificaciones
+      %th Precio minimo
+      %th Precio maximo
+      %th Tipo de cambio
+      %th Entrega
+      %th Plazo
+      %th Observaciones
+      %th
+      %th
+      %th
+
+  %tbody
+    - @licitacions.each do |licitacion|
+      %tr
+        %td= licitacion.titulo
+        %td= licitacion.pais
+        %td= licitacion.cantidad
+        %td= licitacion.unidad_medida
+        %td= licitacion.producto_categoria_id
+        %td= licitacion.especificaciones
+        %td= licitacion.precio_minimo
+        %td= licitacion.precio_maximo
+        %td= licitacion.tipo_de_cambio
+        %td= licitacion.entrega
+        %td= licitacion.plazo
+        %td= licitacion.observaciones
+        %td= link_to 'Show', licitacion
+        %td= link_to 'Edit', edit_licitacion_path(licitacion)
+        %td= link_to 'Destroy', licitacion, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Licitacion', new_licitacion_path

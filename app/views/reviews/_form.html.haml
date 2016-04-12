@@ -1,0 +1,27 @@
+= form_for ([@reviewable, @review]), :html => { class: 'form form-profile form-horizontal form-profile'}  do |f|
+  - if @review.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@review.errors.count, "error")} prohibited this review from being saved:"
+      %ul
+        - @review.errors.full_messages.each do |msg|
+          %li= msg
+
+  .form-group
+    = f.label :rating, class: 'col-xs-2'
+    .col-xs-10
+      = f.select :rating, ["1", "2", "3", "4", "5"]
+  .form-group
+    = f.label :comentario, class: 'col-xs-2'
+    .col-xs-10
+      = f.text_area :comentario, class: 'form-control'
+  .form-group
+    .col-xs-10.col-xs-offset-2
+      = f.submit 'Calificar', class: "btn btn-primary"
+
+:javascript
+  $(function() {
+      $('#review_rating').barrating({
+        theme: 'fontawesome-stars',
+        initialRating: null
+      });
+   });

@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  profesional_id: 1
+  institucion: MyString
+  titulo: MyString
+  fecha: MyString
+  pais: MyString
+
+two:
+  profesional_id: 1
+  institucion: MyString
+  titulo: MyString
+  fecha: MyString
+  pais: MyString

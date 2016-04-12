@@ -1,0 +1,16 @@
+.row
+	.col-xs-2
+		Filtros
+	.col-xs-8
+		%h1= @tag.name.capitalize
+		- unless @profesionales.empty?
+			%h2 Profesionales
+			.row
+				=render partial: "profesionales/profesional", collection: @profesionales, layout: "layouts/nest_object"
+
+		- unless @empresas.empty?
+			%h2 Empresas
+			.row
+				=render partial: "empresas/empresa", collection: @empresas, layout: "layouts/nest_object"
+	.col-xs-2
+		Listado de mis perfiles

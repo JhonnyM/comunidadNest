@@ -1,0 +1,65 @@
+= form_for (@licitacion), :html => {class: 'form form-profile form-horizontal'} do |f|
+  - if @licitacion.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@licitacion.errors.count, "error")} prohibited this licitacion from being saved:"
+      %ul
+        - @licitacion.errors.full_messages.each do |msg|
+          %li= msg
+
+  .form-group
+    = f.label :titulo,class: 'col-xs-2'
+    .col-xs-8
+      = f.text_field :titulo, {class: "form-control"}
+  .form-group
+    = f.label :pais,class: 'col-xs-2'
+    .col-xs-8
+      = country_select("licitacion", "pais", priority_countries: ["CR"])
+  .form-group
+    = f.label :cantidad,class: 'col-xs-2'
+    .col-xs-8
+      = f.number_field :cantidad, {class: "form-control"}
+      = f.select :unidad_medida, options_for_select(@licitacion.unidades, @licitacion.unidad_medida)
+  .form-group
+    = f.label :productos_categoria_id,class: 'col-xs-2'
+    .col-xs-8
+      = f.collection_select(:productos_categoria_id, ProductosCategoria.all, :id, :nombre)
+  .form-group
+    = f.label :especificaciones,class: 'col-xs-2'
+    .col-xs-8
+      = f.text_area :especificaciones, {class: "form-control"}
+  .form-group
+    = f.label :precio_minimo,class: 'col-xs-2'
+    .col-xs-8
+      = f.number_field :precio_minimo, {class: "form-control"}
+  .form-group
+    = f.label :precio_maximo,class: 'col-xs-2'
+    .col-xs-8
+      = f.number_field :precio_maximo, {class: "form-control"}
+  .form-group
+    = f.label :tipo_de_cambio,class: 'col-xs-2'
+    .col-xs-8
+      = f.select :tipo_de_cambio, options_for_select(@licitacion.currencies, @licitacion.tipo_de_cambio)
+  .form-group
+    = f.label :entrega,class: 'col-xs-2'
+    .col-xs-8
+      = f.date_select :entrega, {class: "form-control"}
+  .form-group
+    = f.label :plazo,class: 'col-xs-2'
+    .col-xs-8
+      = f.date_select :plazo, {class: "form-control"}
+  .form-group
+    = f.label :observaciones,class: 'col-xs-2'
+    .col-xs-8
+      = f.text_area :observaciones, {class: "form-control"}
+  .form-group
+    = f.label :licitacion_imagenes, :class => 'control-label'
+    .col-xs-8
+      = file_field_tag "imagenes[]", type: :file, multiple: true
+  -if params[:action] == 'edit'
+    .form-group
+      = f.hidden_field :empresa_id
+  -else
+    .form-group
+      = f.hidden_field :empresa_id, :value => @empresa_id
+  .actions
+    = f.submit 'Guardar', {:class => 'btn btn-primary'}

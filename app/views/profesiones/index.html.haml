@@ -1,0 +1,25 @@
+%h1 Listing profesiones
+
+%table
+  %thead
+    %tr
+      %th Generico
+      %th Masculino
+      %th Femenino
+      %th
+      %th
+      %th
+
+  %tbody
+    - @profesiones.each do |profesion|
+      %tr
+        %td= profesion.generico
+        %td= profesion.masculino
+        %td= profesion.femenino
+        %td= link_to 'Show', profesion
+        %td= link_to 'Edit', edit_profesion_path(profesion)
+        %td= link_to 'Destroy', profesion, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Profesion', new_profesion_path

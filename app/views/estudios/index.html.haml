@@ -1,0 +1,19 @@
+%h1 Listing estudios
+
+%table
+  %thead
+    %tr
+      %th
+      %th
+      %th
+
+  %tbody
+    - @estudios.each do |estudio|
+      %tr
+        %td= link_to 'Show', estudio
+        %td= link_to 'Edit', edit_estudio_path(estudio)
+        %td= link_to 'Destroy', estudio, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Estudio', new_estudio_path

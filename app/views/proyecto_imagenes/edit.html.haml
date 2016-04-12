@@ -1,0 +1,7 @@
+%h1
+	Editando imagen de
+	=@proyecto_imagen.proyecto.titulo
+
+= render 'form'
+
+= link_to 'Cancelar', proyecto_path(@proyecto_imagen.proyecto)

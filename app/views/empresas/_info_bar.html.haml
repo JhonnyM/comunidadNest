@@ -1,0 +1,119 @@
+.main-profile
+  %h1.profile-title
+    =@empresa.nombre
+  %p.profile-subtitle
+    =@empresa.industria.nombre
+  .avatar.profile-pic
+    = image_tag @empresa.avatar.url(:medium), class: 'img-responsive'
+.social-bar
+  %ul.list-inline
+    -if @empresa.website.present?
+      %li
+        = link_to @empresa.website do
+          %i.fa.fa-globe
+    -if defined? (@empresa.facebook)
+      %li
+        = link_to @empresa.facebook do
+          %i.fa.fa-facebook
+    -if defined? (@empresa.twitter)
+      %li
+        = link_to @empresa.twitter do
+          %i.fa.fa-twitter
+    -if defined? (@empresa.instagram)
+      %li
+        = link_to @empresa.instagram do
+          %i.fa.fa-instagram
+    -if defined? (@empresa.linkedin)
+      %li
+        = link_to @empresa.linkedin do
+          %i.fa.fa-linkedin
+    -if defined? (@empresa.pinterest)
+      %li
+        = link_to @empresa.pinterest do
+          %i.fa.fa-pinterest
+
+%h3 Calificación
+.caja.clearfix
+  .info-rating
+    = @avg_rating
+    %i.fa.fa-star
+  .info-rating-text
+    = "#{@avg_rating} de 5 estrellas"
+    %br
+    %small= "#{@empresa.reviews.length} Opiniones"
+  - if @empresa.reviewable_by?(current_user)
+    = link_to "Mi opinión", new_empresa_review_path(@empresa), class: "btn btn-primary pull-right"
+-#//- if @avg_rating > 4.5
+    -#//Empresa recomendado y 5 ratings
+
+%h3 ID EMPRESA
+.pull-right
+  =link_to 'Portafolio' , @empresa.portafolio.url
+.caja
+  %dl
+    %dt Año de Fundación:
+    %dd= @empresa.fundacion
+
+    %dt Especialidades:
+    %dd= @empresa.especialidades
+
+%h3 Contacto
+.caja
+  %dl
+    %dt Sitio Web
+    %dd= link_to @empresa.nombre, @empresa.website
+
+    %dt Número Telefónico
+    %dd= @empresa.telefono
+
+    %dt Teléfono secundario
+    %dd= @empresa.telefono2
+
+    %dt Email
+    %dd= @empresa.email
+
+    %dt Dirección
+    %dd= simple_format(@empresa.direccion)
+
+    %dt Horario
+    %dd= @empresa.horario
+
+- unless @empresa.tags.empty?
+  %h3 Tags
+  .caja
+    =render @empresa.tags
+
+- if @empresa.id == "zz"
+  %h3 Equipo de trabajo:
+  .row
+    = render partial: 'empleados_empresas/empleado', collection: @empresa.empleados_empresas
+  = form_tag empleados_empresas_new_path do
+    = hidden_field_tag :empresa_id, @empresa.id
+    = submit_tag 'Agregar Miembro' , {:class => 'btn btn-primary'}
+
+%h3 Crear
+.caja.text-center.botones
+  = form_tag new_proyecto_path do
+    = hidden_field_tag :propietario_id, @empresa.id
+    = hidden_field_tag :propietario_tipo, 'empresa'
+    = submit_tag 'Crear Proyecto' , {:class => 'btn btn-primary'}
+  = form_tag new_producto_path do
+    = hidden_field_tag :propietario_id, @empresa.id
+    = hidden_field_tag :propietario_tipo, 'empresa'
+    -#= submit_tag 'Crear Producto' , {:class => 'btn btn-primary'}
+  = form_tag new_vacantes_trabajo_path do
+    = hidden_field_tag :propietario_id, @empresa.id
+    = hidden_field_tag :propietario_tipo, 'empresa'
+    -#= submit_tag 'Crear Oferta de Empleo' , {:class => 'btn btn-primary'}
+  = form_tag new_licitacion_path do
+    = hidden_field_tag :propietario_id, @empresa.id
+    -#= submit_tag 'Publicar licitación' , {:class => 'btn btn-primary'}
+
+  %br
+  -#=link_to 'Solicitar Oferta' , '#', {:class => 'btn btn-primary'}
+- if user_signed_in? and current_user.id == @empresa.user_id
+  %h3 Opciones de Administrador
+  .caja
+    = link_to 'Editar', edit_empresa_path(@empresa), { :class => 'btn btn-primary'}
+
+= link_to 'Volver a Comunidad de Empresas', empresas_path, class: 'btn btn-border text-center center-block'

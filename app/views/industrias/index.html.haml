@@ -1,0 +1,19 @@
+%h1 Listing industrias
+
+%table
+  %thead
+    %tr
+      %th
+      %th
+      %th
+
+  %tbody
+    - @industrias.each do |industria|
+      %tr
+        %td= link_to 'Show', industria
+        %td= link_to 'Edit', edit_industria_path(industria)
+        %td= link_to 'Destroy', industria, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Industria', new_industria_path

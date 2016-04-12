@@ -1,0 +1,3 @@
+$('.new_experiencia').hide();
+$('li#experiencia-<%= @experiencia.id %>').replaceWith('<%= j render("experiencias/form") %>');
+$('.new-experiencia-button').hide();

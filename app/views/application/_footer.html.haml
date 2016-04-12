@@ -1,0 +1,50 @@
+.gray-bg.pre-footer
+  .container
+    .col-lg-3
+      .fb-page{"data-hide-cover" => "false", "data-href" => "https://www.facebook.com/comunidadnest", "data-show-facepile" => "true", "data-show-posts" => "false", "data-width" => "300"}
+        .fb-xfbml-parse-ignore
+          %blockquote{:cite => "https://www.facebook.com/comunidadnest"}
+            %a{:href => "https://www.facebook.com/comunidadnest"} Comunidad Nest
+    .col-lg-6.text-center
+      .custom-somos-nest
+        %h3 ¡Somos Comunidad Nest!
+        %p Una comunidad virtual donde cada profesional y cada empresa tiene su espacio para exponerle al mundo quienes son, qué es lo que hacen y que es lo que ofrecen.
+        %p Una plataforma para generar links entre empresas, proveedores y profesionales que abren un mundo de posibilidades laborales y de negocios.
+        %p Un medio para facilitar la comunicación entre todos los participantes que ponen su grano de arena en el mundo de la arquitectura y el diseño de América Latina.
+    .col-lg-3
+      .instagram-widget
+        %h4
+          %i.fa.fa-instagram
+          Imágenes Recientes
+        / INSTANSIVE WIDGET
+        %script{:src => "//instansive.com/widget/js/instansive.js"}
+        %iframe#instansive_61959b89cc.instansive-widget{:allowtransparency => "true", :name => "instansive_61959b89cc", :scrolling => "no", :src => "//instansive.com/widgets/61959b89ccd5ff1ce27078a739bb6bee6e414d3d.html", :style => "width: 100%; border: 0px; overflow: hidden; height: 191px;"}
+
+%footer
+  .container
+    .col-xs-3
+      %h3 comunidad
+      %ul.list-unstyled
+        %li
+          = link_to 'Profesionales', profesionales_path
+        %li
+          = link_to 'Empresas', empresas_path
+        %li
+          = link_to 'Blog', '/blog'
+    .col-xs-3
+      %h3 información
+      %ul.list-unstyled
+        %li
+          = link_to 'Sobre Nosotros', nosotros_path
+        %li
+          = link_to 'Contacto', contacto_path
+        %li
+          = link_to 'Política de privacidad', privacidad_path
+        %li
+          = link_to 'Términos y Condiciones', terminos_path
+        //Agregar Sitemap
+
+    .col-xs-3.pull-right
+      = link_to root_path, :class => "logo-link-footer" do
+        = image_tag "logo-menu.png", :class => "logo-image"
+      %p Copyright © 2016 Comunidad Nest. Todos los derechos reservados.

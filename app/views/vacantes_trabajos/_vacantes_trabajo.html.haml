@@ -1,0 +1,9 @@
+.col-xs-12
+	%h4= vacantes_trabajo.titulo
+	Por: 
+	=link_to vacantes_trabajo.empresa.nombre
+	%br
+	%p
+		%strong Descripción de puesto
+	%p= vacantes_trabajo.descripcion
+	= link_to 'Ver oferta completa', vacantes_trabajo

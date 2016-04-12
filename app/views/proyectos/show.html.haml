@@ -1,0 +1,101 @@
+-content_for :title do
+  = @proyecto.titulo
+
+-content_for :meta_tags do
+  = render partial: "shared/meta_tags", locals: { title: @proyecto.titulo, descripcion: @proyecto.descripcion, image: ( @proyecto.proyecto_imagenes.length > 0 ) ? @proyecto.proyecto_imagenes.first.imagen.url(:medium) : nil }
+
+-content_for :full_width_header do
+  .proyecto-images-container.clearfix
+    %div
+      -@proyecto.proyecto_imagenes.take(3).each do |image|
+        =image_tag image.imagen.url(:medium)
+.row
+  .col-xs-9
+    .row
+      .col-xs-12
+        %h1
+          = @proyecto.titulo
+        = render partial: "shared/social_buttons", locals: {text: @proyecto.titulo, title: @proyecto.titulo, summary: @proyecto.descripcion, img: ( @proyecto.proyecto_imagenes.length > 0 ) ? @proyecto.proyecto_imagenes.first.imagen.url(:medium) : "" }
+        .propietario
+          Por:
+          =link_to @proyecto.propietario.nombre, @proyecto.propietario
+    .row
+      .col-xs-6
+        %h3 ID Proyecto
+        .caja.info_proyecto.max-height
+          %dl
+            %dt Ubicación
+            %dd="#{@proyecto.ciudad}, #{@proyecto.pais}"
+            -unless @proyecto.proyectos_categorias.blank?
+              %dt Tipo
+              %dd
+                -@proyecto.proyectos_categorias.each do |categoria|
+                  - if categoria == @proyecto.proyectos_categorias.last
+                    =categoria.nombre
+                  -else
+                    =categoria.nombre+', '
+            -unless @proyecto.fecha.blank?
+              %dt Año
+              %dd=@proyecto.fecha
+            %dt Status
+            %dd=@proyecto.status_proyecto.capitalize
+      .col-xs-6
+        %h3 Participantes
+        .caja.clearfix
+          %ul#participates
+            - @participante_proyectos.each do |participante_proyecto|
+              = render partial: "participante_proyectos/single", locals: { participante_proyecto: participante_proyecto }
+          = link_to "Agregar Participantes", new_participante_proyecto_path(:proyecto_id => @proyecto.id), remote: true, :class => 'btn btn-primary new-participante-button'
+
+    %h2 Descripcion:
+    = @proyecto.descripcion
+
+
+    -unless @imagenes.empty?
+      .row.proyecto-imagenes
+        .col-xs-12
+          %h2 Imágenes
+          .grid-images
+            .grid-sizer
+            - @imagenes.each_with_index do |pic, index|
+              .grid-item
+                %a.thumbnail{:data => {:toggle => 'modal', :target => "#image_gallery#{index + 1}"}}
+                  = image_tag pic.imagen.url(:medium)
+                %div.modal.fade{id: "image_gallery#{index + 1}", "aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+                  .modal-dialog
+                    .modal-content
+                      .modal-header
+                        %button.close{"data-dismiss" => "modal", :type => "button"}
+                          %span{"aria-hidden" => "true"} ×
+                          %span.sr-only Cerrar
+                          %h4#image-gallery-title.modal-title
+                      .modal-body
+                        %img.image-gallery-image.img-responsive{:src => pic.imagen.url(:large)}
+                      .modal-footer
+                        .col-md-2
+                          %button#show-previous-image.btn.btn-primary{:type => "button", data: { toggle: 'modal', target: "#image_gallery#{index.zero? ? @imagenes.size : index}", dismiss: 'modal' }} Anterior
+                        #image-gallery-caption.col-md-8.text-justify
+                          //This text will be overwritten by jQuery
+                        .col-md-2
+                          %button#show-next-image.btn.btn-default{:type => "button", data: { toggle: 'modal', target: "#image_gallery#{@imagenes.size == index + 1 ? 1 : index + 2}", dismiss: 'modal' }} Siguiente
+
+    = link_to 'Editar', edit_proyecto_path(@proyecto), class: 'btn btn-primary'
+    = link_to 'Volver a Proyectos', proyectos_path
+
+#image-gallery.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %button.close{"data-dismiss" => "modal", :type => "button"}
+          %span{"aria-hidden" => "true"} ×
+          %span.sr-only Cerrar
+        %h4#image-gallery-title.modal-title
+      .modal-body
+        %img#image-gallery-image.img-responsive{:src => ""}
+      .modal-footer
+        .col-md-2
+          %button#show-previous-image.btn.btn-primary{:type => "button"} Anterior
+        #image-gallery-caption.col-md-8.text-justify
+          //This text will be overwritten by jQuery
+        .col-md-2
+          %button#show-next-image.btn.btn-default{:type => "button"} Siguiente

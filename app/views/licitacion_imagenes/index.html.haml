@@ -1,0 +1,27 @@
+%h1 Listing licitacion_imagenes
+
+%table
+  %thead
+    %tr
+      %th Descripcion
+      %th Imagen
+      %th Producto
+      %th Producto token
+      %th
+      %th
+      %th
+
+  %tbody
+    - @licitacion_imagenes.each do |licitacion_imagen|
+      %tr
+        %td= licitacion_imagen.descripcion
+        %td= licitacion_imagen.imagen
+        %td= licitacion_imagen.producto_id
+        %td= licitacion_imagen.producto_token
+        %td= link_to 'Show', licitacion_imagen
+        %td= link_to 'Edit', edit_licitacion_imagen_path(licitacion_imagen)
+        %td= link_to 'Destroy', licitacion_imagen, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Licitacion imagen', new_licitacion_imagen_path

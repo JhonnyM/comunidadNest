@@ -1,0 +1,15 @@
+#main-slider
+	%ul
+		- @slides.each do |slide|
+			%li
+				.slide-container
+					%a{ :href => slide.link }
+						= image_tag slide.imagen.url, :class => 'img-responsive'
+						.slide-info-container
+							.slide-title
+								= slide.titulo
+								%strong= slide.titulo_bold
+							.slide-autor
+								= "Por: #{slide.autor}"
+							.slide-autor
+								%strong= slide.pais

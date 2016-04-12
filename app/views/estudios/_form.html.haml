@@ -1,0 +1,16 @@
+= form_for(@estudio, remote: true) do |f|
+	= f.hidden_field :profesional_id, :value => @profesional.id
+	.control-group
+		= f.label :institucion
+		= f.text_field :institucion, {:class => 'form-control'}
+	.control-group
+		= f.label :titulo
+		= f.text_field :titulo, {:class => 'form-control'}
+	.control-group
+		= f.label :fecha
+		= f.text_field :fecha, {:class => 'form-control'}
+	.control-group
+		= f.label :pais
+		= country_select("profesional", "pais", {priority_countries: ["CR"]}, {class: "form-control"})
+
+	= f.submit 'Guardar', {:class => 'btn btn-primary'}

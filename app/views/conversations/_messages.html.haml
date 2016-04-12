@@ -1,0 +1,15 @@
+- @receipts.each do |receipt|
+	- message = receipt.message
+	.media
+		.media-body
+			%h4.media-heading
+				= link_to message.sender.nombre, '#'
+				%br
+				%small
+					%b Asunto:
+					= message.subject
+					%br
+					%small
+						%b Fecha:
+						= message.created_at.strftime("%A, %b %d, %Y at %I:%M%p")
+		= message.body

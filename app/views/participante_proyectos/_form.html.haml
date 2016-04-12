@@ -1,0 +1,82 @@
+= form_for (@participante_proyecto), remote: true, :html => {class: 'form form-profile form-horizontal', id: 'add_participante_form'} do |f|
+	- if @participante_proyecto.errors.any?
+		#error_explanation
+			%h2= "#{pluralize(@participante_proyecto.errors.count, "error")} prohibited this participante_proyecto from being saved:"
+			%ul
+				- @participante_proyecto.errors.full_messages.each do |msg|
+					%li= msg
+
+	= f.hidden_field :proyecto_id
+
+	%ol.steps
+		%li.step.step1
+			¿Qué tipo de participante desea agregar?
+			= f.select :participante_type, ParticipanteProyecto.participante_type.options, {prompt: "Sleccioná una opción"}, {class: "form-control"}
+
+		%li.step.step2
+			¿Este participante cuenta con un perfil en Comunidad Nest?
+			%div
+				%fieldset#existe-btn-group.radio.btn-group
+					.controls
+						.col-xs-6
+							%input#si-existe.btn{"data-show" => "nest", :name => "jform[existe]", :type => "radio", :value => "1"}
+							%label.btn.on{:for => "si-existe"} Sí
+						.col-xs-6
+							%input#no-existe.btn.btn-warning{"data-show" => "custom", :name => "jform[existe]", :type => "radio", :value => "0"}
+							%label.btn.off{:for => "no-existe"} No
+
+		%li.step.step3
+			#nest
+				.profesional-selector.selector#Profesional
+					= f.label 'Seleccione al profesional'
+					= collection_select(:profesional, :profesional, Profesional.all, :id, :nombre, {:prompt=>true}, {:class => 'form-control'})
+				.empresa-selector.selector#Empresa
+					= f.label 'Seleccione la empresa'
+					= collection_select(:empresa, :empresa, Empresa.all, :id, :nombre, {:prompt=>true}, {:class => 'form-control'})
+			#custom
+				.custom-selector.selector#custom
+					= f.label :nombre
+					= f.text_field :nombre, {:class => 'form-control'}
+			#avatar
+
+		%li.step.step4
+			.form-group
+				= f.label :rol
+				= f.text_field :rol, {:class => 'form-control'}
+	.col-xs-12
+		.form-group
+			= f.submit 'Agregar Participante', remote: true, :class => 'btn btn-primary', :id => "send"
+:javascript
+	showStep(1);
+
+	//Show step 2
+	$('#participante_proyecto_participante_type').change(function(){
+	showType($(this).val());
+	showStep(2);
+	});
+
+	//Show Step 3
+	$('#existe-btn-group input').change(function(){
+	showStep3($(this).data('show'));
+	});
+
+	//Show image for profesional.
+	$('#nest #Profesional select').change(function(){
+		$.getJSON( "/profesionales/"+$(this).val()+ "/avatar.json", function( data ) {
+			$("#avatar").html("<img src=\""+data["img"]+"\" />");
+			showStep(4);
+		});
+	});
+
+	//Show image for empresa.
+	$('#nest #Empresa select').change(function(){
+		$.getJSON( "/empresas/"+$(this).val()+ "/avatar.json", function( data ) {
+			$("#avatar").html("<img src=\""+data["img"]+"\" />");
+			showStep(4);
+		});
+	});
+
+	//Show step 4 when custom is filled.
+	$('#custom').on('input',function(e){
+	   showStep(4);
+	});

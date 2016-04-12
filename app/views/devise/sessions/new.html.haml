@@ -1,0 +1,18 @@
+%h2 Log in
+
+= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
+  .form-group
+    = label_tag "Email o username"
+    = text_field_tag 'user[login]', nil, class: 'form-control'
+  .form-group
+    = label_tag "Password"
+    = password_field_tag 'user[password]', nil, class: 'form-control'
+  .form-group
+    = check_box_tag 'user[remember_me]'
+    = label_tag 'user[remember_me]', 'Recordarme'
+  .form-group
+    %button.btn.btn-primary Identificarse
+  .form-group
+    = link_to "¿Olvidó su contraseña?", new_password_path(:user)
+
+= render "devise/shared/links"

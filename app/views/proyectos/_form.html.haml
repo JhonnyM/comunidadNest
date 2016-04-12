@@ -1,0 +1,91 @@
+= form_for (@proyecto), :html => { multipart: true , class: 'form form-profile form-horizontal'} do |f|
+  - if @proyecto.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@proyecto.errors.count, "error")} prohibited this proyecto from being saved:"
+      %ul
+        - @proyecto.errors.full_messages.each do |msg|
+          %li= msg
+
+  %fieldset.clearfix
+    %h2 Información General
+    .form-group
+      = f.label :titulo,class: 'col-xs-2'
+      .col-xs-8
+        = f.text_field :titulo, {class: "form-control"}
+    .form-group
+      = f.label :descripcion, "Desripción de proyecto", class: 'col-xs-2'
+      .col-xs-8
+        = f.text_area :descripcion, {class: "form-control"}
+    .form-group
+      = f.label :pais, "País", class: 'col-xs-2'
+      .col-xs-8
+        = country_select("proyecto", "pais", {priority_countries: ["CR"]}, {class: "form-control"})
+    .form-group
+      = f.label :ciudad,class: 'col-xs-2'
+      .col-xs-8
+        = f.text_field :ciudad, {class: "form-control"}
+    .form-group
+      = f.label :area, "Área", class: 'col-xs-2'
+      .col-xs-8
+        = f.number_field :area, {class: "form-control"}
+    .form-group
+      = f.label :fecha, "Año de construcción", class: 'col-xs-2'
+      .col-xs-8
+        = f.number_field :fecha, {class: "form-control"}
+    .form-group
+      -categorias = @categorias.map { |categoria| [categoria.nombre, categoria.id] }
+      = f.label :proyectos_categoria_id, "Categoría de proyecto", class: 'col-xs-2'
+      .col-xs-8
+        -#= collection_select(:proyecto, :proyectos_categoria_id, ProyectosCategoria.all, :id, :nombre, {:prompt=>true}, {:class => 'form-control'})
+    .form-group
+      = f.label :status_proyecto, "Estátus de proyecto", class: 'col-xs-2'
+      .col-xs-8
+        = f.select :status_proyecto, Proyecto.status_proyecto.options, {}, {class: "form-control"}
+    .form-group
+      = f.label :proyecto_imagenes, "Imágenes de proyecto", class: 'col-xs-2'
+      .col-xs-8
+        = file_field_tag "imagenes[]", type: :file, multiple: true
+
+    -if params[:action] == 'edit'
+      .form-group
+        = f.hidden_field :propietario_id
+        .col-xs-8
+          = f.hidden_field :propietario_tipo
+    -else
+      .form-group
+        = f.hidden_field :propietario_id, :value => @propietario_id
+        = f.hidden_field :propietario_tipo, :value => @propietario_tipo
+
+    = f.hidden_field :user_id
+  
+  -unless @imagenes.blank?
+    %fieldset.clearfix
+      %h2 Imágenes
+      - @imagenes.in_groups_of(4, false).each do |group|
+        .row
+        - group.each do |pic|
+          %li.list-unstyled
+            .col-xs-3
+              .thumbnail{:id => "imagen_#{pic.id}", :class => ("default-image" if pic.id == @proyecto.cover)}
+                = image_tag pic.imagen.url(:thumb)
+                .caption
+                  %p
+                    = link_to 'Imagen Principal', make_default_proyecto_imagen_path(pic, proyecto_id: @proyecto.id), class: 'make-default btn btn-sm btn-primary', remote: true, method: :post
+                    = link_to "Eliminar imagen", pic, :data => { :confirm => "Are you sure?" }, :method => :delete, class: 'btn btn-sm btn-danger'
+                    = link_to 'Seleccionar como Principal', make_default_proyecto_imagen_path(pic, proyecto_id: @proyecto.id), class: 'make-default', remote: true, method: :post
+                    = link_to "Eliminar Imagen", pic, :data => { :confirm => "¿Está seguro?" }, :method => :delete
+                    = link_to 'Seleccionar como Principal', make_default_proyecto_imagen_path(pic, proyecto_id: @proyecto.id), class: 'make-default', remote: true, method: :post
+                    = link_to "Eliminar Imagen", pic, :data => { :confirm => "¿Está seguro?" }, :method => :delete
+  .actions
+    = f.submit 'Guardar', {:class => 'btn btn-primary'}
+    = link_to 'Cancelar', proyectos_path, :class =>  "btn"
+
+:javascript
+  $(document).ready(function() {
+    $('#proyecto_proyectos_categoria_id').multiselect({
+      nonSelectedText: 'Seleccioná una o más tipos de proyecto'
+    });
+  });
+  $(function () {
+    $('[data-toggle="tooltip"]').tooltip()
+  })

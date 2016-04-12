@@ -1,0 +1,26 @@
+= form_for (@empleados_empresa), :html => {class: 'form form-profile form-horizontal'} do |f|
+  - if @empleados_empresa.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@empleados_empresa.errors.count, "error")} prohibited this empleados_empresa from being saved:"
+      %ul
+        - @empleados_empresa.errors.full_messages.each do |msg|
+          %li= msg
+  .form-group
+    = f.label :profesional_id, 'Seleccione el profesional que desea agregar en su equipo de trabajo'
+    .col-xs-8
+      = f.collection_select(:profesional_id, Profesional.all, :id, :nombre)
+
+  .form-group
+    = f.label :puesto,class: 'col-xs-2'
+    .col-xs-8
+      = f.text_field :puesto     
+  
+  -if params[:action] == 'edit'
+    .form-group
+      = f.hidden_field :empresa_id
+  -else
+    .form-group
+      -#= f.hidden_field :empresa_id
+
+  .actions
+    = f.submit 'Guardar', { :class => 'btn btn-primary'}

@@ -1,0 +1,37 @@
+%h1 Listing vacantes_trabajos
+
+%table
+  %thead
+    %tr
+      %th Titulo
+      %th Empresa
+      %th Pais
+      %th Desripcion
+      %th Puesto
+      %th Descripcion puesto
+      %th Requisitos
+      %th Tiempo
+      %th Salario
+      %th
+      %th
+      %th
+
+  %tbody
+    - @vacantes_trabajos.each do |vacantes_trabajo|
+      %tr
+        %td= vacantes_trabajo.titulo
+        %td= vacantes_trabajo.empresa_id
+        %td= vacantes_trabajo.pais
+        %td= vacantes_trabajo.desripcion
+        %td= vacantes_trabajo.puesto
+        %td= vacantes_trabajo.descripcion_puesto
+        %td= vacantes_trabajo.requisitos
+        %td= vacantes_trabajo.tiempo
+        %td= vacantes_trabajo.salario
+        %td= link_to 'Show', vacantes_trabajo
+        %td= link_to 'Edit', edit_vacantes_trabajo_path(vacantes_trabajo)
+        %td= link_to 'Destroy', vacantes_trabajo, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Vacantes trabajo', new_vacantes_trabajo_path

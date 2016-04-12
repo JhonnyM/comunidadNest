@@ -1,0 +1,3 @@
+$('form').hide();
+$('form#edit_estudio_<%= @estudio.id %>').replaceWith('<%= j render partial: "estudio", locals: {estudio: @estudio} %>');
+$('.new-estudio-button').show();

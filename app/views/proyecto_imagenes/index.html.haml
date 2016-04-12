@@ -1,0 +1,21 @@
+%h1 Listing proyectos_categorias
+
+%table
+  %thead
+    %tr
+      %th Nombre
+      %th
+      %th
+      %th
+
+  %tbody
+    - @proyectos_categorias.each do |proyectos_categoria|
+      %tr
+        %td= proyectos_categoria.nombre
+        %td= link_to 'Show', proyectos_categoria
+        %td= link_to 'Edit', edit_proyectos_categoria_path(proyectos_categoria)
+        %td= link_to 'Destroy', proyectos_categoria, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Proyectos categoria', new_proyectos_categoria_path
