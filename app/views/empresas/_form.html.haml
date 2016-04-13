@@ -21,7 +21,7 @@
       .col-xs-8
         = f.file_field :page_img, class: "form-control"
     .form-group
-      = f.label :industria, class: 'col-xs-2'
+      = f.label :industria:, class: 'col-xs-2'
       .col-xs-8
         = f.collection_select :industria_id, Industria.all, :id, :nombre, {prompt: "Seleccioná una Industria"}, {class: "form-control"}
     .form-group

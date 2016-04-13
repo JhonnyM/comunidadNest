@@ -530,7 +530,8 @@ a.btn-circle, a.btn-circle:link{
 	}
 
 	.form-control{
-		border: solid 2px $brand-secondary;
+		border-radius: 0;
+    border: solid 2px #0cb7fa;
 
 		&.date-selector{
 			width: 31%;
@@ -621,8 +622,8 @@ a.btn-circle, a.btn-circle:link{
 		}
 	}
 	.form-control{
-		border: 1px solid $gray-lightest;
-		color: $gray-light;
+    border-radius: 0;
+    border: solid 2px #0cb7fa;
 	}
 	label{
 		font-weight: normal;
