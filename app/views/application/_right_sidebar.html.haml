@@ -1,10 +1,26 @@
 #right-sidebar
 	.opciones-perfil
 		%h3 OPCIONES DE PERFIL
-		%p
-			=link_to "Profesional", new_profesional_path, class: "btn btn-purple btn-profesional"
-		%p
-			=link_to "Empresa", new_empresa_path, class: "btn btn-blue btn-empresa"
+		-if user_signed_in?
+			-if current_user.profesional.present?
+				=link_to "Mi Perfil", profesional_path(current_user.profesional)
+			-else
+				%p
+					=link_to "Profesional", new_profesional_path, class: "btn btn-purple btn-profesional"
+			-if current_user.empresas.present?
+				%h3 MI PERFIL DE EMPRESA
+				-current_user.empresas.each  do |empresa|
+					%p
+						=link_to "#{empresa.nombre}", empresa_path(empresa)
+			-else
+				%p
+					=link_to "Empresa", new_empresa_path, class: "btn btn-blue btn-empresa"
+		-else
+			%p
+				=link_to "Profesional", new_profesional_path, class: "btn btn-purple btn-profesional"
+			%p
+				=link_to "Empresa", new_empresa_path, class: "btn btn-blue btn-empresa"
+
 	.module
 		%h3 Estamos en
 		#socialicons
