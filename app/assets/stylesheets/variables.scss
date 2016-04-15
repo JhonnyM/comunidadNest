@@ -102,6 +102,14 @@ $border-radius-small:       0px;
 	border: none !important;
 	border-radius: 0;
 }
+.btn-cancel {
+    padding: 6px 12px;
+    border: none !important;
+    border-radius: 0;
+    background-color: #d9534f;
+    border-color: #d43f3a;
+    color: #ffffff;
+}
 .btn-sm, btn{
 	border-radius: 0;
 	border: none;
