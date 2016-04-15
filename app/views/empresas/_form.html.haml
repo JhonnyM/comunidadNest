@@ -5,66 +5,109 @@
       %ul
         - @empresa.errors.full_messages.each do |msg|
           %li= msg
+  %fieldset.clearfix
+    .gey-title
+      ¡Ingrese la información de su empresa!
 
   %fieldset.clearfix
-    %h2 Información General
+    .blue-title
+      Información General:
     .form-group
-      = f.label :nombre, 'Nombre', class: 'col-xs-2'
+      = f.label :nombre, 'Nombre de mi empresa:', class: 'col-xs-2'
       .col-xs-8
         = f.text_field :nombre, class: "form-control"
     .form-group
-      = f.label :avatar, 'Imagen de perfil', class: 'col-xs-2'
-      .col-xs-8
-        = f.file_field :avatar, class: "form-control"
-    .form-group
-      = f.label :page_img, 'Imagen para su página', class: 'col-xs-2'
-      .col-xs-8
-        = f.file_field :page_img, class: "form-control"
-    .form-group
-      = f.label :industria:, class: 'col-xs-2'
+      = f.label :industria, class: 'col-xs-2'
       .col-xs-8
         = f.collection_select :industria_id, Industria.all, :id, :nombre, {prompt: "Seleccioná una Industria"}, {class: "form-control"}
+    .form-group
+      = f.label :avatar, 'Imagen de perfil', class: 'col-xs-2', :data => {:toggle => 'tooltip', :title => 'Seleccioná el logotipo de tu empresa. Las imágenes en formato cuadrado funcionan mejor.'}
+      - if @empresa.page_img.exists?
+        .col-xs-2
+          =image_tag @empresa.avatar.url(:thumb)
+      .col-xs-6
+        = f.file_field :avatar
+    .form-group
+      = f.label :page_img, 'Imagen de portada', class: 'col-xs-2', :data => {:toggle => 'tooltip', :title => 'Seleccioná una imagen para tu página de perfil. Las dimensiones que mejor funcionan son: 700px de ancho por 300px de alto.'}
+      - if @empresa.page_img.exists?
+        .col-xs-2
+          =image_tag @empresa.page_img.url, class: 'img-responsive'
+      .col-xs-8
+        = f.file_field :page_img
+    .form-group
+      = f.label :especialidades, class: 'col-xs-2'
+      .col-xs-8
+        = f.text_area :especialidades, class: "form-control"
     .form-group
       = f.label :pais, class: 'col-xs-2'
       .col-xs-8
         = country_select("empresa", "pais", {priority_countries: ["CR"]}, {class: "form-control"})
     .form-group
+      = f.label :ubicacion, class: 'col-xs-2'
+      .col-xs-8
+        = f.text_area :direccion, class: "form-control"
+    .form-group
       = f.label :telefono, class: 'col-xs-2'
       .col-xs-8
         = f.text_field :telefono, class: "form-control"
-    .form-group
-      = f.label :telefono2, class: 'col-xs-2'
-      .col-xs-8
-        = f.text_field :telefono2, class: "form-control"
     .form-group
       = f.label :email, class: 'col-xs-2'
       .col-xs-8
         = f.text_field :email, class: "form-control"
     .form-group
-      = f.label :servicios, class: 'col-xs-2'
+      = f.label :email, 'Sitio Web:', class: 'col-xs-2'
       .col-xs-8
-        = f.text_area :servicios, class: "form-control"
+        = f.text_field :website, class: "form-control"
     .form-group
       = f.label :horario, class: 'col-xs-2'
       .col-xs-8
         = f.text_area :horario, class: "form-control"
     .form-group
-      = f.label :empleados, class: 'col-xs-2'
+      = f.label :empleados, "Numero de empleados",  class: 'col-xs-2'
       .col-xs-8
         = f.number_field :empleados, class: "form-control"
     .form-group
-      = f.label :fundacion, class: 'col-xs-2'
+      = f.label :fundacion, " Año de Fundación",class: 'col-xs-2'
       .col-xs-8
         = f.number_field :fundacion, class: "form-control"
-    .form-group
-      = f.label :portafolio, class: 'col-xs-2'
-      .col-xs-8
-        = f.file_field :portafolio, class: "form-control"
     .form-group
       = f.label :tag_list, 'Tags', class: 'col-xs-2'
       .col-xs-8
         = f.text_field :tag_list, :value => @empresa.tag_list.join(', '), class: "form-control"
-
+  %fieldset.clearfix
+    .blue-title
+      Sobre mi empresa:
+    .form-group
+      = f.label :descripcion, "Sobre mi", class: 'col-xs-2', :data => {:toggle => 'tooltip', :title => 'Esta es la oportunidad para causar una buena primera impresión. Escriba una descripción breve sobre usted, sus estudios, experiencia laboral, gustos. ¡Sea creativo! *850 palabras máximo'}
+      .col-xs-8
+        = f.text_area :descripcion, class: 'form-control'
+    .form-group
+      = f.label :servicios, class: 'col-xs-2'
+      .col-xs-8
+        = f.text_area :servicios, class: "form-control"
+  %fieldset.clearfix
+    .blue-title
+      Mis Redes Sociales
+    .form-group
+      = f.label :facebook, class: 'col-xs-2', :data => {:toggle => 'tooltip', :title => 'Dirección URL completo de tu perfil de facebook. Ejemplo: http://facebook.com/comunidadnest'}
+      .col-xs-8
+        = f.text_field :facebook, class: 'form-control'
+    .form-group
+      = f.label :twitter, class: 'col-xs-2', :data => {:toggle => 'tooltip', :title => 'Dirección URL completo de tu perfil de twitter. Ejemplo: http://twitter.com/comunidadnest'}
+      .col-xs-8
+        = f.text_field :twitter, class: 'form-control'
+    .form-group
+      = f.label :instagram, class: 'col-xs-2', :data => {:toggle => 'tooltip', :title => 'Dirección URL completo de tu perfil de instagram. Ejemplo: http://instagram.com/comunidadnest'}
+      .col-xs-8
+        = f.text_field :instagram, class: 'form-control'
+    .form-group
+      = f.label :pinterest, class: 'col-xs-2', :data => {:toggle => 'tooltip', :title => 'Dirección URL completo de tu perfil de pinterest. Ejemplo: http://pinterest.com/comunidadnest'}
+      .col-xs-8
+        = f.text_field :pinterest, class: 'form-control'
+    .form-group
+      = f.label :linkedin, class: 'col-xs-2', :data => {:toggle => 'tooltip', :title => 'Dirección URL completo de tu perfil de linkedin. Ejemplo: http://linkedin.com/comunidadnest'}
+      .col-xs-8
+        = f.text_field :linkedin, class: 'form-control'
   .actions
     = f.submit 'Guardar', {:class => 'btn btn-primary'}
-    = link_to 'Cancelar', empresas_path, :class =>  "btn"
+    = link_to 'Cancelar', empresas_path, :class =>  "btn btn-cancel"

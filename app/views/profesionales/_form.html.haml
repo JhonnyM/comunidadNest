@@ -113,7 +113,7 @@
 
   .actions
     = f.submit 'Guardar', :class => "btn btn-primary"
-    %button.btn-cancel Cancelar
+    = link_to 'Cancelar', profesionales_path, :class =>  "btn btn-cancel"
 
 :javascript
   $(document).ready(function() {

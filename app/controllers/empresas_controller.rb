@@ -40,7 +40,7 @@ class EmpresasController < ApplicationController
   # POST /empresas.json
   def create
     @empresa = Empresa.new(empresa_params)
-
+    @empresa.user_id = current_user.id
     respond_to do |format|
       if @empresa.save
         format.html { redirect_to @empresa, notice: 'Empresa was successfully created.' }
@@ -106,6 +106,6 @@ class EmpresasController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def empresa_params
-      params.require(:empresa).permit(:industria_id, :telefono, :telefono2, :email, :servicios, :horario, :empleados, :fundacion, :avatar, :page_img, :portafolio, :tag_list, :nombre)
+      params.require(:empresa).permit(:descripcion, :industria_id, :telefono, :email, :servicios, :horario, :empleados, :fundacion, :avatar, :page_img, :pais, :tag_list, :nombre)
     end
 end

@@ -114,6 +114,6 @@ class ProfesionalesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def profesional_params
-      params.require(:profesional).permit(:especialidades, :descripcion, :email, :telefono, :movil, :website, :facebook, :twitter, :instagram, :pinterest, :linkedin, :pais, :ciudad, :otros, :genero, :nacimiento, :profesion_id, :estado_civil, :intereses, :cfia, :avatar, :page_img, :curriculum, :portafolio, :tag_list, :idiomas =>[])
+      params.require(:profesional).permit(:especialidades, :descripcion, :email, :telefono, :facebook, :twitter, :instagram, :pinterest, :linkedin, :pais, :ciudad, :otros, :genero, :nacimiento, :profesion_id, :estado_civil, :intereses, :avatar, :page_img, :tag_list, :idiomas =>[])
     end
 end
