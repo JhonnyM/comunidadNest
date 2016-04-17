@@ -6,19 +6,23 @@
         - @profesional.errors.full_messages.each do |msg|
           %li= msg
   %fieldset.clearfix
-    %h2 Información General
+    .gey-title
+      ¡Ingrese la información de su perfil profesional!
+  %fieldset.clearfix
+    .blue-title
+      Información General:
+    .form-group
+      = f.label :nombre, 'Nombre', class: 'col-xs-2'
+      .col-xs-8
+        = f.text_field :nombre, class: "form-control"
+    .form-group
+      = f.label :genero, class: 'col-xs-2'
+      .col-xs-8
+        = f.select :genero, options_for_select(@profesional.generos, @profesional.genero), {}, { class: 'form-control' }
     .form-group
       = f.label :profesion_id, "Profesión",class: 'col-xs-2', :data => {:toggle => 'tooltip', :title => 'Selecciona una profesión'}
       .col-xs-8
         = f.collection_select :profesion_id, Profesion.all, :id, :generico, {prompt: "Seleccioná una profesión"}, {class: "form-control"}
-    .form-group
-      = f.label :especialidades, class: 'col-xs-2', :data => {:toggle => 'tooltip', :title => '¿En qué se especializa como profesional? Ejemplo: Interiorismo, diseño comercial, telecomunicaciones, diseño sostenible. 70 caracteres máximo.'}
-      .col-xs-8
-        = f.text_area :especialidades, class: 'form-control'
-    .form-group
-      = f.label :descripcion, "Descripción", class: 'col-xs-2', :data => {:toggle => 'tooltip', :title => 'Esta es la oportunidad para causar una buena primera impresión. Escriba una descripción breve sobre usted, sus estudios, experiencia laboral, gustos. ¡Sea creativo! *850 palabras máximo'}
-      .col-xs-8
-        = f.text_area :descripcion, class: 'form-control'
     .form-group
       = f.label :avatar, 'Imagen de perfil', class: 'col-xs-2', :data => {:toggle => 'tooltip', :title => 'Seleccioná una imagen de perfil desde tu computadora. Las imágenes en formato cuadrado funcionan mejor.'}
       - if @profesional.page_img.exists?
@@ -27,64 +31,65 @@
       .col-xs-6
         = f.file_field :avatar
     .form-group
-      = f.label :page_img, 'Imagen para su página', class: 'col-xs-2', :data => {:toggle => 'tooltip', :title => 'Seleccioná una imagen para tu página de perfil. Las dimensiones que mejor funcionan son: 700px de ancho por 300px de alto.'}
+      = f.label :page_img, 'Imagen de portada', class: 'col-xs-2', :data => {:toggle => 'tooltip', :title => 'Seleccioná una imagen para tu página de perfil. Las dimensiones que mejor funcionan son: 700px de ancho por 300px de alto.'}
       - if @profesional.page_img.exists?
         .col-xs-2
           =image_tag @profesional.page_img.url, class: 'img-responsive'
       .col-xs-8
         = f.file_field :page_img
     .form-group
+      = f.label :especialidades, class: 'col-xs-2', :data => {:toggle => 'tooltip', :title => '¿En qué se especializa como profesional? Ejemplo: Interiorismo, diseño comercial, telecomunicaciones, diseño sostenible. 70 caracteres máximo.'}
+      .col-xs-8
+        = f.text_area :especialidades, class: 'form-control'
+    .form-group
       = f.label :pais, class: 'col-xs-2'
       .col-xs-8
         = country_select("profesional", "pais", {priority_countries: ["CR"]}, {class: "form-control"})
     .form-group
-      = f.label :ciudad, class: 'col-xs-2'
+      = f.label :residencia, class: 'col-xs-2'
       .col-xs-8
         = f.text_field :ciudad, class: 'form-control'
-    .form-group
-      = f.label :genero, class: 'col-xs-2'
-      .col-xs-8
-        = f.select :genero, options_for_select(@profesional.generos, @profesional.genero), {}, { class: 'form-control' }
-    .form-group
-      = f.label :nacimiento, class: 'col-xs-2'
-      .col-xs-6
-        = f.date_select :nacimiento, {:start_year=>1950,:end_year=>2016}, { class: 'form-control date-selector' }
-    .form-group
-      = f.label :intereses, class: 'col-xs-2'
-      .col-xs-8
-        = f.text_area :intereses, class: 'form-control'
-    .form-group
-      = f.label :curriculum, 'Currículum', class: 'col-xs-2', :data => {:toggle => 'tooltip', :title => 'El archivo debe ser menor 1MB y estar en formato PDF'}
-      .col-xs-8
-        - if @profesional.curriculum.exists?
-          = link_to 'Ver archivo actual' , @profesional.curriculum.url
-        = f.file_field :curriculum
-    .form-group
-      = f.label :portafolio, class: 'col-xs-2', :data => {:toggle => 'tooltip', :title => 'El archivo debe ser menor 3MB y estar en formato PDF'}
-      .col-xs-8
-        - if @profesional.portafolio.exists?
-          = link_to 'Ver archivo actual' , @profesional.portafolio.url
-        = f.file_field :portafolio
-  %fieldset.clearfix
-    %h2 Contacto
-    .form-group
-      = f.label :email, class: 'col-xs-2'
-      .col-xs-8
-        = f.text_field :email, class: 'form-control'
     .form-group
       = f.label :telefono, class: 'col-xs-2'
       .col-xs-8
         = f.text_field :telefono, class: 'form-control'
     .form-group
-      = f.label :movil, class: 'col-xs-2'
+      = f.label :email, class: 'col-xs-2'
       .col-xs-8
-        = f.text_field :movil, class: 'form-control'
+        = f.text_field :email, class: 'form-control'
     .form-group
-      = f.label :website, class: 'col-xs-2'
+      = f.label :tag_list, 'Tags', class: 'col-xs-2', :data => {:toggle => 'tooltip', :title => 'Escribí palabras clave, separadas por coma, con las que querás que te encuentren. Ejemplo: contemporaneo, minimalismo'}
       .col-xs-8
-        = f.text_field :website, class: 'form-control'
+        = f.text_field :tag_list, :value => @profesional.tag_list.join(', '), class: 'form-control'
   %fieldset.clearfix
-    %h2 Redes Sociales
+    .blue-title
+      Descripción:
+    .form-group
+      = f.label :descripcion, "Sobre mi", class: 'col-xs-2', :data => {:toggle => 'tooltip', :title => 'Esta es la oportunidad para causar una buena primera impresión. Escriba una descripción breve sobre usted, sus estudios, experiencia laboral, gustos. ¡Sea creativo! *850 palabras máximo'}
+      .col-xs-8
+        = f.text_area :descripcion, class: 'form-control'
+  %fieldset.clearfix
+    .blue-title
+      Otra información:
+    .form-group
+      = f.label :nacimiento, class: 'col-xs-2'
+      .col-xs-6
+        = f.date_select :nacimiento, {:start_year=>1950,:end_year=>2016}, { class: 'form-control date-selector' }
+    .form-group
+      = f.label :estado_civil, class: 'col-xs-2'
+      .col-xs-8
+        = f.select :estado_civil, options_for_select(@profesional.estados_civiles, @profesional.estado_civil), {}, { class: 'form-control' }
+    .form-group
+      = f.label :idiomas, class: 'col-xs-2', :data => {:toggle => 'tooltip', :title => '¿Cuáles idiomas hablás? Seleccionalos'}
+      .col-xs-8
+        = f.select(:idiomas, options_for_select(IDIOMAS, :selected => @profesional.idiomas),{},{multiple: true, size: 10, class: 'form-control'})
+    .form-group
+      = f.label :intereses, class: 'col-xs-2'
+      .col-xs-8
+        = f.text_area :intereses, class: 'form-control'
+  %fieldset.clearfix
+    .blue-title
+      Mis Redes Sociales
     .form-group
       = f.label :facebook, class: 'col-xs-2', :data => {:toggle => 'tooltip', :title => 'Dirección URL completo de tu perfil de facebook. Ejemplo: http://facebook.com/comunidadnest'}
       .col-xs-8
@@ -105,32 +110,10 @@
       = f.label :linkedin, class: 'col-xs-2', :data => {:toggle => 'tooltip', :title => 'Dirección URL completo de tu perfil de linkedin. Ejemplo: http://linkedin.com/comunidadnest'}
       .col-xs-8
         = f.text_field :linkedin, class: 'form-control'
-  %fieldset.clearfix
-    %h2 Otros  
-    .form-group
-      = f.label :tag_list, 'Tags', class: 'col-xs-2', :data => {:toggle => 'tooltip', :title => 'Escribí palabras clave, separadas por coma, con las que querás que te encuentren. Ejemplo: contemporaneo, minimalismo'}
-      .col-xs-8
-        = f.text_field :tag_list, :value => @profesional.tag_list.join(', '), class: 'form-control'
-    .form-group
-      = f.label :estado_civil, class: 'col-xs-2'
-      .col-xs-8
-        = f.select :estado_civil, options_for_select(@profesional.estados_civiles, @profesional.estado_civil), {}, { class: 'form-control' }
-    .form-group
-      = f.label :otros, class: 'col-xs-2'
-      .col-xs-8
-        = f.text_area :otros, class: 'form-control'
-    .form-group
-      = f.label :cfia, class: 'col-xs-2', :data => {:toggle => 'tooltip', :title => 'Escribí tu número de carné del Colegio Federado de Ingenieros y Arquitecos. Es opcional.'}
-      .col-xs-8
-        = f.text_field :cfia, class: 'form-control'
-    .form-group
-      = f.label :idiomas, class: 'col-xs-2', :data => {:toggle => 'tooltip', :title => '¿Cuáles idiomas hablás? Seleccionalos'}
-      .col-xs-8
-        = f.select(:idiomas, options_for_select(IDIOMAS, :selected => @profesional.idiomas),{},{multiple: true, size: 10, class: 'form-control'})
-  
+
   .actions
     = f.submit 'Guardar', :class => "btn btn-primary"
-    = link_to 'Volver a Comunidad de Profesionales', profesionales_path, :class => 'btn btn-border'
+    = link_to 'Cancelar', profesionales_path, :class =>  "btn btn-cancel"
 
 :javascript
   $(document).ready(function() {

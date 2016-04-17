@@ -68,11 +68,7 @@
     %dd
       =link_to @profesional.nombre, @profesional.website
 
-    %dt Número Móvil
-    %dd
-      = link_to @profesional.movil, "tel:#{@profesional.movil}"
-
-    %dt Teléfono secundario
+    %dt Teléfono
     %dd
       = link_to @profesional.telefono, "tel:#{@profesional.telefono}"
 
@@ -95,11 +91,6 @@
       = hidden_field_tag :propietario_id, @profesional.id
       = hidden_field_tag :propietario_tipo, 'profesional'
       = submit_tag 'Crear Proyecto' , {:class => 'btn btn-primary'}
-    - if @profesional.empleados == "zz"
-      = form_tag new_producto_path do
-        = hidden_field_tag :propietario_id, @profesional.id
-        = hidden_field_tag :propietario_tipo, 'profesional'
-        = submit_tag 'Crear Producto' , {:class => 'btn btn-primary'}
 
 - if @is_owner
   %h3 Opciones de Administrador
