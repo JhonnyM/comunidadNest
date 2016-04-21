@@ -4,6 +4,8 @@ class Proyecto < ActiveRecord::Base
 	has_many :proyecto_imagenes, :dependent => :destroy
 	has_many :participante_proyectos, :dependent => :destroy
 
+	validates :titulo, presence: true
+
 	include Elasticsearch::Model
 	include Elasticsearch::Model::Callbacks
 
