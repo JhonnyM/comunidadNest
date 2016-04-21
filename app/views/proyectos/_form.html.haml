@@ -1,4 +1,4 @@
-= form_for (@proyecto), :html => { multipart: true , class: 'form form-profile form-horizontal'} do |f|
+= form_for (@proyecto), html: {class: 'form form-profile form-horizontal'} do |f|
   - if @proyecto.errors.any?
     #error_explanation
       %h2= "#{pluralize(@proyecto.errors.count, "error")} prohibited this proyecto from being saved:"
@@ -44,7 +44,7 @@
     .form-group
       = f.label :proyecto_imagenes, "Imágenes de proyecto", class: 'col-xs-2'
       .col-xs-8
-        = file_field_tag "imagenes[]", type: :file, multiple: true
+        = f.file_field "imagenes[]", type: :file, multiple: true
 
     -if params[:action] == 'edit'
       .form-group
