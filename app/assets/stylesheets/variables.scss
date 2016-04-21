@@ -65,15 +65,16 @@ $footer-text-color:              $gray-lightest;
 .yellow-title {
     background: $brand-warning;
     width: 350px;
+    letter-spacing: 2px;
   }
   .blue-title {
     background: #05dbcb;
-    width: 250px;
+    width: 300px;
     font-size: 26px;
     font-weight: bold;
     font-family: "bebasregular";
     color: #fff;
-    letter-spacing: 1px;
+    letter-spacing: 2px;
     margin-bottom: 15px;
     padding-left: 10px;
   }

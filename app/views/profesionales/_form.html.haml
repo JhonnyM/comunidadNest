@@ -24,7 +24,7 @@
       .col-xs-4
         = f.collection_select :profesion_id, Profesion.all, :id, :generico, {prompt: "Seleccioná una profesión"}, {class: "form-control"}
     .form-group
-      = f.label :avatar, 'Imagen de perfil', class: 'col-xs-2', :data => {:toggle => 'tooltip', :title => 'Seleccioná una imagen de perfil desde tu computadora. Las imágenes en formato cuadrado funcionan mejor.'}
+      = f.label :avatar, 'Imagen de perfil', class: 'col-xs-2', :data => {:toggle => 'tooltip', :title => 'Formatos permitidos: Archivos JPG/JPEG o PNG. Máximo tamaño permitido: 1MB Dimensiones ideales: 180px x 180px. Resolución ideal: 72ppi.Confirmo que los derechos de esta imagen me pertenecen..'}
       - if @profesional.page_img.exists?
         .col-xs-2
           =image_tag @profesional.avatar.url(:thumb)

@@ -18,7 +18,7 @@
         = f.text_field :nombre, class: "form-control"
     .form-group
       = f.label :industria, class: 'col-xs-2'
-      .col-xs-2
+      .col-xs-4
         = f.collection_select :industria_id, Industria.all, :id, :nombre, {prompt: "Seleccioná una Industria"}, {class: "form-control"}
     .form-group
       = f.label :avatar, 'Imagen de perfil', class: 'col-xs-2', :data => {:toggle => 'tooltip', :title => 'Seleccioná el logotipo de tu empresa. Las imágenes en formato cuadrado funcionan mejor.'}
