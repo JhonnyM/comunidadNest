@@ -18,7 +18,7 @@
         = f.text_field :nombre, class: "form-control"
     .form-group
       = f.label :industria, class: 'col-xs-2'
-      .col-xs-8
+      .col-xs-2
         = f.collection_select :industria_id, Industria.all, :id, :nombre, {prompt: "Seleccioná una Industria"}, {class: "form-control"}
     .form-group
       = f.label :avatar, 'Imagen de perfil', class: 'col-xs-2', :data => {:toggle => 'tooltip', :title => 'Seleccioná el logotipo de tu empresa. Las imágenes en formato cuadrado funcionan mejor.'}
@@ -40,7 +40,7 @@
         = f.text_area :especialidades, class: "form-control"
     .form-group
       = f.label :pais, class: 'col-xs-2'
-      .col-xs-8
+      .col-xs-2
         = country_select("empresa", "pais", {priority_countries: ["CR"]}, {class: "form-control"})
     .form-group
       = f.label :ubicacion, class: 'col-xs-2'
@@ -48,31 +48,31 @@
         = f.text_area :direccion, class: "form-control"
     .form-group
       = f.label :telefono, class: 'col-xs-2'
-      .col-xs-8
+      .col-xs-2
         = f.text_field :telefono, class: "form-control"
     .form-group
       = f.label :email, class: 'col-xs-2'
-      .col-xs-8
+      .col-xs-2
         = f.text_field :email, class: "form-control"
     .form-group
-      = f.label :email, 'Sitio Web:', class: 'col-xs-2'
-      .col-xs-8
+      = f.label :website, 'Sitio Web:', class: 'col-xs-2'
+      .col-xs-2
         = f.text_field :website, class: "form-control"
     .form-group
       = f.label :horario, class: 'col-xs-2'
-      .col-xs-8
+      .col-xs-2
         = f.text_area :horario, class: "form-control"
     .form-group
       = f.label :empleados, "Numero de empleados",  class: 'col-xs-2'
-      .col-xs-8
+      .col-xs-2
         = f.number_field :empleados, class: "form-control"
     .form-group
       = f.label :fundacion, " Año de Fundación",class: 'col-xs-2'
-      .col-xs-8
+      .col-xs-2
         = f.number_field :fundacion, class: "form-control"
     .form-group
       = f.label :tag_list, 'Tags', class: 'col-xs-2'
-      .col-xs-8
+      .col-xs-2
         = f.text_field :tag_list, :value => @empresa.tag_list.join(', '), class: "form-control"
   %fieldset.clearfix
     .blue-title
