@@ -373,6 +373,7 @@ DEPENDENCIES
   rails-i18n (~> 4.0, >= 4.0.8)
   rails_12factor
   rails_admin
+  remotipart (~> 1.2)
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)
   spring

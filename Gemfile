@@ -59,6 +59,9 @@ gem 'faye'
 
 gem  'thin'
 
+# This gem allows to use ajax requests with file upload forms
+gem 'remotipart', '~> 1.2'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
