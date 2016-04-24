@@ -16,7 +16,7 @@
       .col-xs-8
         = f.text_field :nombre, class: "form-control"
     .form-group
-      = f.label :genero, class: 'col-xs-2'
+      = f.label :genero, 'Género', class: 'col-xs-2'
       .col-xs-2
         = f.select :genero, options_for_select(@profesional.generos, @profesional.genero), {}, { class: 'form-control' }
     .form-group
@@ -24,29 +24,30 @@
       .col-xs-4
         = f.collection_select :profesion_id, Profesion.all, :id, :generico, {prompt: "Seleccioná una profesión"}, {class: "form-control"}
     .form-group
-      = f.label :avatar, 'Imagen de perfil', class: 'col-xs-2', :data => {:toggle => 'tooltip', :title => 'Formatos permitidos: Archivos JPG/JPEG o PNG. Máximo tamaño permitido: 1MB Dimensiones ideales: 180px x 180px. Resolución ideal: 72ppi.Confirmo que los derechos de esta imagen me pertenecen..'}
+      = f.label :avatar, 'Imagen de perfil', class: 'col-xs-2', :data => {:toggle => 'tooltip', :title => 'Formatos permitidos: Archivos JPG/JPEG o PNG. Máximo tamaño permitido: 1MB Dimensiones ideales: 180px x 180px. Resolución ideal: 72ppi.Confirmo que los derechos de esta imagen me pertenecen.'}
       - if @profesional.page_img.exists?
         .col-xs-2
           =image_tag @profesional.avatar.url(:thumb)
       .col-xs-6
         = f.file_field :avatar
     .form-group
-      = f.label :page_img, 'Imagen de portada', class: 'col-xs-2', :data => {:toggle => 'tooltip', :title => 'Seleccioná una imagen para tu página de perfil. Las dimensiones que mejor funcionan son: 700px de ancho por 300px de alto.'}
+      = f.label :page_img, 'Imagen de portada', class: 'col-xs-2', :data => {:toggle => 'tooltip', :title => 'Formatos permitidos: Archivos JPG/JPEG o PNG. Máximo tamaño permitido: 1MB Dimensiones ideales: 180px x 180px. Resolución ideal: 72ppi.Confirmo que los derechos de esta imagen me pertenecen.'}
       - if @profesional.page_img.exists?
         .col-xs-2
           =image_tag @profesional.page_img.url, class: 'img-responsive'
       .col-xs-8
         = f.file_field :page_img
     .form-group
-      = f.label :especialidades, class: 'col-xs-2', :data => {:toggle => 'tooltip', :title => '¿En qué se especializa como profesional? Ejemplo: Interiorismo, diseño comercial, telecomunicaciones, diseño sostenible. 70 caracteres máximo.'}
+      = f.label :especialidades, class: 'col-xs-2', :data => {:toggle => 'tooltip', :title => 'Escriba en que se especializa como profesional Ejemplo: Arquitectura Residencial, Diseño Interno, Diseño de Mobiliario, etc.'}
       .col-xs-8
         = f.text_area :especialidades, class: 'form-control'
     .form-group
-      = f.label :pais, class: 'col-xs-2'
+      = f.label :pais, 'País' ,class: 'col-xs-2'
       .col-xs-2
         = country_select("profesional", "pais", {priority_countries: ["CR"]}, {class: "form-control"})
     .form-group
-      = f.label :residencia, class: 'col-xs-2'
+      = f.label :residencia, class: 'col-xs-2', :data => {:toggle => 'tooltip', :title => 'Indique su residencia.'}
+      .col-xs-8
       .col-xs-8
         = f.text_field :ciudad, class: 'form-control'
     .form-group
@@ -58,14 +59,14 @@
       .col-xs-2
         = f.text_field :email, class: 'form-control'
     .form-group
-      = f.label :tag_list, 'Tags', class: 'col-xs-2', :data => {:toggle => 'tooltip', :title => 'Escribí palabras clave, separadas por coma, con las que querás que te encuentren. Ejemplo: contemporaneo, minimalismo'}
+      = f.label :tag_list, 'Tags', class: 'col-xs-2', :data => {:toggle => 'tooltip', :title => 'Escriba palabras con las que se identifica como profesional. Máximo 5 tags.'}
       .col-xs-2
         = f.text_field :tag_list, :value => @profesional.tag_list.join(', '), class: 'form-control'
   %fieldset.clearfix
     .blue-title
       Descripción:
     .form-group
-      = f.label :descripcion, "Sobre mi", class: 'col-xs-2', :data => {:toggle => 'tooltip', :title => 'Esta es la oportunidad para causar una buena primera impresión. Escriba una descripción breve sobre usted, sus estudios, experiencia laboral, gustos. ¡Sea creativo! *850 palabras máximo'}
+      = f.label :descripcion, "Sobre mi", class: 'col-xs-2', :data => {:toggle => 'tooltip', :title => 'sta es la oportunidad para destacarse y causar una buena primera impresión. Descríbase como profesional. Máximo 200 palabras.'}
       .col-xs-8
         = f.text_area :descripcion, class: 'form-control'
   %fieldset.clearfix
@@ -76,15 +77,15 @@
       .col-xs-6
         = f.date_select :nacimiento, {:start_year=>1950,:end_year=>2016}, { class: 'form-control date-selector' }
     .form-group
-      = f.label :estado_civil, class: 'col-xs-2'
+      = f.label :estado_civil,'Estado cívil', class: 'col-xs-2'
       .col-xs-2
         = f.select :estado_civil, options_for_select(@profesional.estados_civiles, @profesional.estado_civil), {}, { class: 'form-control' }
     .form-group
-      = f.label :idiomas, class: 'col-xs-2', :data => {:toggle => 'tooltip', :title => '¿Cuáles idiomas hablás? Seleccionalos'}
+      = f.label :idiomas, class: 'col-xs-2'
       .col-xs-8
         = f.select(:idiomas, options_for_select(IDIOMAS, :selected => @profesional.idiomas),{},{multiple: true, size: 10, class: 'form-control'})
     .form-group
-      = f.label :intereses, class: 'col-xs-2'
+      = f.label :intereses, class: 'col-xs-2', :data => {:toggle => 'tooltip', :title => 'Indique sus intereses. Ejemplo: Fotografía, Deporte, Enseñanza, etc.'}
       .col-xs-8
         = f.text_area :intereses, class: 'form-control'
   %fieldset.clearfix

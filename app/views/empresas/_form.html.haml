@@ -19,23 +19,23 @@
     .form-group
       = f.label :industria, class: 'col-xs-2'
       .col-xs-4
-        = f.collection_select :industria_id, Industria.all, :id, :nombre, {prompt: "Seleccioná una Industria"}, {class: "form-control"}
+        = f.collection_select :industria_id, Industria.all, :id, :nombre, {prompt: "Seleccione el sector de la industria a la que pertenece su empresa."}, {class: "form-control"}
     .form-group
-      = f.label :avatar, 'Imagen de perfil', class: 'col-xs-2', :data => {:toggle => 'tooltip', :title => 'Seleccioná el logotipo de tu empresa. Las imágenes en formato cuadrado funcionan mejor.'}
+      = f.label :avatar, 'Imagen de logotipo', class: 'col-xs-2', :data => {:toggle => 'tooltip', :title => 'Formatos permitidos: Archivos JPG/JPEG o PNG.Máximo tamaño permitido: 1MB. Dimensiones ideales: 180px x 180px. Resolución ideal: 72ppi. Confirmo que los derechos de esta imagen me pertenecen.'}
       - if @empresa.page_img.exists?
         .col-xs-2
           =image_tag @empresa.avatar.url(:thumb)
       .col-xs-6
         = f.file_field :avatar
     .form-group
-      = f.label :page_img, 'Imagen de portada', class: 'col-xs-2', :data => {:toggle => 'tooltip', :title => 'Seleccioná una imagen para tu página de perfil. Las dimensiones que mejor funcionan son: 700px de ancho por 300px de alto.'}
+      = f.label :page_img, 'Imagen de portada', class: 'col-xs-2', :data => {:toggle => 'tooltip', :title => 'Formatos permitidos: Archivos JPG/JPEG o PNG.Máximo tamaño permitido: 1MB. Dimensiones ideales: 180px x 180px. Resolución ideal: 72ppi. Confirmo que los derechos de esta imagen me pertenecen.'}
       - if @empresa.page_img.exists?
         .col-xs-2
           =image_tag @empresa.page_img.url, class: 'img-responsive'
       .col-xs-8
         = f.file_field :page_img
     .form-group
-      = f.label :especialidades, class: 'col-xs-2'
+      = f.label :especialidades, class: 'col-xs-2', :data => {:toggle => 'tooltip', :title => 'Escriba en que se especializa su empresa. Ejemplo: Arquitectura Residencial, Diseño Interno, Diseño de Mobiliario, etc.'}
       .col-xs-8
         = f.text_area :especialidades, class: "form-control"
     .form-group
@@ -43,7 +43,7 @@
       .col-xs-2
         = country_select("empresa", "pais", {priority_countries: ["CR"]}, {class: "form-control"})
     .form-group
-      = f.label :ubicacion, class: 'col-xs-2'
+      = f.label :ubicacion, class: 'col-xs-2', :data => {:toggle => 'tooltip', :title => 'Indique la dirección de su empresa.'}
       .col-xs-8
         = f.text_area :direccion, class: "form-control"
     .form-group
@@ -59,11 +59,11 @@
       .col-xs-2
         = f.text_field :website, class: "form-control"
     .form-group
-      = f.label :horario, class: 'col-xs-2'
+      = f.label :horario, class: 'col-xs-2', :data => {:toggle => 'tooltip', :title => 'Indique el horario de su empresa. Ejemplo: De 9:00 am a 6:00pm'}
       .col-xs-2
         = f.text_area :horario, class: "form-control"
     .form-group
-      = f.label :empleados, "Numero de empleados",  class: 'col-xs-2'
+      = f.label :empleados, "Número de empleados",  class: 'col-xs-2'
       .col-xs-2
         = f.number_field :empleados, class: "form-control"
     .form-group
@@ -71,18 +71,18 @@
       .col-xs-2
         = f.number_field :fundacion, class: "form-control"
     .form-group
-      = f.label :tag_list, 'Tags', class: 'col-xs-2'
+      = f.label :tag_list, 'Tags', class: 'col-xs-2', :data => {:toggle => 'tooltip', :title => 'Escriba palabras con las que se relacionan tu empresa. Máximo 5 tags.'}
       .col-xs-2
         = f.text_field :tag_list, :value => @empresa.tag_list.join(', '), class: "form-control"
   %fieldset.clearfix
     .blue-title
       Sobre mi empresa:
     .form-group
-      = f.label :descripcion, "Sobre mi", class: 'col-xs-2', :data => {:toggle => 'tooltip', :title => 'Esta es la oportunidad para causar una buena primera impresión. Escriba una descripción breve sobre usted, sus estudios, experiencia laboral, gustos. ¡Sea creativo! *850 palabras máximo'}
+      = f.label :descripcion, "Sobre nosotros", class: 'col-xs-2', :data => {:toggle => 'tooltip', :title => 'Esta es la oportunidad para destacarse y causar una buena primera impresión. Describí tu empresa en pocas palabras. Máximo 200 palabras.'}
       .col-xs-8
         = f.text_area :descripcion, class: 'form-control'
     .form-group
-      = f.label :servicios, class: 'col-xs-2'
+      = f.label :servicios, class: 'col-xs-2', :data => {:toggle => 'tooltip', :title => '¿Qué servicios ofrece tu empresa? ¿Para qué la pueden contratar? Máximo 200 palabras.'}
       .col-xs-8
         = f.text_area :servicios, class: "form-control"
   %fieldset.clearfix
@@ -111,3 +111,13 @@
   .actions
     = f.submit 'Guardar', {:class => 'btn btn-primary'}
     = link_to 'Cancelar', empresas_path, :class =>  "btn btn-cancel"
+    
+:javascript
+  $(document).ready(function() {
+    $('#profesional_idiomas').multiselect({
+      nonSelectedText: 'Seleccioná uno o más idiomas'
+    });
+  });
+  $(function () {
+    $('[data-toggle="tooltip"]').tooltip()
+  })
