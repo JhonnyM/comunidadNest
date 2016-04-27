@@ -88,6 +88,27 @@ $footer-text-color:              $gray-lightest;
     padding-bottom: 5px;
   }
 
+  .module-description {
+    text-align: center;
+  }
+
+  .module-question {
+    text-align: center;
+    font-weight: bold;
+  }
+
+  .module-image {
+    padding-left: 17px; 
+    border-right-width: 17px; 
+    border-bottom-width: 0px; 
+    margin-bottom: 10px; 
+    border-top-width: 10px
+  }
+
+  .description-bold {
+    font-weight: bold;
+  }
+
 $border-radius-base: 0;
 $border-radius-large:       0px;
 $border-radius-small:       0px;
