@@ -518,16 +518,22 @@ a.btn-circle, a.btn-circle:link{
 			background: $brand-warning;
 			display: inline-block;
 			border-radius: 50%;
-			margin-left: 5px;
-			margin-top: -3px;
+			margin-right: 5px;
+			margin-top: 3px;
 	    color: #fff;
 	    font-size: 10px;
 	    width: 13px;
 	    height: 13px;
 	    text-align: center;
 	    line-height: 13px;
+      float: left;
+      right: 15px;
 		}
 	}
+
+  .form-group{
+    margin-left: 35;
+  }
 
 	.form-control{
 		border-radius: 0;
@@ -611,6 +617,10 @@ a.btn-circle, a.btn-circle:link{
 	}
 }
 
+.actions{
+  text-align: center;
+}
+
 .form-profile{
 	fieldset{
 		margin-bottom: 20px;
@@ -628,6 +638,7 @@ a.btn-circle, a.btn-circle:link{
 	label{
 		font-weight: normal;
 		color: $gray;
+
 	}
 	.multiselect-container li{
 		padding: 3px 10px;
@@ -644,30 +655,7 @@ a.btn-circle, a.btn-circle:link{
 		color: $gray-light;
 	}
 
-  .yellow-title {
-    background: $brand-warning;
-    width: 350px;
-  }
-  .blue-title {
-    background: #05dbcb;
-    width: 250px;
-    font-size: 26px;
-    font-weight: bold;
-    font-family: "bebasregular";
-    color: #fff;
-    letter-spacing: 1px;
-    margin-bottom: 15px;
-    padding-left: 10px;
-  }
-
-  .gey-title {
-    font-size: 36px;
-    color: #8c8c8c;
-    font-weight: 500;
-    width: 1140px;
-    border-bottom: 2px solid #eee;
-    padding-bottom: 5px;
-  }
+  
 }
 
 // Filtros

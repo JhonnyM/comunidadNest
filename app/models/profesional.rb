@@ -39,8 +39,9 @@ class Profesional < ActiveRecord::Base
 	serialize :idiomas, Array
 
 	#Validaciones
-	validates_presence_of :genero, :user_id, :email, :profesion_id, :pais
+	validates_presence_of :genero, :user_id, :email, :profesion_id, :pais, :nombre
 	validates :email, format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i, on: :create }
+  validates :nombre, length: { maximum: 40 }
 
 	def estados_civiles
     [['Soltero(a)', 0], ['Casado(a)', 2], ['Divorciado(a)', 0], ['Unión Libre', 2]]

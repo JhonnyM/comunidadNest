@@ -62,6 +62,53 @@ $footer-text-color:              $gray-lightest;
 	padding: 40px 0 60px 0;
 }
 
+.yellow-title {
+    background: $brand-warning;
+    width: 350px;
+    letter-spacing: 2px;
+  }
+  .blue-title {
+    background: #05dbcb;
+    width: 300px;
+    font-size: 26px;
+    font-weight: bold;
+    font-family: "bebasregular";
+    color: #fff;
+    letter-spacing: 2px;
+    margin-bottom: 15px;
+    padding-left: 10px;
+  }
+
+  .gey-title {
+    font-size: 36px;
+    color: #8c8c8c;
+    font-weight: 500;
+    width: 1140px;
+    border-bottom: 2px solid #eee;
+    padding-bottom: 5px;
+  }
+
+  .module-description {
+    text-align: center;
+  }
+
+  .module-question {
+    text-align: center;
+    font-weight: bold;
+  }
+
+  .module-image {
+    padding-left: 17px; 
+    border-right-width: 17px; 
+    border-bottom-width: 0px; 
+    margin-bottom: 10px; 
+    border-top-width: 10px
+  }
+
+  .description-bold {
+    font-weight: bold;
+  }
+
 $border-radius-base: 0;
 $border-radius-large:       0px;
 $border-radius-small:       0px;
