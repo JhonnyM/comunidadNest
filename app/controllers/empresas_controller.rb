@@ -1,5 +1,7 @@
 class EmpresasController < ApplicationController
 
+  before_filter :user_signed_in, only: [:create, :edit, :new]
+
   before_action :set_empresa, only: [:show, :edit, :update, :destroy]
 
   # GET /empresas
@@ -107,5 +109,15 @@ class EmpresasController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def empresa_params
       params.require(:empresa).permit(:descripcion, :industria_id, :telefono, :email, :servicios, :horario, :empleados, :fundacion, :avatar, :page_img, :pais, :tag_list, :nombre)
+    end
+
+    def user_signed_in
+      respond_to do |format|
+        if signed_in?
+          format.html { render new_empresa_path }
+        else
+          format.html { redirect_to new_user_registration_path }
+        end
+      end
     end
 end

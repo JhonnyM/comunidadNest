@@ -1,4 +1,6 @@
 class ProfesionalesController < ApplicationController
+
+  before_filter :user_signed_in, only: [:create, :edit, :new]
   before_action :set_profesional, only: [:show, :edit, :update, :destroy]
   has_scope :by_profesion
   has_scope :by_pais
@@ -115,5 +117,15 @@ class ProfesionalesController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def profesional_params
       params.require(:profesional).permit(:especialidades, :descripcion, :email, :telefono, :facebook, :twitter, :instagram, :pinterest, :linkedin, :pais, :ciudad, :otros, :genero, :nacimiento, :profesion_id, :estado_civil, :intereses, :avatar, :page_img, :tag_list, :idiomas =>[])
+    end
+
+    def user_signed_in
+      respond_to do |format|
+        if signed_in?
+          format.html { render new_profesional_path }
+        else
+          format.html { redirect_to new_user_registration_path }
+        end
+      end
     end
 end
