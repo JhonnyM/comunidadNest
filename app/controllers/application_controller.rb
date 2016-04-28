@@ -5,6 +5,8 @@ class ApplicationController < ActionController::Base
 
   before_action :configure_permitted_parameters, if: :devise_controller?
 
+  before_filter :user_signed_in, only: [:create, :edit, :new]
+  
   helper_method :mailbox, :conversation
   
   private
@@ -15,6 +17,10 @@ class ApplicationController < ActionController::Base
 
   def conversation
     @conversation ||= mailbox.conversations.find(params[:id])
+  end
+
+  def user_signed_in
+    authenticate_user!
   end
 
   protected
