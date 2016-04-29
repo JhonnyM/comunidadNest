@@ -1,10 +1,4 @@
 = form_for (@proyecto), html: {class: 'form form-profile form-horizontal'}, remote: true, validate: true  do |f|
-  - if @proyecto.errors.any?
-    #error_explanation
-      %h2= "#{pluralize(@proyecto.errors.count, "error")} prohibited this proyecto from being saved:"
-      %ul
-        - @proyecto.errors.full_messages.each do |msg|
-          %li= msg
 
   %fieldset.clearfix
     %h2 Información General
@@ -77,8 +71,9 @@
                     = link_to 'Seleccionar como Principal', make_default_proyecto_imagen_path(pic, proyecto_id: @proyecto.id), class: 'make-default', remote: true, method: :post
                     = link_to "Eliminar Imagen", pic, :data => { :confirm => "¿Está seguro?" }, :method => :delete
   .actions
-    = f.submit 'Guardar', {:class => 'btn btn-primary'}
-    = link_to 'Cancelar', proyectos_path, :class =>  "btn"
+    = f.submit 'Guardar', {id: 'js-save-proyecto', class: 'btn btn-primary'}
+    = image_tag "spinner.gif",{id: 'js-proyecto-spinner', style: 'display:none'}
+    = link_to 'Cancelar', proyectos_path, class:  "btn"
 
 :javascript
   $(document).ready(function() {

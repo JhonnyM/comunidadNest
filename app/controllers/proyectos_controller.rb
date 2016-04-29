@@ -78,9 +78,11 @@ class ProyectosController < ApplicationController
 
         format.html { redirect_to @proyecto, notice: 'Proyecto editado correctamente.' }
         format.json { render :show, status: :ok, location: @proyecto }
+        format.js
       else
         format.html { render :edit }
         format.json { render json: @proyecto.errors, status: :unprocessable_entity }
+        format.js
       end
     end
   end
