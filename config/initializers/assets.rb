@@ -16,3 +16,4 @@ Rails.application.config.assets.precompile += %w( favicon.ico )
 Rails.application.config.assets.precompile += %w( unslider-min.js )
 Rails.application.config.assets.precompile << /\.(?:svg|eot|woff|ttf)$/
 Rails.application.config.assets.precompile += %w( Impacticologo.png )
+Rails.application.config.assets.precompile += ['manifests/*']
