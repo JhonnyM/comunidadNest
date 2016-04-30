@@ -8,7 +8,9 @@ class @ProyectosForm
 
   _apply_click_behavior:(el) ->
     el.saveButton.click ->
-      el.spinner.show()
+      $(document).ajaxStart ->
+        el.spinner.show()
+        return
 
   hide_spinner: ->
     @spinner.hide(2000)
