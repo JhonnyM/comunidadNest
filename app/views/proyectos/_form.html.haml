@@ -72,7 +72,8 @@
                     = link_to "Eliminar Imagen", pic, :data => { :confirm => "¿Está seguro?" }, :method => :delete
   .actions
     = f.submit 'Guardar', {id: 'js-save-proyecto', class: 'btn btn-primary'}
-    = image_tag "spinner.gif",{id: 'js-proyecto-spinner', style: 'display:none'}
+    .spacer{class: 'spacer'}
+      = image_tag "spinner.gif",{id: 'js-proyecto-spinner', style: 'display:none;'}
     = link_to 'Cancelar', proyectos_path, class:  "btn"
 
 :javascript
