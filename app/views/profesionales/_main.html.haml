@@ -32,7 +32,7 @@
     %ul.list-unstyled
       %li
         %strong Fecha de nacimiento:
-        -#=@profesional.nacimiento.strftime('%d de %b, %Y')
+        =@profesional.nacimiento.strftime('%d de %b, %Y')
       %li
         %strong Estado Civil:
         =@profesional.estado_civil_formateado

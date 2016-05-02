@@ -39,15 +39,15 @@
       .col-xs-8
         = f.text_area :especialidades, class: "form-control"
     .form-group
-      = f.label :pais, class: 'col-xs-2'
+      = f.label :pais, 'País',class: 'col-xs-2'
       .col-xs-2
         = country_select("empresa", "pais", {priority_countries: ["CR"]}, {class: "form-control"})
     .form-group
-      = f.label :ubicacion, class: 'col-xs-2', :data => {:toggle => 'tooltip', :title => 'Indique la dirección de su empresa.'}
+      = f.label :ubicacion, 'Dirección' ,class: 'col-xs-2', :data => {:toggle => 'tooltip', :title => 'Indique la dirección de su empresa.'}
       .col-xs-8
         = f.text_area :direccion, class: "form-control"
     .form-group
-      = f.label :telefono, class: 'col-xs-2'
+      = f.label :telefono, 'Teléfono' ,class: 'col-xs-2'
       .col-xs-2
         = f.text_field :telefono, class: "form-control"
     .form-group

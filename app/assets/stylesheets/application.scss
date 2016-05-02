@@ -132,7 +132,7 @@ footer{
 	border: 0;
   background-color: $gray-darker;
   li {
-    margin-bottom: 0;
+    margin-bottom: 15;
     a{
 	    color: #fff;
 	    border: none;
@@ -807,6 +807,23 @@ a.btn-circle, a.btn-circle:link{
 		border: 0;
 		padding: 0;
 	}
+}
+.caja-center{
+  padding: 15px;
+  background: $gray-lightest;
+  margin-bottom: 10px;
+  text-align:center;
+  dl{
+    margin: 0;
+  }
+  &.botones{
+    .btn{
+      display:block;
+      width: 90%;
+      margin: 0 auto;
+      margin-bottom: 5px;
+    }
+  }
 }
 
 // Social Buttons

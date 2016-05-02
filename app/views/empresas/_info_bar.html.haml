@@ -53,28 +53,33 @@
   %dl
     %dt Año de Fundación:
     %dd= @empresa.fundacion
-
+    %br
     %dt Especialidades:
     %dd= @empresa.especialidades
+    %br
+    %dt Numero de empleados:
+    %dd= @empresa.empleados
+    %br
+    %dt País:
+    %dd= "#{@empresa.country_name}."
+    %br
 
 %h3 Contacto
 .caja
   %dl
     %dt Sitio Web
     %dd= link_to @empresa.nombre, @empresa.website
-
+    %br
     %dt Número Telefónico
     %dd= @empresa.telefono
-
-    %dt Teléfono secundario
-    %dd= @empresa.telefono2
-
+    %br
     %dt Email
     %dd= @empresa.email
-
-    %dt Dirección
-    %dd= simple_format(@empresa.direccion)
-
+    %br
+    - if @empresa.direccion.present?
+      %dt Dirección
+      %dd= simple_format(@empresa.direccion)
+      %br
     %dt Horario
     %dd= @empresa.horario
 
@@ -113,7 +118,8 @@
   -#=link_to 'Solicitar Oferta' , '#', {:class => 'btn btn-primary'}
 - if user_signed_in? and current_user.id == @empresa.user_id
   %h3 Opciones de Administrador
-  .caja
-    = link_to 'Editar', edit_empresa_path(@empresa), { :class => 'btn btn-primary'}
+  .caja-center
+    = link_to 'Editar Perfil', edit_empresa_path(@empresa), { :class => 'btn btn-primary'}
+    = link_to '<i class="icon-ok icon-white"></i>'.html_safe, empresa_path(@empresa), :class => 'btn btn-lg glyphicon glyphicon-trash', :method => :delete,  data: { confirm: "¿Está seguro de querer borrar su perfil? Toda la información se borrará y no la podrá recuperar" }
 
-= link_to 'Volver a Comunidad de Empresas', empresas_path, class: 'btn btn-border text-center center-block'
+= link_to 'Ir a Comunidad de Empresas', empresas_path, class: 'btn btn-border text-center center-block'

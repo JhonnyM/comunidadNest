@@ -55,9 +55,12 @@
     =link_to 'CV' , @profesional.curriculum.url, {:class => 'btn-circle btn-cv', :target => '_blank'}
 .caja
   %dl
-    %dt Residencia:
-    %dd= "#{@profesional.ciudad}, #{@profesional.country_name}"
-
+    %dt Dirección:
+    %dd= "#{@profesional.ciudad}."
+    %br
+    %dt País:
+    %dd= "#{@profesional.country_name}."
+    %br
     %dt Especialidades:
     %dd= @profesional.especialidades
 
@@ -94,7 +97,8 @@
 
 - if @is_owner
   %h3 Opciones de Administrador
-  .caja
+  .caja-center
     = link_to 'Editar', edit_profesional_path(@profesional), { :class => 'btn btn-primary'}
+    = link_to '<i class="icon-ok icon-white"></i>'.html_safe, profesional_path(@profesional), :class => 'btn btn-lg glyphicon glyphicon-trash', :method => :delete,  data: { confirm: "¿Está seguro de querer borrar su perfil? Toda la información se borrará y no la podrá recuperar" }
 
-= link_to 'Ver todos los profesionales', profesionales_path
+= link_to 'Ir a Comunidad de Profesionales', profesionales_path, class: 'btn btn-border text-center center-block'
