@@ -39,7 +39,7 @@
       .col-xs-8
         = f.select :status_proyecto, Proyecto.status_proyecto.options, {}, {class: "form-control form-control-custom"}
     .form-group
-      = f.label :proyecto_imagenes, "Imágenes de proyecto", class: 'col-xs-2'
+      = f.label :proyecto_imagenes, "Imágenes de proyecto", class: 'col-xs-2', data:{toggle:'tooltip', title: 'El máximo de imágenes a seleccionar es 12'}
       .col-xs-8
         = f.file_field "imagenes[]", type: :file, multiple: true
 
