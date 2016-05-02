@@ -7,27 +7,27 @@
         Título
         %span{class: 'star'} *
       .col-xs-8
-        = f.text_field :titulo, {class: "form-control"}
+        = f.text_field :titulo, {class: "form-control form-control-custom"}
     .form-group
       = f.label :descripcion, "Descripción de proyecto", class: 'col-xs-2'
       .col-xs-8
-        = f.text_area :descripcion, {class: "form-control"}
+        = f.text_area :descripcion, {class: "form-control form-control-custom"}
     .form-group
       = f.label :pais, "País", class: 'col-xs-2'
       .col-xs-8
-        = country_select("proyecto", "pais", {priority_countries: ["CR"]}, {class: "form-control"})
+        = country_select("proyecto", "pais", {priority_countries: ["CR"]}, {class: "form-control form-control-custom"})
     .form-group
       = f.label :ciudad,class: 'col-xs-2'
       .col-xs-8
-        = f.text_field :ciudad, {class: "form-control"}
+        = f.text_field :ciudad, {class: "form-control form-control-custom"}
     .form-group
-      = f.label :area, "Área", class: 'col-xs-2'
+      = f.label :area, "Área de construcción (m²)", class: 'col-xs-2'
       .col-xs-8
-        = f.number_field :area, {class: "form-control"}
+        = f.number_field :area, {class: "form-control form-control-custom"}
     .form-group
       = f.label :fecha, "Año de construcción", class: 'col-xs-2'
       .col-xs-8
-        = f.number_field :fecha, {class: "form-control"}
+        = f.number_field :fecha, {class: "form-control form-control-custom"}
     .form-group
       -categorias = @categorias.map { |categoria| [categoria.nombre, categoria.id] }
       = f.label :proyectos_categoria_id, "Categoría de proyecto", class: 'col-xs-2'
@@ -36,7 +36,7 @@
     .form-group
       = f.label :status_proyecto, "Estátus de proyecto", class: 'col-xs-2'
       .col-xs-8
-        = f.select :status_proyecto, Proyecto.status_proyecto.options, {}, {class: "form-control"}
+        = f.select :status_proyecto, Proyecto.status_proyecto.options, {}, {class: "form-control form-control-custom"}
     .form-group
       = f.label :proyecto_imagenes, "Imágenes de proyecto", class: 'col-xs-2'
       .col-xs-8
