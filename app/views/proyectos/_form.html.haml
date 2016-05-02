@@ -9,7 +9,8 @@
       .col-xs-8
         = f.text_field :titulo, {class: "form-control form-control-custom"}
     .form-group
-      = f.label :descripcion, "Descripción de proyecto", class: 'col-xs-2'
+      %label{class: 'col-xs-2'}
+        Descripción de proyecto
       .col-xs-8
         = f.text_area :descripcion, {class: "form-control form-control-custom"}
     .form-group
@@ -21,7 +22,7 @@
       .col-xs-8
         = f.text_field :ciudad, {class: "form-control form-control-custom"}
     .form-group
-      = f.label :area, "Área de construcción (m²)", class: 'col-xs-2'
+      = f.label :area, "Área Construcción(m²)", class: 'col-xs-2', data:{toggle:'tooltip', title: 'Escriba el área en metros cuadrados Ej: 2000'}
       .col-xs-8
         = f.number_field :area, {class: "form-control form-control-custom"}
     .form-group
@@ -30,11 +31,11 @@
         = f.number_field :fecha, {class: "form-control form-control-custom"}
     .form-group
       -categorias = @categorias.map { |categoria| [categoria.nombre, categoria.id] }
-      = f.label :proyectos_categoria_id, "Categoría de proyecto", class: 'col-xs-2'
+      = f.label :proyectos_categoria_id, "Categoría de proyecto", class: 'col-xs-2', data:{toggle:'tooltip', title: 'Seleccione la categoría a la que pertenece este proyecto'}
       .col-xs-8
         -#= collection_select(:proyecto, :proyectos_categoria_id, ProyectosCategoria.all, :id, :nombre, {:prompt=>true}, {:class => 'form-control'})
     .form-group
-      = f.label :status_proyecto, "Estátus de proyecto", class: 'col-xs-2'
+      = f.label :status_proyecto, 'Status de proyecto', class: 'col-xs-2', data:{toggle:'tooltip', title: 'Seleccione el status actual del proyecto'}
       .col-xs-8
         = f.select :status_proyecto, Proyecto.status_proyecto.options, {}, {class: "form-control form-control-custom"}
     .form-group

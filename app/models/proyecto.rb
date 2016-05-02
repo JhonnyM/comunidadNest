@@ -13,8 +13,8 @@ class Proyecto < ActiveRecord::Base
   scope :by_categoria, -> categoria { where(:categoria_id == categoria.to_i) }
 
 	extend Enumerize
-	enumerize :status_proyecto, in: [:construido, :en_construccion, :anteproyecto, :academico], default: :construido
-	enumerize :status, in: [:publico, :oculto], default: :publico
+	enumerize :status_proyecto, in: [:construido, :en_construcción, :anteproyecto, :académico], default: :construido
+	enumerize :status, in: [:público, :oculto], default: :público
 
 	rails_admin do
 		object_label_method :titulo
