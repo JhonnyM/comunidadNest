@@ -3,11 +3,13 @@
   %fieldset.clearfix
     %h2 Información General
     .form-group
-      = f.label :titulo,class: 'col-xs-2'
+      %label{class: 'col-xs-2'}
+        Título
+        %span{class: 'star'} *
       .col-xs-8
         = f.text_field :titulo, {class: "form-control"}
     .form-group
-      = f.label :descripcion, "Desripción de proyecto", class: 'col-xs-2'
+      = f.label :descripcion, "Descripción de proyecto", class: 'col-xs-2'
       .col-xs-8
         = f.text_area :descripcion, {class: "form-control"}
     .form-group
