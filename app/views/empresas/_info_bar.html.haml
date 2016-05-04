@@ -11,23 +11,23 @@
       %li
         = link_to @empresa.website do
           %i.fa.fa-globe
-    -if defined? (@empresa.facebook)
+    -if @empresa.facebook.present?
       %li
         = link_to @empresa.facebook do
           %i.fa.fa-facebook
-    -if defined? (@empresa.twitter)
+    -if @empresa.twitter.present?
       %li
         = link_to @empresa.twitter do
           %i.fa.fa-twitter
-    -if defined? (@empresa.instagram)
+    -if @empresa.instagram.present?
       %li
         = link_to @empresa.instagram do
           %i.fa.fa-instagram
-    -if defined? (@empresa.linkedin)
+    -if @empresa.linkedin.present?
       %li
         = link_to @empresa.linkedin do
           %i.fa.fa-linkedin
-    -if defined? (@empresa.pinterest)
+    -if @empresa.pinterest.present?
       %li
         = link_to @empresa.pinterest do
           %i.fa.fa-pinterest
@@ -65,12 +65,12 @@
     %br
 
 %h3 Contacto
--byebug
 .caja
   %dl
-    %dt Sitio Web
-    %dd= link_to @empresa.nombre, @empresa.website
-    %br
+    -if @empresa.website.present?
+      %dt Sitio Web
+      %dd= link_to "#{@empresa.nombre}", "http://#{@empresa.website}"
+      %br
     %dt Número Telefónico
     %dd= @empresa.telefono
     %br

@@ -43,7 +43,7 @@ class EmpresasController < ApplicationController
     @empresa.user_id = current_user.id
     respond_to do |format|
       if @empresa.save
-        format.html { redirect_to @empresa, notice: 'Empresa was successfully created.' }
+        format.html { redirect_to @empresa, notice: 'Su perfil de empresa fue creado exitosamente.' }
         format.json { render :show, status: :created, location: @empresa }
       else
         format.html { render :new }
@@ -55,9 +55,10 @@ class EmpresasController < ApplicationController
   # PATCH/PUT /empresas/1
   # PATCH/PUT /empresas/1.json
   def update
+
     respond_to do |format|
       if @empresa.update(empresa_params)
-        format.html { redirect_to @empresa, notice: 'Empresa was successfully updated.' }
+        format.html { redirect_to @empresa, notice: 'Su perfil de empresa fue modificado exitosamente.' }
         format.json { render :show, status: :ok, location: @empresa }
       else
         format.html { render :edit }
@@ -71,7 +72,7 @@ class EmpresasController < ApplicationController
   def destroy
     @empresa.destroy
     respond_to do |format|
-      format.html { redirect_to empresas_url, notice: 'Empresa was successfully destroyed.' }
+      format.html { redirect_to empresas_url, notice: 'Su perfil de empresa fue eliminado exitosamente.' }
       format.json { head :no_content }
     end
   end
@@ -106,6 +107,6 @@ class EmpresasController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def empresa_params
-      params.require(:empresa).permit(:descripcion, :industria_id, :telefono, :email, :servicios, :horario, :empleados, :fundacion, :avatar, :page_img, :pais, :tag_list, :nombre)
+      params.require(:empresa).permit(:descripcion, :industria_id, :telefono, :email, :servicios, :horario, :empleados, :fundacion, :avatar, :page_img, :pais, :tag_list, :nombre, :website)
     end
 end
