@@ -4,6 +4,8 @@ class Proyecto < ActiveRecord::Base
 	has_many :proyecto_imagenes, :dependent => :destroy
 	has_many :participante_proyectos, :dependent => :destroy
 
+	attr_accessor :imagenes
+
 	validates :titulo, presence: true
 
 	include Elasticsearch::Model
@@ -21,6 +23,16 @@ class Proyecto < ActiveRecord::Base
 
 	rails_admin do
 		object_label_method :titulo
+	end
+
+	# Methods
+
+	def imagenes=(imagenes)
+		imagenes.each{|imagen| proyecto_imagenes.create(imagen: imagen)}
+	end
+
+	def self.white_list
+		[:titulo, :descripcion, :pais, :ciudad, :area, :fecha, :proyectos_categoria_id, :status_proyecto, :status, :user_id, :propietario_id, :propietario_tipo, :pais]
 	end
 
 	def propietario

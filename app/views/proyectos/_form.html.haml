@@ -40,10 +40,9 @@
         = f.select :status_proyecto, Proyecto.status_proyecto.options, {}, {class: "form-control form-control-custom"}
 
     .form-group
-      = f.fields_for :proyecto_imagenes do |image_form|
-        = image_form.label "Imágenes de proyecto", {class: 'col-xs-2', data:{toggle:'tooltip', title: 'El máximo de imágenes a seleccionar es 12'}}
-        .col-xs-8
-          = image_form.file_field :imagen
+      = f.label :proyecto_imagenes, "Imágenes de proyecto", class: 'col-xs-2', data:{toggle:'tooltip', title: 'El máximo de imágenes a seleccionar es 12'}
+      .col-xs-8
+        = f.file_field :imagenes, multiple: true
 
     -if params[:action] == 'edit'
       .form-group
@@ -71,10 +70,7 @@
                   %p
                     = link_to 'Imagen Principal', make_default_proyecto_imagen_path(pic, proyecto_id: @proyecto.id), class: 'make-default btn btn-sm btn-primary', remote: true, method: :post
                     = link_to "Eliminar imagen", pic, :data => { :confirm => "Are you sure?" }, :method => :delete, class: 'btn btn-sm btn-danger'
-                    = link_to 'Seleccionar como Principal', make_default_proyecto_imagen_path(pic, proyecto_id: @proyecto.id), class: 'make-default', remote: true, method: :post
-                    = link_to "Eliminar Imagen", pic, :data => { :confirm => "¿Está seguro?" }, :method => :delete
-                    = link_to 'Seleccionar como Principal', make_default_proyecto_imagen_path(pic, proyecto_id: @proyecto.id), class: 'make-default', remote: true, method: :post
-                    = link_to "Eliminar Imagen", pic, :data => { :confirm => "¿Está seguro?" }, :method => :delete
+
   .actions
     = f.submit 'Guardar', {id: 'js-save-proyecto', class: 'btn btn-primary'}
     .spacer{class: 'spacer'}
