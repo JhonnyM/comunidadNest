@@ -10,27 +10,23 @@
       = image_tag '/assets/sello-recomendado.png'
 .social-bar
   %ul.list-inline
-    -if @profesional.website.present?
-      %li
-        = link_to @profesional.website, {:target => '_blank'} do
-          %i.fa.fa-globe
-    -if defined? (@profesional.facebook)
+    -if @profesional.facebook.present?
       %li
         = link_to @profesional.facebook, {:target => '_blank'} do
           %i.fa.fa-facebook
-    -if defined? (@profesional.twitter)
+    -if @profesional.twitter.present?
       %li
         = link_to @profesional.twitter, {:target => '_blank'} do
           %i.fa.fa-twitter
-    -if defined? (@profesional.instagram)
+    -if @profesional.instagram.present?
       %li
         = link_to @profesional.instagram, {:target => '_blank'} do
           %i.fa.fa-instagram
-    -if defined? (@profesional.linkedin)
+    -if @profesional.linkedin.present?
       %li
         = link_to @profesional.linkedin, {:target => '_blank'} do
           %i.fa.fa-linkedin
-    -if defined? (@profesional.pinterest)
+    -if @profesional.pinterest.present?
       %li
         = link_to @profesional.pinterest, {:target => '_blank'} do
           %i.fa.fa-pinterest
@@ -55,19 +51,18 @@
     =link_to 'CV' , @profesional.curriculum.url, {:class => 'btn-circle btn-cv', :target => '_blank'}
 .caja
   %dl
-    %dt Residencia:
-    %dd= "#{@profesional.ciudad}, #{@profesional.country_name}"
-
+    %dt Dirección:
+    %dd= "#{@profesional.ciudad}."
+    %br
+    %dt País:
+    %dd= "#{@profesional.country_name}."
+    %br
     %dt Especialidades:
     %dd= @profesional.especialidades
 
 %h3 Contacto
 .caja.clearfix
   %dl
-    %dt Sitio Web
-    %dd
-      =link_to @profesional.nombre, @profesional.website
-
     %dt Teléfono
     %dd
       = link_to @profesional.telefono, "tel:#{@profesional.telefono}"
@@ -94,7 +89,8 @@
 
 - if @is_owner
   %h3 Opciones de Administrador
-  .caja
+  .caja-center
     = link_to 'Editar', edit_profesional_path(@profesional), { :class => 'btn btn-primary'}
+    = link_to '<i class="icon-ok icon-white"></i>'.html_safe, profesional_path(@profesional), :class => 'btn btn-lg glyphicon glyphicon-trash', :method => :delete,  data: { confirm: "¿Está seguro de querer borrar su perfil? Toda la información se borrará y no la podrá recuperar" }
 
-= link_to 'Ver todos los profesionales', profesionales_path
+= link_to 'Ir a Comunidad de Profesionales', profesionales_path, class: 'btn btn-border text-center center-block'

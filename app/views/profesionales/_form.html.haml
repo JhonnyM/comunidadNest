@@ -46,12 +46,11 @@
       .col-xs-2
         = country_select("profesional", "pais", {priority_countries: ["CR"]}, {class: "form-control"})
     .form-group
-      = f.label :residencia, class: 'col-xs-2', :data => {:toggle => 'tooltip', :title => 'Indique su residencia.'}
-      .col-xs-8
+      = f.label :residencia, 'Dirección', class: 'col-xs-2', :data => {:toggle => 'tooltip', :title => 'Indique su residencia.'}
       .col-xs-8
         = f.text_field :ciudad, class: 'form-control'
     .form-group
-      = f.label :telefono, class: 'col-xs-2'
+      = f.label :telefono, 'Teléfono', class: 'col-xs-2'
       .col-xs-2
         = f.text_field :telefono, class: 'form-control'
     .form-group

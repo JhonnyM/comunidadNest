@@ -132,7 +132,7 @@ footer{
 	border: 0;
   background-color: $gray-darker;
   li {
-    margin-bottom: 0;
+    margin-bottom: 15;
     a{
 	    color: #fff;
 	    border: none;
@@ -472,6 +472,14 @@ a.btn-circle, a.btn-circle:link{
 			width:30px;
 			height: 30px;
 		}
+
+    .mini-profile-pic {
+      width: 20px;
+      height: 20px;
+      float: left;
+      margin-right: 5px;
+      margin-bottom: 5px
+    }
   }
 
   .nest-object-info{
@@ -807,6 +815,23 @@ a.btn-circle, a.btn-circle:link{
 		border: 0;
 		padding: 0;
 	}
+}
+.caja-center{
+  padding: 15px;
+  background: $gray-lightest;
+  margin-bottom: 10px;
+  text-align:center;
+  dl{
+    margin: 0;
+  }
+  &.botones{
+    .btn{
+      display:block;
+      width: 90%;
+      margin: 0 auto;
+      margin-bottom: 5px;
+    }
+  }
 }
 
 // Social Buttons

@@ -1,16 +1,18 @@
 #right-sidebar
   .opciones-perfil
-    %h3 OPCIONES DE PERFIL
+    %h3 MIS PERFILES
     -if user_signed_in?
       -if current_user.profesional.present?
-        =link_to "Mi Perfil", profesional_path(current_user.profesional)
+        %p
+          = image_tag current_user.profesional.avatar.url(:medium), class: 'mini-profile-pic', :size => '20x20'
+          =link_to "#{current_user.nombre}", profesional_path(current_user.profesional)
       -else
         %p
           =link_to "Profesional", new_profesional_path, class: "btn btn-purple btn-profesional"
       -if current_user.empresas.present?
-        %h3 MI PERFIL DE EMPRESA
         -current_user.empresas.each  do |empresa|
           %p
+            = image_tag empresa.avatar.url(:medium), class: 'mini-profile-pic', :size => '20x20'
             =link_to "#{empresa.nombre}", empresa_path(empresa)
       -else
         %p
