@@ -44,7 +44,12 @@ class Proyecto < ActiveRecord::Base
 	end
 
 	def cover_img
-		ProyectoImagen.find(self.cover).imagen
+		if self.cover.present?
+			ProyectoImagen.find(self.cover).imagen
+		else
+			proyecto_imagenes.first.try(:imagen)
+		end
+
 	end
 
 	def country_name
