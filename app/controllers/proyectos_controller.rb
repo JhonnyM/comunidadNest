@@ -26,6 +26,7 @@ class ProyectosController < ApplicationController
   # GET /proyectos/new
   def new
     @proyecto = Proyecto.new
+    @proyecto.proyecto_imagenes.build
     @categorias = ProyectosCategoria.all
     @propietario_id = params[:propietario_id]
     @propietario_tipo = params[:propietario_tipo]
@@ -44,14 +45,6 @@ class ProyectosController < ApplicationController
 
     respond_to do |format|
       if @proyecto.save
-
-        if params[:imagenes]
-          #===== The magic is here ;)
-          params[:imagenes].each { |imagen|
-            @proyecto.proyecto_imagenes.create(imagen: imagen)
-          }
-        end
-
         format.html { redirect_to @proyecto, notice: 'Proyecto creado correctamente' }
         format.json { render :show, status: :created, location: @proyecto }
         format.js
@@ -68,14 +61,6 @@ class ProyectosController < ApplicationController
   def update
     respond_to do |format|
       if @proyecto.update(proyecto_params)
-
-        if params[:imagenes]
-          #===== The magic is here ;)
-          params[:imagenes].each { |imagen|
-            @proyecto.proyecto_imagenes.create(imagen: imagen)
-          }
-        end
-
         format.html { redirect_to @proyecto, notice: 'Proyecto editado correctamente.' }
         format.json { render :show, status: :ok, location: @proyecto }
         format.js
@@ -119,8 +104,7 @@ class ProyectosController < ApplicationController
       @queue = 'Todos'
     end
     @proyectos = @proyectos.where(pais: params[:proyecto][:pais_name]) if params[:proyecto][:pais_name].present?
-    @proyectos = @proyectos.order(titulo: params[:proyectios][:orden_key])
-    @proyectos = @proyectos.order(titulo: params[:proyecto][:creación_key])
+    @proyectos = @proyectos.order(titulo: params[:proyectios][:orden_key]).order(titulo: params[:proyecto][:creación_key])
   end
 
 
@@ -132,6 +116,8 @@ class ProyectosController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def proyecto_params
-      params.require(:proyecto).permit(:titulo, :descripcion, :pais, :ciudad, :area, :fecha, :proyectos_categoria_id, :status_proyecto, :status, :user_id, :propietario_id, :propietario_tipo, :pais)
+      params.require(:proyecto).permit(:titulo, :descripcion, :pais, :ciudad, :area, :fecha, :proyectos_categoria_id,
+                                       :status_proyecto, :status, :user_id, :propietario_id, :propietario_tipo, :pais,
+                                       proyecto_imagenes_attributes: [:id, :proyecto_id, :imagen])
     end
 end

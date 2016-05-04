@@ -9,6 +9,9 @@ class Proyecto < ActiveRecord::Base
 	include Elasticsearch::Model
 	include Elasticsearch::Model::Callbacks
 
+	# Nested attributes
+	accepts_nested_attributes_for :proyecto_imagenes
+
 	#Scopes
   scope :by_categoria, -> categoria { where(:categoria_id == categoria.to_i) }
 
