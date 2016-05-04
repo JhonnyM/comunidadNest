@@ -4,18 +4,35 @@ class Proyecto < ActiveRecord::Base
 	has_many :proyecto_imagenes, :dependent => :destroy
 	has_many :participante_proyectos, :dependent => :destroy
 
+	attr_accessor :imagenes
+
+	validates :titulo, presence: true
+
 	include Elasticsearch::Model
 	include Elasticsearch::Model::Callbacks
+
+	# Nested attributes
+	accepts_nested_attributes_for :proyecto_imagenes
 
 	#Scopes
   scope :by_categoria, -> categoria { where(:categoria_id == categoria.to_i) }
 
 	extend Enumerize
-	enumerize :status_proyecto, in: [:construido, :en_construccion, :anteproyecto, :academico], default: :construido
-	enumerize :status, in: [:publico, :oculto], default: :publico
+	enumerize :status_proyecto, in: [:construido, :en_construcción, :anteproyecto, :académico], default: :construido
+	enumerize :status, in: [:público, :oculto], default: :público
 
 	rails_admin do
 		object_label_method :titulo
+	end
+
+	# Methods
+
+	def imagenes=(imagenes)
+		imagenes.each{|imagen| proyecto_imagenes.create(imagen: imagen)}
+	end
+
+	def self.white_list
+		[:titulo, :descripcion, :pais, :ciudad, :area, :fecha, :proyectos_categoria_id, :status_proyecto, :status, :user_id, :propietario_id, :propietario_tipo, :pais]
 	end
 
 	def propietario
@@ -27,7 +44,12 @@ class Proyecto < ActiveRecord::Base
 	end
 
 	def cover_img
-		ProyectoImagen.find(self.cover).imagen
+		if self.cover.present?
+			ProyectoImagen.find(self.cover).imagen
+		else
+			proyecto_imagenes.first.try(:imagen)
+		end
+
 	end
 
 	def country_name
