@@ -6,7 +6,16 @@ class Proyecto < ActiveRecord::Base
 
 	attr_accessor :imagenes
 
+	# Validations
+
 	validates :titulo, presence: true
+	validates :descripcion, length: { maximum: 400, too_long: "%{count} es el máximo número de palabras permitido"  }
+	validates :area, numericality: { only_integer: true }
+	validates :fecha, inclusion: { in: 1950..Date.today.year },
+						format: {
+										with: /(19|20)\d{2}/i,
+										message: "Debe contener un año válidao"
+								}
 
 	include Elasticsearch::Model
 	include Elasticsearch::Model::Callbacks
