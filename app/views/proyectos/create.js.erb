@@ -1,3 +1,8 @@
-new AlertNotification('.notification-area', 'Proyecto Creado Correctamente!').success_notification();
+new AlertNotification('.notification-area', "Proyecto Creado Correctamente!").success_notification();
 new ProyectosForm().hide_spinner();
+
+// Url Redirection
+url = '/proyectos/<%= @proyecto.id %>';
+
+window.location.href = url;
 
