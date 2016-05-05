@@ -8,7 +8,6 @@
 					=link_to "#{current_user.nombre}", profesional_path(current_user.profesional)
 			-else
 				%p
-					= image_tag empresa.avatar.url(:medium), class: 'mini-profile-pic', :size => '20x20', :margin => "5px"
 					=link_to "Profesional", new_profesional_path, class: "btn btn-purple btn-profesional"
 			-if current_user.empresas.present?
 				-current_user.empresas.each  do |empresa|
