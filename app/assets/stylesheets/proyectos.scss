@@ -17,3 +17,22 @@
     padding: 0;
   }  
 }
+
+.field_with_errors .message {
+  color: #D00;
+}
+
+.spacer{
+  width: 5px;
+  height: auto;
+  display: inline-block;
+}
+
+.star {
+  color: #ffcc00;
+}
+
+.form-control-custom {
+  min-width: 0;
+  width: 450px;
+}

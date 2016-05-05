@@ -20,6 +20,8 @@
 //= require fbsdk
 //= require masonry.pkgd.min.js
 //= require imagesloaded.pkgd.min.js
+//= require jquery.remotipart
+//= require rails.validations
 //= require_tree .
 
 //Funciones para form de agregar participante

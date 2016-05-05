@@ -1,50 +1,48 @@
-= form_for (@proyecto), :html => { multipart: true , class: 'form form-profile form-horizontal'} do |f|
-  - if @proyecto.errors.any?
-    #error_explanation
-      %h2= "#{pluralize(@proyecto.errors.count, "error")} prohibited this proyecto from being saved:"
-      %ul
-        - @proyecto.errors.full_messages.each do |msg|
-          %li= msg
+= form_for (@proyecto), html: {class: 'form form-profile form-horizontal', multipart: true}, validate: true, remote: true  do |f|
 
   %fieldset.clearfix
     %h2 Información General
     .form-group
-      = f.label :titulo,class: 'col-xs-2'
+      %label{class: 'col-xs-2'}
+        Título
+        %span{class: 'star'} *
       .col-xs-8
-        = f.text_field :titulo, {class: "form-control"}
+        = f.text_field :titulo, {class: "form-control form-control-custom"}
     .form-group
-      = f.label :descripcion, "Desripción de proyecto", class: 'col-xs-2'
+      %label{class: 'col-xs-2'}
+        Descripción de proyecto
       .col-xs-8
-        = f.text_area :descripcion, {class: "form-control"}
+        = f.text_area :descripcion, {class: "form-control form-control-custom"}
     .form-group
       = f.label :pais, "País", class: 'col-xs-2'
       .col-xs-8
-        = country_select("proyecto", "pais", {priority_countries: ["CR"]}, {class: "form-control"})
+        = country_select("proyecto", "pais", {priority_countries: ["CR"]}, {class: "form-control form-control-custom"})
     .form-group
       = f.label :ciudad,class: 'col-xs-2'
       .col-xs-8
-        = f.text_field :ciudad, {class: "form-control"}
+        = f.text_field :ciudad, {class: "form-control form-control-custom"}
     .form-group
-      = f.label :area, "Área", class: 'col-xs-2'
+      = f.label :area, "Área Construcción(m²)", class: 'col-xs-2', data:{toggle:'tooltip', title: 'Escriba el área en metros cuadrados Ej: 2000'}
       .col-xs-8
-        = f.number_field :area, {class: "form-control"}
+        = f.number_field :area, {class: "form-control form-control-custom"}
     .form-group
       = f.label :fecha, "Año de construcción", class: 'col-xs-2'
       .col-xs-8
-        = f.number_field :fecha, {class: "form-control"}
+        = f.number_field :fecha, {class: "form-control form-control-custom"}
     .form-group
       -categorias = @categorias.map { |categoria| [categoria.nombre, categoria.id] }
-      = f.label :proyectos_categoria_id, "Categoría de proyecto", class: 'col-xs-2'
+      = f.label :proyectos_categoria_id, "Categoría de proyecto", class: 'col-xs-2', data:{toggle:'tooltip', title: 'Seleccione la categoría a la que pertenece este proyecto'}
       .col-xs-8
         -#= collection_select(:proyecto, :proyectos_categoria_id, ProyectosCategoria.all, :id, :nombre, {:prompt=>true}, {:class => 'form-control'})
     .form-group
-      = f.label :status_proyecto, "Estátus de proyecto", class: 'col-xs-2'
+      = f.label :status_proyecto, 'Status de proyecto', class: 'col-xs-2', data:{toggle:'tooltip', title: 'Seleccione el status actual del proyecto'}
       .col-xs-8
-        = f.select :status_proyecto, Proyecto.status_proyecto.options, {}, {class: "form-control"}
+        = f.select :status_proyecto, Proyecto.status_proyecto.options, {}, {class: "form-control form-control-custom"}
+
     .form-group
-      = f.label :proyecto_imagenes, "Imágenes de proyecto", class: 'col-xs-2'
+      = f.label :proyecto_imagenes, "Imágenes de proyecto", class: 'col-xs-2', data:{toggle:'tooltip', title: 'El máximo de imágenes a seleccionar es 12'}
       .col-xs-8
-        = file_field_tag "imagenes[]", type: :file, multiple: true
+        = f.file_field :imagenes, multiple: true
 
     -if params[:action] == 'edit'
       .form-group
@@ -72,13 +70,12 @@
                   %p
                     = link_to 'Imagen Principal', make_default_proyecto_imagen_path(pic, proyecto_id: @proyecto.id), class: 'make-default btn btn-sm btn-primary', remote: true, method: :post
                     = link_to "Eliminar imagen", pic, :data => { :confirm => "Are you sure?" }, :method => :delete, class: 'btn btn-sm btn-danger'
-                    = link_to 'Seleccionar como Principal', make_default_proyecto_imagen_path(pic, proyecto_id: @proyecto.id), class: 'make-default', remote: true, method: :post
-                    = link_to "Eliminar Imagen", pic, :data => { :confirm => "¿Está seguro?" }, :method => :delete
-                    = link_to 'Seleccionar como Principal', make_default_proyecto_imagen_path(pic, proyecto_id: @proyecto.id), class: 'make-default', remote: true, method: :post
-                    = link_to "Eliminar Imagen", pic, :data => { :confirm => "¿Está seguro?" }, :method => :delete
+
   .actions
-    = f.submit 'Guardar', {:class => 'btn btn-primary'}
-    = link_to 'Cancelar', proyectos_path, :class =>  "btn"
+    = f.submit 'Guardar', {id: 'js-save-proyecto', class: 'btn btn-primary'}
+    .spacer{class: 'spacer'}
+      = image_tag "spinner.gif",{id: 'js-proyecto-spinner', style: 'display:none;'}
+    = link_to 'Cancelar', proyectos_path, class:  "btn"
 
 :javascript
   $(document).ready(function() {
