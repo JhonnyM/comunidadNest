@@ -52,20 +52,25 @@
 .caja
   %dl
     %dt Dirección:
-    %dd= "#{@profesional.ciudad}."
+    %dd= format_nil_values(@profesional.ciudad)
     %br
     %dt País:
-    %dd= "#{@profesional.country_name}."
+    %dd= @profesional.country_name
     %br
     %dt Especialidades:
-    %dd= @profesional.especialidades
+    %dd= format_nil_values(@profesional.especialidades)
+    %br
+    %dt Intereses:
+    %dd= format_nil_values(@profesional.intereses)
 
 %h3 Contacto
 .caja.clearfix
   %dl
-    %dt Teléfono
-    %dd
-      = link_to @profesional.telefono, "tel:#{@profesional.telefono}"
+    %dt Teléfono:
+    %dd= format_nil_values(@profesional.telefono)
+    %br
+    %dt E-mail:
+    %dd= @profesional.email 
 
   = link_to new_conversation_path(:recipient_id => @profesional.user.id), class: 'btn btn-primary pull-right' do
     %i.fa.fa-envelope

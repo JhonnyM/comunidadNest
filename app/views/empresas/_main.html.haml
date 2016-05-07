@@ -10,10 +10,10 @@
 .tab-content#myTabContent
   #descripcion.tab-pane.active
     %h3 Descripción
-    =simple_format(@empresa.descripcion)
+    =format_nil_values(@empresa.descripcion)
   #servicios.tab-pane
     %h3 Servicios
-    =simple_format(@empresa.servicios.gsub!("\r\n", " - "))
+    =format_nil_values(@empresa.servicios.gsub!("\r\n", " - "))
   #opiniones.tab-pane
     %h3 Opiniones
     - if @empresa.reviews.blank?

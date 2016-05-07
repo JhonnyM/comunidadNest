@@ -40,8 +40,8 @@
         %strong Idiomas:
         =@profesional.idiomas_string
       %li
-        %strong Otros:
-        =@profesional.otros
+        %strong Género:
+        = "#{formar_gender(@profesional.genero)}"
     -unless @profesional.intereses.empty?
       %h3 Intereses
       =simple_format(@profesional.intereses)
