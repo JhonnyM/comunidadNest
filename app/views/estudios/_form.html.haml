@@ -11,6 +11,6 @@
 		= f.text_field :fecha, {:class => 'form-control'}
 	.control-group
 		= f.label :pais
-		= country_select("profesional", "pais", {priority_countries: ["CR"]}, {class: "form-control"})
+		= country_select("estudio", "pais", {priority_countries: ["CR"]}, {class: "form-control"})
 
 	= f.submit 'Guardar', {:class => 'btn btn-primary'}

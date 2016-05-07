@@ -52,16 +52,16 @@
 .caja
   %dl
     %dt Año de Fundación:
-    %dd= @empresa.fundacion
+    %dd= format_nil_values(@empresa.fundacion)
     %br
     %dt Especialidades:
-    %dd= @empresa.especialidades
+    %dd= format_nil_values(@empresa.especialidades)
     %br
     %dt Numero de empleados:
-    %dd= @empresa.empleados
+    %dd= format_nil_values(@empresa.empleados)
     %br
     %dt País:
-    %dd= "#{@empresa.country_name}."
+    %dd= @empresa.country_name
     %br
 
 %h3 Contacto
@@ -72,17 +72,16 @@
       %dd= link_to "#{@empresa.nombre}", "http://#{@empresa.website}"
       %br
     %dt Número Telefónico
-    %dd= @empresa.telefono
+    %dd= format_nil_values(@empresa.telefono)
     %br
     %dt Email
-    %dd= @empresa.email
+    %dd= format_nil_values(@empresa.email)
     %br
-    - if @empresa.direccion.present?
-      %dt Dirección
-      %dd= simple_format(@empresa.direccion)
-      %br
+    %dt Dirección
+    %dd= format_nil_values(@empresa.direccion)
+    %br
     %dt Horario
-    %dd= @empresa.horario
+    %dd= format_nil_values(@empresa.horario)
 
 - unless @empresa.tags.empty?
   %h3 Tags

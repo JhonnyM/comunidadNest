@@ -7,4 +7,12 @@ module ProfesionalesHelper
     # no empresa records at all.
     values.present? ? values : [nil]
   end
+
+  def format_nil_values value
+    value.blank? ? "N/A" : value
+  end
+
+  def formar_gender gender
+    gender == 0 ? "Masculino" : "Femenino"
+  end
 end

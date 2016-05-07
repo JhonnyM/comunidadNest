@@ -35,6 +35,7 @@ class EstudiosController < ApplicationController
   # POST /estudios
   # POST /estudios.json
   def create
+    byebug
     @estudio = Estudio.new(estudio_params)
 
     respond_to do |format|
