@@ -36,7 +36,6 @@ class EstudiosController < ApplicationController
   # POST /estudios.json
   def create
     @estudio = Estudio.new(estudio_params)
-
     respond_to do |format|
       if @estudio.save
         format.html { redirect_to @estudio, notice: 'Estudio was successfully created.' }
@@ -45,6 +44,7 @@ class EstudiosController < ApplicationController
       else
         format.html { render :new }
         format.json { render json: @estudio.errors, status: :unprocessable_entity }
+        format.js { flash[:notice] = "#{@estudio.errors.full_messages.join('; ')}." }
       end
     end
   end
