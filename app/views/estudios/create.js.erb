@@ -1,3 +1,9 @@
-$('form').hide();
-$("<%= escape_javascript(render @estudio) %>").appendTo("#estudios_container ul");
-$('.new-estudio-button').show();
+<% if @estudio.errors.any? %>
+  $(".notification-area").show();
+  $(".notification-area").html("<%= flash[:notice] %>");
+<% else %>
+  $(".notification-area").hide();
+  $('form').hide();
+  $("<%= escape_javascript(render @estudio) %>").appendTo("#estudios_container ul");
+  $('.new-estudio-button').show();
+<% end %>
