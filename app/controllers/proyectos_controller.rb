@@ -33,6 +33,7 @@ class ProyectosController < ApplicationController
   # GET /proyectos/1/edit
   def edit
     @categorias = ProyectosCategoria.all
+    @participante_proyectos = @proyecto.participante_proyectos
     @imagenes = @proyecto.proyecto_imagenes
   end
 

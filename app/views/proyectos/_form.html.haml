@@ -62,7 +62,7 @@
           = render partial: 'image_upload', locals: {form: f}
         #participante-tab.tab-pane
           %h3 Agregar Participantes
-          = render partial: 'create_participant', locals: {form: f}
+          = render partial: 'create_participant', locals: {form: f, display_participant_form: locals[:display_participant_form]}
 
   .actions{style: 'text-align: center;'}
     %button{id: 'js-save-proyecto', class: 'btn btn-primary'}
