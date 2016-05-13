@@ -7,7 +7,7 @@ class @ProyectosForm
     @_apply_click_behavior(@)
 
   _apply_click_behavior:(el) ->
-    el.saveButton.click ->
+    el.saveButton.on 'click', (event) ->
       $(document).ajaxStart ->
         el.spinner.show()
         return

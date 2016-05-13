@@ -25,14 +25,15 @@ class ProyectosController < ApplicationController
   # GET /proyectos/new
   def new
     @proyecto = Proyecto.new
+    @proyecto.participante_proyectos.build
     @categorias = ProyectosCategoria.all
-    @propietario_id = params[:propietario_id]
-    @propietario_tipo = params[:propietario_tipo]
+    @user = current_user
   end
 
   # GET /proyectos/1/edit
   def edit
     @categorias = ProyectosCategoria.all
+    @participante_proyectos = @proyecto.participante_proyectos
     @imagenes = @proyecto.proyecto_imagenes
   end
 

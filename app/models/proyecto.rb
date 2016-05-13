@@ -6,13 +6,23 @@ class Proyecto < ActiveRecord::Base
 
 	attr_accessor :imagenes
 
+	# Validations
+
 	validates :titulo, presence: true
+	validates :descripcion, length: { maximum: 400, too_long: "%{count} es el máximo número de palabras permitido"  }
+	validates :area, numericality: { only_integer: true }, if: lambda{ |object| object.area.present? }
+	validates :fecha, inclusion: { in: 1900..Date.today.year },
+						format: {
+										with: /(19|20)\d{2}/i,
+										message: "Debe contener un año válido"
+								}, if: lambda{ |object| object.fecha.present? }
 
 	include Elasticsearch::Model
 	include Elasticsearch::Model::Callbacks
 
 	# Nested attributes
 	accepts_nested_attributes_for :proyecto_imagenes
+	accepts_nested_attributes_for :participante_proyectos
 
 	#Scopes
   scope :by_categoria, -> categoria { where(:categoria_id == categoria.to_i) }
@@ -32,7 +42,8 @@ class Proyecto < ActiveRecord::Base
 	end
 
 	def self.white_list
-		[:titulo, :descripcion, :pais, :ciudad, :area, :fecha, :proyectos_categoria_id, :status_proyecto, :status, :user_id, :propietario_id, :propietario_tipo, :pais]
+		[:titulo, :descripcion, :pais, :ciudad, :area, :fecha, :proyectos_categoria_id, :status_proyecto, :status, :user_id,
+		 :propietario_id, :propietario_tipo, :pais, participante_proyectos_attributes: [:id, :participante_type, :nombre, :rol]]
 	end
 
 	def propietario

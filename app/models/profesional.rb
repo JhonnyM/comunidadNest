@@ -63,7 +63,9 @@ class Profesional < ActiveRecord::Base
 	end
 
 	def nombre
-  	self.user.nombre if self.user
+  	return self.user.nombre if self.user
+		return nombre if nombre
+		''
   end
 
   def estado_civil_formateado
