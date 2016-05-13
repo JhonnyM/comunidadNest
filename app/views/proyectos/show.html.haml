@@ -5,9 +5,9 @@
   = render partial: "shared/meta_tags", locals: { title: @proyecto.titulo, descripcion: @proyecto.descripcion, image: ( @proyecto.proyecto_imagenes.length > 0 ) ? @proyecto.proyecto_imagenes.first.imagen.url(:medium) : nil }
 
 -content_for :full_width_header do
-  .proyecto-images-container.clearfix{style: 'width: 100%; text-align: center;'}
-    %div.thumbnail
-      = image_tag @proyecto.cover_img.url(:medium), class: 'img-responsive pull-left'
+  .proyecto-images-container.col-xs-4
+    %div.thumbnail{style: 'width: 300px%; text-align: center; padding-left: 360px;'}
+      = image_tag @proyecto.cover_img.url(:large), class: 'img-responsive pull-left'
 .row
   .col-xs-9
     .row
