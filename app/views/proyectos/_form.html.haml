@@ -1,81 +1,90 @@
 = form_for (@proyecto), html: {class: 'form form-profile form-horizontal', multipart: true}, validate: true, remote: true  do |f|
 
-  %fieldset.clearfix
-    %h2 Información General
-    .form-group
-      %label{class: 'col-xs-2'}
-        Título
-        %span{class: 'star'} *
-      .col-xs-8
-        = f.text_field :titulo, {class: "form-control form-control-custom"}
-    .form-group
-      %label{class: 'col-xs-2'}
-        Descripción de proyecto
-      .col-xs-8
-        = f.text_area :descripcion, {class: "form-control form-control-custom"}
-    .form-group
-      = f.label :pais, "País", class: 'col-xs-2'
-      .col-xs-8
-        = country_select("proyecto", "pais", {priority_countries: ["CR"]}, {class: "form-control form-control-custom"})
-    .form-group
-      = f.label :ciudad,class: 'col-xs-2'
-      .col-xs-8
-        = f.text_field :ciudad, {class: "form-control form-control-custom"}
-    .form-group
-      = f.label :area, "Área Construcción(m²)", class: 'col-xs-2', data:{toggle:'tooltip', title: 'Escriba el área en metros cuadrados Ej: 2000'}
-      .col-xs-8
-        = f.number_field :area, {class: "form-control form-control-custom"}
-    .form-group
-      = f.label :fecha, "Año de construcción", class: 'col-xs-2'
-      .col-xs-8
-        = f.number_field :fecha, {class: "form-control form-control-custom"}
-    .form-group
-      -categorias = @categorias.map { |categoria| [categoria.nombre, categoria.id] }
-      = f.label :proyectos_categoria_id, "Categoría de proyecto", class: 'col-xs-2', data:{toggle:'tooltip', title: 'Seleccione la categoría a la que pertenece este proyecto'}
-      .col-xs-8
-        -#= collection_select(:proyecto, :proyectos_categoria_id, ProyectosCategoria.all, :id, :nombre, {:prompt=>true}, {:class => 'form-control'})
-    .form-group
-      = f.label :status_proyecto, 'Status de proyecto', class: 'col-xs-2', data:{toggle:'tooltip', title: 'Seleccione el status actual del proyecto'}
-      .col-xs-8
-        = f.select :status_proyecto, Proyecto.status_proyecto.options, {}, {class: "form-control form-control-custom"}
-
-    .form-group
-      = f.label :proyecto_imagenes, "Imágenes de proyecto", class: 'col-xs-2', data:{toggle:'tooltip', title: 'El máximo de imágenes a seleccionar es 12'}
-      .col-xs-8
-        = f.file_field :imagenes, multiple: true
-
-    -if params[:action] == 'edit'
-      .form-group
-        = f.hidden_field :propietario_id
-        .col-xs-8
-          = f.hidden_field :propietario_tipo
-    -else
-      .form-group
-        = f.hidden_field :propietario_id, :value => @propietario_id
-        = f.hidden_field :propietario_tipo, :value => @propietario_tipo
-
-    = f.hidden_field :user_id
-
-    .actions
-      = f.submit 'Guardar', {id: 'js-save-proyecto', class: 'btn btn-primary'}
-      .spacer{class: 'spacer'}
-        = image_tag "spinner.gif",{id: 'js-proyecto-spinner', style: 'display:none;'}
-      = link_to 'Cancelar', proyectos_path, class:  "btn"
-  
-  -unless @imagenes.blank?
+  %div#js-page-one
     %fieldset.clearfix
-      %h2 Imágenes
-      - @imagenes.in_groups_of(4, false).each do |group|
-        .row
-        - group.each do |pic|
-          %li.list-unstyled
-            .col-xs-3
-              .thumbnail{:id => "imagen_#{pic.id}", :class => ("default-image" if pic.id == @proyecto.cover)}
-                = image_tag pic.imagen.url(:thumb)
-                .caption
-                  %p
-                    = link_to 'Imagen Principal', make_default_proyecto_imagen_path(pic, proyecto_id: @proyecto.id), class: 'make-default btn btn-sm btn-primary', remote: true, method: :post
-                    = link_to "Eliminar imagen", pic, :data => { :confirm => "Are you sure?" }, :method => :delete, class: 'btn btn-sm btn-danger'
+      %h2 Información General
+      .form-group
+        %label{class: 'col-xs-2'}
+          Título
+          %span{class: 'star'} *
+        .col-xs-8
+          = f.text_field :titulo, {class: "form-control form-control-custom"}
+      .form-group
+        = f.label :status_proyecto, 'Status de proyecto', class: 'col-xs-2', data:{toggle:'tooltip', title: 'Seleccione el status actual del proyecto'}
+        .col-xs-8
+          = f.select :status_proyecto, Proyecto.status_proyecto.options, {}, {class: "form-control form-control-custom"}
+      .form-group
+        = f.label :pais, "País", class: 'col-xs-2'
+        .col-xs-8
+          = country_select("proyecto", "pais", {priority_countries: ["CR"]}, {class: "form-control form-control-custom"})
+      .form-group
+        = f.label 'Ubicación',class: 'col-xs-2'
+        .col-xs-8
+          = f.text_field :ciudad, {class: "form-control form-control-custom"}
+      .form-group
+        = f.label :area, "Área Construcción(m²)", class: 'col-xs-2', data:{toggle:'tooltip', title: 'Escriba el área en metros cuadrados Ej: 2000'}
+        .col-xs-8
+          = f.number_field :area, {class: "form-control form-control-custom"}
+      .form-group
+        = f.label :fecha, "Año de construcción", class: 'col-xs-2'
+        .col-xs-8
+          = f.number_field :fecha, {class: "form-control form-control-custom"}
+      .form-group
+        -categorias = @categorias.map { |categoria| [categoria.nombre, categoria.id] }
+        = f.label :proyectos_categoria_id, "Categoría de proyecto", class: 'col-xs-2', data:{toggle:'tooltip', title: 'Seleccione la categoría a la que pertenece este proyecto'}
+        .col-xs-8
+      -#= collection_select(:proyecto, :proyectos_categoria_id, ProyectosCategoria.all, :id, :nombre, {:prompt=>true}, {:class => 'form-control'})
+      .form-group
+        %label{class: 'col-xs-2'}
+          Descripción de proyecto
+        .col-xs-8
+          = f.text_area :descripcion, {class: "form-control form-control-custom", style: 'height: 100px;'}
+
+  %br
+  %br
+  %br
+
+  %div#js-page-two
+    = render 'proyecto_header', locals: {text: 'Selecciona las imágenes y participantes del proyecto', number: 2}
+    %br
+    #content
+      %ul#tabs.nav.nav-tabs{"data-tabs" => "tabs"}
+        %li.active
+          %a{"data-toggle" => "tab", :href => "#image-tab"} Imágenes
+        %li
+          %a{"data-toggle" => "tab", :href => "#participante-tab"} Participantes
+      #my-tab-content.tab-content
+        #image-tab.tab-pane.active
+          %br
+          %p{style: 'text-align: left;'}
+            Selecciona las imágenes del proyecto arquitectónico. Las imágenes no deben sobrepasar los 5 MB y deben estar en formato .png o .jpeg
+          %br
+          = render partial: 'image_upload', locals: {form: f}
+        #participante-tab.tab-pane
+          %h3 Agregar Participantes
+          = render partial: 'create_participant', locals: {form: f}
+
+  .actions{style: 'text-align: center;'}
+    %button{id: 'js-save-proyecto', class: 'btn btn-primary'}
+      Guardar Proyecto
+    .spacer{class: 'spacer'}
+      = image_tag "spinner.gif",{id: 'js-proyecto-spinner', style: 'display:none;'}
+    = link_to 'Cancelar Proyecto', proyectos_path, class:  "btn"
+  
+    -unless @imagenes.blank?
+      %fieldset.clearfix
+        %h2 Imágenes
+        - @imagenes.in_groups_of(4, false).each do |group|
+          .row
+          - group.each do |pic|
+            %li.list-unstyled
+              .col-xs-3
+                .thumbnail{:id => "imagen_#{pic.id}", :class => ("default-image" if pic.id == @proyecto.cover)}
+                  = image_tag pic.imagen.url(:thumb)
+                  .caption
+                    %p
+                      = link_to 'Imagen Principal', make_default_proyecto_imagen_path(pic, proyecto_id: @proyecto.id), class: 'make-default btn btn-sm btn-primary', remote: true, method: :post
+                      = link_to "Eliminar imagen", pic, :data => { :confirm => "Are you sure?" }, :method => :delete, class: 'btn btn-sm btn-danger'
 
 :javascript
   $(document).ready(function() {

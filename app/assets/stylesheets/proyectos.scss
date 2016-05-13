@@ -36,3 +36,29 @@
   min-width: 0;
   width: 450px;
 }
+
+.information-container{
+  margin: 0;
+}
+
+.information-header{
+  height: 60px;
+  background-color: #eeeeee;
+  text-align: center;
+  width: 40%;
+  font-size: 1em;
+  color: black;
+  vertical-align: middle;
+  display: table-cell;
+  //float: left;
+}
+
+.number-header{
+  height: 60px;
+  width: 8%;
+  text-align: center;
+  font-size: 3em;
+  background-color: lightskyblue;
+  color: white;
+  //float: left;
+}

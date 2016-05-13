@@ -5,10 +5,9 @@
   = render partial: "shared/meta_tags", locals: { title: @proyecto.titulo, descripcion: @proyecto.descripcion, image: ( @proyecto.proyecto_imagenes.length > 0 ) ? @proyecto.proyecto_imagenes.first.imagen.url(:medium) : nil }
 
 -content_for :full_width_header do
-  .proyecto-images-container.clearfix
-    %div
-      -@proyecto.proyecto_imagenes.take(3).each do |image|
-        =image_tag image.imagen.url(:medium)
+  .proyecto-images-container.clearfix{style: 'width: 100%; text-align: center;'}
+    %div.thumbnail
+      = image_tag @proyecto.cover_img.url(:medium), class: 'img-responsive pull-left'
 .row
   .col-xs-9
     .row
@@ -17,8 +16,8 @@
           = @proyecto.titulo
         = render partial: "shared/social_buttons", locals: {text: @proyecto.titulo, title: @proyecto.titulo, summary: @proyecto.descripcion, img: ( @proyecto.proyecto_imagenes.length > 0 ) ? @proyecto.proyecto_imagenes.first.imagen.url(:medium) : "" }
         .propietario
-          Por:
-          =link_to @proyecto.propietario.nombre, @proyecto.propietario
+          -#Por:
+          -#=link_to @proyecto.propietario.nombre, @proyecto.propietario
     .row
       .col-xs-6
         %h3 ID Proyecto

@@ -1,0 +1,32 @@
+= form.fields_for :participante_proyectos, "Participantes", class: 'col-xs-2' do |participant|
+  .form-group
+    %label{class: 'col-xs-3'}
+      Tipo Participante
+    .col-xs-7
+      = participant.select :participante_type, ParticipanteProyecto.participante_type.options, {prompt: "Selecciona una opción"}, {class: "form-control form-control-custom"}
+  .form-group
+    %label{class: 'col-xs-3', data:{toggle:'tooltip', title: '¿Este participante cuenta con un perfil en comunidad Nest?'}}
+      Posee perfil en comunidad Nest
+    .col-xs-7
+      .radio
+        %label
+          %input{:name => "optradio", :type => "radio"} Si
+      .radio
+        %label
+          %input{:name => "optradio", :type => "radio"} No
+  .form-group
+    %label{class: 'col-xs-3'}
+      Nombre
+    .col-xs-7
+      = participant.text_field :nombre, {class: "form-control form-control-custom"}
+  .form-group
+    %label{class: 'col-xs-3'}
+      Seleccione al profesional
+    .col-xs-7
+      = collection_select(:profesional, :profesional, Profesional.all, :id, :nombre, {:prompt=>true}, {:class => 'form-control form-control-custom'})
+  .form-group
+    %label{class: 'col-xs-3'}
+      Rol
+    .col-xs-7
+      = participant.text_field :rol, {class: "form-control form-control-custom"}
+
