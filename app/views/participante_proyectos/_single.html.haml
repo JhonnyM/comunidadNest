@@ -1,4 +1,5 @@
-%li#eliminar[participante_proyecto]
-  = participante_proyecto.nombre
-  = participante_proyecto.rol
-  = button_to "Eliminar", participante_proyecto_path(participante_proyecto), form: {style: 'display:inline-block;'}, method: :delete, remote: true, class: 'btn btn-danger eliminar'
+%div.lista
+  %li#eliminar[participante_proyecto]
+    %strong= participante_proyecto.nombre
+    = participante_proyecto.rol
+    = link_to raw('<i class="icon-ok icon-white"></i>'), participante_proyecto_path(participante_proyecto), form: {style: 'display:inline-block;'}, method: :delete, remote: true, class: 'btn btn-lg glyphicon glyphicon-trash'

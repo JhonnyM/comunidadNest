@@ -42,8 +42,8 @@ class Proyecto < ActiveRecord::Base
 	end
 
 	def self.white_list
-		[:titulo, :descripcion, :pais, :ciudad, :area, :fecha, :proyectos_categoria_id, :status_proyecto, :status, :user_id,
-		 :propietario_id, :propietario_tipo, :pais, participante_proyectos_attributes: [:id, :participante_type, :nombre, :rol]]
+		[:titulo, :descripcion, :pais, :ciudad, :area, :fecha, :status_proyecto, :status, :user_id,
+		 :propietario_id, :propietario_tipo, :pais, participante_proyectos_attributes: [:id, :participante_type, :nombre, :rol], proyectos_categoria_id: []]
 	end
 
 	def propietario

@@ -23,6 +23,7 @@ class EmpresasController < ApplicationController
   # GET /empresas/1
   # GET /empresas/1.json
   def show
+    session[:company_selected] = @empresa.id
     @proyectos = Proyecto.where("propietario_id = ? AND propietario_tipo = ?", @empresa.id, 'empresa')
     @avg_rating = @empresa.avg_rating
   end

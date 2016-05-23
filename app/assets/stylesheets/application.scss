@@ -249,6 +249,7 @@ a.btn-circle, a.btn-circle:link{
     right: 100%;
     top: 0;
 }
+
 .recomendado{
 	position: absolute;
   height: auto;
@@ -760,6 +761,7 @@ a.btn-circle, a.btn-circle:link{
 .proyecto-images-container  {
 	height: 300px;
 	width:100%;
+  margin-top: 30px;
   overflow: hidden;
 	div{
 		width: 102%;
@@ -821,7 +823,9 @@ a.btn-circle, a.btn-circle:link{
 .proyecto-imagenes{
 	.thumbnail{
 		border: 0;
-		padding: 0;
+		padding: 5px;
+    width:45%;
+    float:left;
 	}
 }
 .caja-center{
@@ -840,6 +844,26 @@ a.btn-circle, a.btn-circle:link{
       margin-bottom: 5px;
     }
   }
+}
+
+p.profesionales {
+    display: block;
+    float: left;
+    font-weight: 700;
+    height: 1em;
+    margin: 3.2em 0 0 20px;
+    vertical-align: text-bottom;
+    margin-left: 270px; 
+    margin-top: 37px;
+    position: absolute;
+}
+
+.lista {
+  float: left;
+  padding-top: 5px;
+  margin-bottom: 5px;
+  width: 260px;
+  height: 35px;
 }
 
 // Social Buttons
@@ -921,6 +945,7 @@ a.btn-circle, a.btn-circle:link{
 @import 'mailbox';
 @import 'blog';
 @import 'proyectos';
+@import 'participante_proyectos';
 
 .radio-filters {
   input[type="radio"] {

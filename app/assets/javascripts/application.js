@@ -70,3 +70,18 @@ $(document).ready(function(){
     this.form.submit();
   });
 });
+
+function readURL(input) {
+  if (input.files && input.files.length > 0) {
+    for (var i = 0; i < input.files.length; i++) {
+      (function(i) {
+        var img = $('<img id="dynamic' + i + '" style="margin-top : 5px;  margin-right: 5px;">');
+        var reader = new FileReader();
+        reader.onload = function(e) {
+          img.prop('src', e.target.result).width(150).height(150).appendTo('.test');
+        }
+        reader.readAsDataURL(input.files[i]);
+      })(i)
+    }
+  }
+}

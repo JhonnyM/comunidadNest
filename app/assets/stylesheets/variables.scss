@@ -69,10 +69,9 @@ $footer-text-color:              $gray-lightest;
   }
   .blue-title {
     background: #05dbcb;
-    width: 300px;
+    width: 350px;
     font-size: 26px;
-    font-weight: bold;
-    font-family: "bebasregular";
+    font-family: "roboto";
     color: #fff;
     letter-spacing: 2px;
     margin-bottom: 15px;
@@ -124,6 +123,7 @@ $border-radius-small:       0px;
 .btn-primary{
 	border: none !important;
 	border-radius: 0;
+  margin-top: 15px;
 }
 .btn-cancel {
     padding: 6px 12px;

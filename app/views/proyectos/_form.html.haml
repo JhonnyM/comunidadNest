@@ -2,15 +2,16 @@
 
   %div#js-page-one
     %fieldset.clearfix
-      %h2 Información General
+      .blue-title
+        Información General
       .form-group
         %label{class: 'col-xs-2'}
-          Título
+          Nombre del Proyecto
           %span{class: 'star'} *
         .col-xs-8
           = f.text_field :titulo, {class: "form-control form-control-custom"}
       .form-group
-        = f.label :status_proyecto, 'Status de proyecto', class: 'col-xs-2', data:{toggle:'tooltip', title: 'Seleccione el status actual del proyecto'}
+        = f.label :status_proyecto, 'Estatus de proyecto', class: 'col-xs-2', data:{toggle:'tooltip', title: 'Seleccione el status actual del proyecto'}
         .col-xs-8
           = f.select :status_proyecto, Proyecto.status_proyecto.options, {}, {class: "form-control form-control-custom"}
       .form-group
@@ -33,36 +34,21 @@
         -categorias = @categorias.map { |categoria| [categoria.nombre, categoria.id] }
         = f.label :proyectos_categoria_id, "Categoría de proyecto", class: 'col-xs-2', data:{toggle:'tooltip', title: 'Seleccione la categoría a la que pertenece este proyecto'}
         .col-xs-8
-      -#= collection_select(:proyecto, :proyectos_categoria_id, ProyectosCategoria.all, :id, :nombre, {:prompt=>true}, {:class => 'form-control'})
+          = f.collection_select(:proyectos_categoria_id, ProyectosCategoria.all, :id, :nombre, {:prompt=>true}, {:class => 'form-control'})
       .form-group
         %label{class: 'col-xs-2'}
           Descripción de proyecto
         .col-xs-8
           = f.text_area :descripcion, {class: "form-control form-control-custom", style: 'height: 100px;'}
-
-  %br
-  %br
-  %br
-
-  %div#js-page-two
-    = render 'proyecto_header', locals: {text: 'Selecciona las imágenes y participantes del proyecto', number: 2}
-    %br
-    #content
-      %ul#tabs.nav.nav-tabs{"data-tabs" => "tabs"}
-        %li.active
-          %a{"data-toggle" => "tab", :href => "#image-tab"} Imágenes
-        %li
-          %a{"data-toggle" => "tab", :href => "#participante-tab"} Participantes
-      #my-tab-content.tab-content
-        #image-tab.tab-pane.active
+    %fieldset.clearfix
+      .blue-title
+        Imágenes del proyecto:
+      .form-group
+        = f.label :proyecto_imagenes, "Imágenes de proyecto", class: 'col-xs-2', :data => {:toggle => 'tooltip', :title => 'Seleccione las imágenes del proyecto.'}
+        .col-xs-8
+          = f.file_field :imagenes, multiple: true
           %br
-          %p{style: 'text-align: left;'}
-            Selecciona las imágenes del proyecto arquitectónico. Las imágenes no deben sobrepasar los 5 MB y deben estar en formato .png o .jpeg
-          %br
-          = render partial: 'image_upload', locals: {form: f}
-        #participante-tab.tab-pane
-          %h3 Agregar Participantes
-          = render partial: 'create_participant', locals: {form: f, display_participant_form: locals[:display_participant_form]}
+          .test
 
   .actions{style: 'text-align: center;'}
     %button{id: 'js-save-proyecto', class: 'btn btn-primary'}
@@ -91,7 +77,12 @@
     $('#proyecto_proyectos_categoria_id').multiselect({
       nonSelectedText: 'Seleccioná una o más tipos de proyecto'
     });
+
+    $("#proyecto_imagenes").change(function(){
+      readURL(this);
+    });
   });
+
   $(function () {
     $('[data-toggle="tooltip"]').tooltip()
   })

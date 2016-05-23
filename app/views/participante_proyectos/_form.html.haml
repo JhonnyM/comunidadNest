@@ -40,9 +40,8 @@
 			#avatar
 
 		%li.step.step4
-			.form-group
-				= f.label :rol
-				= f.text_field :rol, {:class => 'form-control'}
+			= f.label :rol
+			= f.text_field :rol, {:class => 'form-control'}
 	.col-xs-12
 		.form-group
 			= f.submit 'Agregar Participante', remote: true, :class => 'btn btn-primary', :id => "send"

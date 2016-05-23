@@ -41,7 +41,9 @@ class ProyectosController < ApplicationController
   # POST /proyectos.json
   def create
     @proyecto = Proyecto.new(proyecto_params)
-
+    # I know this is really bad but there no option to fix Guayo stupid logic, and i dont want to deal with that for the moment
+    @proyecto.propietario_id = find_correct_owner
+    @proyecto.propietario_tipo = find_correct_owner_type
     respond_to do |format|
       if @proyecto.save
         @proyecto.imagenes = params[:proyecto][:imagenes] if params[:proyecto][:imagenes].present?
@@ -119,4 +121,13 @@ class ProyectosController < ApplicationController
     def proyecto_params
       params.require(:proyecto).permit(*Proyecto.white_list)
     end
+
+    def find_correct_owner
+      session[:company_selected] ? Empresa.find(session[:company_selected]).id : Profesional.find(session[:profesional_selected]).id
+    end
+
+    def find_correct_owner_type
+      session[:company_selected].present? ? 'empresa' : 'profesional'
+    end
+
 end
