@@ -26,6 +26,7 @@ class ProfesionalesController < ApplicationController
   # GET /profesionales/1
   # GET /profesionales/1.json
   def show
+    session[:profesional_selected] = @profesional.id
     @proyectos = Proyecto.where("propietario_id = ? AND propietario_tipo = ?", @profesional.id, 'profesional')
     @productos = Producto.where("propietario_id = ? AND propietario_tipo = ?", @profesional.id, 'profesional')
     @experiencia = Experiencia.new

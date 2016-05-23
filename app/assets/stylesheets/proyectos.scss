@@ -7,16 +7,23 @@
     margin: 0;
   }
   
-  .grid-sizer,
-  .grid-item {
+  .grid-sizer {
   	width: 30%;
   }
 
   .grid-item {
   	float: left;
-    padding: 0;
+    padding-right: 6px; 
+    padding-bottom: 6px;
+    width: 45%;
   }  
 }
+
+
+.imagen {
+  float: left;
+}
+
 
 .field_with_errors .message {
   color: #D00;

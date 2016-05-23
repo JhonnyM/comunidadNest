@@ -6,18 +6,16 @@
 
 -content_for :full_width_header do
   .proyecto-images-container.col-xs-4
-    %div.thumbnail{style: 'width: 300px%; text-align: center; padding-left: 360px;'}
+    %div{style: 'margin-left : 370px;'}
       = image_tag @proyecto.cover_img.url(:large), class: 'img-responsive pull-left'
 .row
   .col-xs-9
     .row
       .col-xs-12
+        %p.profesionales 
+          ="Por: #{@proyecto.propietario.nombre}"
         %h1
           = @proyecto.titulo
-        = render partial: "shared/social_buttons", locals: {text: @proyecto.titulo, title: @proyecto.titulo, summary: @proyecto.descripcion, img: ( @proyecto.proyecto_imagenes.length > 0 ) ? @proyecto.proyecto_imagenes.first.imagen.url(:medium) : "" }
-        .propietario
-          -#Por:
-          -#=link_to @proyecto.propietario.nombre, @proyecto.propietario
     .row
       .col-xs-6
         %h3 ID Proyecto
@@ -41,12 +39,12 @@
       .col-xs-6
         %h3 Participantes
         .caja.clearfix
-          %ul#participates
+          %ul#participates{ :style => "list-style: none;" }
             - @participante_proyectos.each do |participante_proyecto|
               = render partial: "participante_proyectos/single", locals: { participante_proyecto: participante_proyecto }
           = link_to "Agregar Participantes", new_participante_proyecto_path(:proyecto_id => @proyecto.id), remote: true, :class => 'btn btn-primary new-participante-button'
 
-    %h2 Descripcion:
+    %h2 Descripción:
     = @proyecto.descripcion
 
 
@@ -54,32 +52,32 @@
       .row.proyecto-imagenes
         .col-xs-12
           %h2 Imágenes
-          .grid-images
-            .grid-sizer
-            - @imagenes.each_with_index do |pic, index|
-              .grid-item
-                %a.thumbnail{:data => {:toggle => 'modal', :target => "#image_gallery#{index + 1}"}}
-                  = image_tag pic.imagen.url(:medium)
-                %div.modal.fade{id: "image_gallery#{index + 1}", "aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
-                  .modal-dialog
-                    .modal-content
-                      .modal-header
-                        %button.close{"data-dismiss" => "modal", :type => "button"}
-                          %span{"aria-hidden" => "true"} ×
-                          %span.sr-only Cerrar
-                          %h4#image-gallery-title.modal-title
-                      .modal-body
-                        %img.image-gallery-image.img-responsive{:src => pic.imagen.url(:large)}
-                      .modal-footer
-                        .col-md-2
-                          %button#show-previous-image.btn.btn-primary{:type => "button", data: { toggle: 'modal', target: "#image_gallery#{index.zero? ? @imagenes.size : index}", dismiss: 'modal' }} Anterior
-                        #image-gallery-caption.col-md-8.text-justify
-                          //This text will be overwritten by jQuery
-                        .col-md-2
-                          %button#show-next-image.btn.btn-default{:type => "button", data: { toggle: 'modal', target: "#image_gallery#{@imagenes.size == index + 1 ? 1 : index + 2}", dismiss: 'modal' }} Siguiente
+          - @imagenes.each_with_index do |pic, index|
+            %a.thumbnail{:data => {:toggle => 'modal', :target => "#image_gallery#{index + 1}"}}
+              = image_tag pic.imagen.url(:medium)
+            %div.modal.fade{id: "image_gallery#{index + 1}", "aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+              .modal-dialog
+                .modal-content
+                  .modal-header
+                    %button.close{"data-dismiss" => "modal", :type => "button"}
+                      %span{"aria-hidden" => "true"} ×
+                      %span.sr-only Cerrar
+                      %h4#image-gallery-title.modal-title
+                  .modal-body
+                    %img.image-gallery-image.img-responsive{:src => pic.imagen.url(:large)}
+                  .modal-footer
+                    .col-md-2
+                      %button#show-previous-image.btn.btn-primary{:type => "button", data: { toggle: 'modal', target: "#image_gallery#{index.zero? ? @imagenes.size : index}", dismiss: 'modal' }} Anterior
+                    #image-gallery-caption.col-md-8.text-justify
+                      //This text will be overwritten by jQuery
+                    .col-md-2
+                      %button#show-next-image.btn.btn-primary{:type => "button", data: { toggle: 'modal', target: "#image_gallery#{@imagenes.size == index + 1 ? 1 : index + 2}", dismiss: 'modal' }} Siguiente
+    %div.actions
+      = link_to 'Editar', edit_proyecto_path(@proyecto), class: 'btn btn-primary'
+      = link_to 'Volver a Proyectos', proyectos_path, class: 'btn btn-primary'
 
-    = link_to 'Editar', edit_proyecto_path(@proyecto), class: 'btn btn-primary'
-    = link_to 'Volver a Proyectos', proyectos_path
+  .col-xs-12.col-md-6.col-lg-3
+    = render "profesionales/profesionales_side_bar"
 
 #image-gallery.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
   .modal-dialog
